@@ -1,10 +1,148 @@
 <!DOCTYPE html>
-<html>
+<html lang="ar" dir="rtl">
 <head>
-  <title>DR.Tealeb</title>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>معمل د / سيد تعيلب</title>
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Segoe UI',Tahoma,Arial,sans-serif;background:#f4f6f9;color:#1a1a2e;direction:rtl;}
+.page{display:none;}
+.page.active{display:block;}
+.login-wrap{min-height:100vh;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#1a1a2e,#16213e);}
+.login-card{background:#fff;border-radius:16px;padding:2.5rem;width:100%;max-width:420px;box-shadow:0 20px 60px rgba(0,0,0,.3);}
+.fg{margin-bottom:14px;}
+.fg input{width:100%;padding:10px;border:1px solid #ddd;border-radius:8px;}
+.btn-login{width:100%;padding:12px;background:#185FA5;color:#fff;border:none;border-radius:10px;cursor:pointer;}
+.err{color:red;display:none;margin-top:10px;}
+.layout{display:flex;min-height:100vh;}
+.sidebar{width:220px;background:#1a1a2e;color:#fff;padding:10px;}
+.main{flex:1;padding:10px;}
+.sec{display:none;}
+.sec.active{display:block;}
+table{width:100%;border-collapse:collapse;}
+th,td{padding:8px;border-bottom:1px solid #eee;font-size:13px;}
+</style>
 </head>
+
 <body>
-  <h1>🔥 أهلا بيك في موقعي</h1>
-  <p>أنا DR.Tealeb</p>
+
+<!-- LOGIN -->
+<div id="pg-login" class="page active">
+  <div class="login-wrap">
+    <div class="login-card">
+      <h2 style="text-align:center;margin-bottom:20px;">تسجيل الدخول</h2>
+
+      <div class="fg">
+        <input id="lu" placeholder="اسم المستخدم">
+      </div>
+
+      <div class="fg">
+        <input id="lp" type="password" placeholder="كلمة المرور">
+      </div>
+
+      <button class="btn-login" onclick="doLogin()">دخول</button>
+      <p id="lerr" class="err">بيانات غلط</p>
+    </div>
+  </div>
+</div>
+
+<!-- DASHBOARD -->
+<div id="pg-dash" class="page">
+
+<div class="layout">
+
+  <div class="sidebar">
+    <h3>القائمة</h3>
+    <button onclick="showSec('p')">المرضى</button>
+    <button onclick="showSec('r')">النتائج</button>
+    <button onclick="showSec('i')">الفواتير</button>
+  </div>
+
+  <div class="main">
+
+    <div id="s-p" class="sec active">
+      <h2>المرضى</h2>
+      <table>
+        <tbody id="ptbl"></tbody>
+      </table>
+    </div>
+
+    <div id="s-r" class="sec">
+      <h2>النتائج</h2>
+    </div>
+
+    <div id="s-i" class="sec">
+      <h2>الفواتير</h2>
+    </div>
+
+  </div>
+
+</div>
+</div>
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+
+const app = initializeApp({
+  apiKey: "AIzaSyD4QlQx0flDQqSrlMAG00GeG-KnzYBFPhc",
+  authDomain: "medlab-tayelab.firebaseapp.com",
+  projectId: "medlab-tayelab",
+});
+
+const db = getFirestore(app);
+
+let USERS = [
+  {u:"admin",p:"admin123"}
+];
+
+let CU = null;
+
+window.doLogin = function () {
+  const u = document.getElementById("lu").value;
+  const p = document.getElementById("lp").value;
+
+  const f = USERS.find(x => x.u === u && x.p === p);
+
+  if(!f){
+    document.getElementById("lerr").style.display="block";
+    return;
+  }
+
+  CU = f;
+
+  document.getElementById("pg-login").classList.remove("active");
+  document.getElementById("pg-dash").classList.add("active");
+
+  loadPatients();
+};
+
+window.showSec = function (s) {
+  document.querySelectorAll(".sec").forEach(e=>e.classList.remove("active"));
+  document.getElementById("s-"+s).classList.add("active");
+};
+
+async function loadPatients(){
+  const snap = await getDocs(collection(db,"patients"));
+
+  let html = "";
+
+  snap.forEach(doc=>{
+    const d = doc.data();
+    html += `
+      <tr>
+        <td>${d.name||""}</td>
+        <td>${d.phone||""}</td>
+        <td>${d.branch||""}</td>
+      </tr>
+    `;
+  });
+
+  document.getElementById("ptbl").innerHTML = html;
+}
+</script>
+
 </body>
 </html>
