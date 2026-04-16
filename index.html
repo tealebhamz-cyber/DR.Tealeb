@@ -125,117 +125,120 @@ th,td{padding:10px;border-bottom:1px solid #eee;font-size:14px}
 </div>
 
 <script type="module">
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
-import { getFirestore, collection, getDocs, addDoc, deleteDoc, doc } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+import{initializeApp}from"https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+import{getFirestore,collection,addDoc,getDocs,deleteDoc,updateDoc,doc,query,where,orderBy,serverTimestamp}from"https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
-const app = initializeApp({
-apiKey:"AIzaSy...",
-projectId:"medlab-tayelab"
+const app=initializeApp({
+  apiKey:"AIzaSyD4QlQx0flDQqSrlMAG00GeG-KnzYBFPhc",
+  authDomain:"medlab-tayelab.firebaseapp.com",
+  projectId:"medlab-tayelab",
+  storageBucket:"medlab-tayelab.firebasestorage.app",
+  messagingSenderId:"482723222986",
+  appId:"1:482723222986:web:1849d08859cb7e47f1ab33"
 });
+const db=getFirestore(app);
 
-const db = getFirestore(app);
+const DEFAULT_USERS=[
+  {u:'admin',p:'admin123',name:'أدمن',role:'admin',branch:'all',av:'AD',target:0},
+  {u:'cairo1',p:'c1pass',name:'أحمد سعيد',role:'staff',branch:'القاهرة',av:'أح',target:30},
+  {u:'cairo2',p:'c2pass',name:'منى علي',role:'staff',branch:'القاهرة',av:'من',target:25},
+  {u:'cairo3',p:'c3pass',name:'خالد محمود',role:'staff',branch:'القاهرة',av:'خا',target:20},
+  {u:'zaq1',p:'z1pass',name:'سارة حسن',role:'staff',branch:'الزقازيق',av:'سا',target:20},
+  {u:'zaq2',p:'z2pass',name:'عمر إبراهيم',role:'staff',branch:'الزقازيق',av:'عم',target:15},
+  {u:'abo1',p:'a1pass',name:'فاطمة رضا',role:'staff',branch:'أبو حماد',av:'فا',target:10},
+];
 
-let users=[{u:"admin",p:"admin123"}];
-let current=null;
+let CU=null;
+let USERS=[];
+let AP=[],AR=[],AI=[];
+let FS={p:'all',r:'all',i:'all'};
 
-// LOGIN
-window.login=async function(){
-let u=u=document.getElementById('u').value;
-let p=document.getElementById('p').value;
-let f=users.find(x=>x.u===u&&x.p===p);
-if(!f)return alert("خطأ");
-current=f;
-document.getElementById('login').style.display='none';
-document.getElementById('app').classList.remove('hidden');
-loadAll();
+const N=id=>document.getElementById(id);
+function toast(m,ok=false){const t=N('toast');t.textContent=m;t.style.background=ok?'#27500A':'#1a1a2e';t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2500);}
+
+async function loadUsers(){
+  const snap=await getDocs(collection(db,'users'));
+
+  if(snap.empty){
+    for(const u of DEFAULT_USERS){
+      await addDoc(collection(db,'users'),u);
+    }
+    const snap2=await getDocs(collection(db,'users'));
+    USERS=snap2.docs.map(d=>({id:d.id,...d.data()}));
+  }else{
+    USERS=snap.docs.map(d=>({id:d.id,...d.data()}));
+  }
 }
 
-// NAV
-window.show=function(id){
-document.querySelectorAll('.section').forEach(s=>s.classList.add('hidden'));
-document.getElementById(id).classList.remove('hidden');
+async function ensureUsers(){
+  if(!USERS.length){
+    await loadUsers();
+  }
 }
 
-// LOAD ALL
+window.doLogin=async function(){
+  const u=N('lu').value.trim();
+  const p=N('lp').value.trim();
+
+  await ensureUsers();
+
+  const f=USERS.find(x=>x.u===u&&x.p===p);
+
+  if(!f){
+    N('lerr').style.display='block';
+    return;
+  }
+
+  CU=f;
+  N('lerr').style.display='none';
+
+  N('pg-login').classList.remove('active');
+  N('pg-dash').classList.add('active');
+
+  init();
+};
+
+window.logout=function(){
+  CU=null;
+  AP=[];AR=[];AI=[];
+  N('pg-dash').classList.remove('active');
+  N('pg-login').classList.add('active');
+};
+
+async function init(){
+  await ensureUsers();
+  await loadAll();
+}
+
 async function loadAll(){
-loadPatients();
-loadResults();
-loadInvoices();
-loadChart();
+  await Promise.all([loadP(),loadR(),loadI()]);
 }
 
-// PATIENTS
-async function loadPatients(){
-const s=await getDocs(collection(db,"patients"));
-let h="";
-s.forEach(d=>{
-let x=d.data();
-h+=`<tr>
-<td>${x.name}</td>
-<td>${x.phone}</td>
-<td>${x.branch}</td>
-<td><button onclick="del('patients','${d.id}')">حذف</button></td>
-</tr>`;
-});
-document.getElementById('pt').innerHTML=h;
+function bldQ(col){
+  return CU.role==='admin'
+    ?query(collection(db,col),orderBy('createdAt','desc'))
+    :query(collection(db,col),where('branch','==',CU.branch),orderBy('createdAt','desc'));
 }
 
-// RESULTS
-async function loadResults(){
-const s=await getDocs(collection(db,"results"));
-let h="";
-s.forEach(d=>{
-let x=d.data();
-h+=`<tr><td>${x.patient||""} - ${x.test||""}</td></tr>`;
-});
-document.getElementById('rt').innerHTML=h;
+async function loadP(){
+  const s=await getDocs(bldQ('patients'));
+  AP=s.docs.map(d=>({id:d.id,...d.data()}));
 }
 
-// INVOICES
-async function loadInvoices(){
-const s=await getDocs(collection(db,"invoices"));
-let h="";
-s.forEach(d=>{
-let x=d.data();
-h+=`<tr><td>${x.patient||""} - ${x.total||0}</td></tr>`;
-});
-document.getElementById('it').innerHTML=h;
+async function loadR(){
+  const s=await getDocs(bldQ('results'));
+  AR=s.docs.map(d=>({id:d.id,...d.data()}));
 }
 
-// ADD PATIENT
-window.addPatient=async function(){
-await addDoc(collection(db,"patients"),{
-name:document.getElementById('n').value,
-phone:document.getElementById('ph').value,
-branch:document.getElementById('b').value
-});
-closeModal();loadPatients();loadChart();
+async function loadI(){
+  const s=await getDocs(bldQ('invoices'));
+  AI=s.docs.map(d=>({id:d.id,...d.data()}));
 }
 
-// DELETE
-window.del=async function(col,id){
-await deleteDoc(doc(db,col,id));
-loadAll();
-}
+window.ft=function(){/* keep UI calls unchanged in your original file */};
+window.sf=function(){/* keep UI calls unchanged in your original file */};
 
-// MODAL
-window.openModal=()=>document.getElementById('m').classList.add('show');
-window.closeModal=()=>document.getElementById('m').classList.remove('show');
-
-// CHART
-async function loadChart(){
-const s=await getDocs(collection(db,"patients"));
-let b={};
-s.forEach(d=>{
-let x=d.data().branch||"unknown";
-b[x]=(b[x]||0)+1;
-});
-
-new Chart(document.getElementById('c'),{
-type:'bar',
-data:{labels:Object.keys(b),datasets:[{data:Object.values(b)}]}
-});
-}
+loadUsers();
 
 </script>
 </body>
