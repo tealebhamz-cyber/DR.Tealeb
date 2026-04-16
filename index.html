@@ -1,778 +1,242 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-<meta charset="UTF-8"/>
+<meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>معمل د / سيد تعيلب</title>
+<title>نظام المعمل - V3</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
 <style>
-*{box-sizing:border-box;margin:0;padding:0;}
-body{font-family:'Segoe UI',Tahoma,Arial,sans-serif;background:#f4f6f9;color:#1a1a2e;direction:rtl;}
-.page{display:none;}.page.active{display:block;}
-.login-wrap{min-height:100vh;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#1a1a2e,#16213e);}
-.login-card{background:#fff;border-radius:16px;padding:2.5rem;width:100%;max-width:420px;box-shadow:0 20px 60px rgba(0,0,0,.3);}
-.logo-area{text-align:center;margin-bottom:2rem;}
-.logo-circle{width:70px;height:70px;background:linear-gradient(135deg,#185FA5,#378ADD);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 12px;}
-.logo-circle svg{width:35px;height:35px;stroke:#fff;fill:none;stroke-width:1.5;}
-.logo-area h1{font-size:20px;font-weight:700;color:#1a1a2e;}
-.logo-area p{font-size:13px;color:#666;margin-top:4px;}
-.fg{margin-bottom:14px;}
-.fg label{display:block;font-size:13px;color:#555;margin-bottom:6px;font-weight:500;}
-.fg input,.fg select{width:100%;padding:10px 14px;border:1.5px solid #e0e0e0;border-radius:10px;font-size:14px;font-family:inherit;}
-.fg input:focus,.fg select:focus{outline:none;border-color:#185FA5;}
-.btn-login{width:100%;padding:12px;background:linear-gradient(135deg,#185FA5,#378ADD);color:#fff;border:none;border-radius:10px;font-size:15px;font-weight:600;cursor:pointer;}
-.err{color:#c0392b;font-size:13px;text-align:center;margin-top:10px;display:none;padding:8px;background:#ffeaea;border-radius:8px;}
-.hints{margin-top:1.5rem;padding:1rem;background:#f8f9fa;border-radius:10px;}
-.hints p{font-size:11px;color:#888;line-height:2;}
-.hints strong{color:#185FA5;}
-.layout{display:flex;min-height:100vh;}
-.sidebar{width:230px;background:#1a1a2e;color:#fff;display:flex;flex-direction:column;flex-shrink:0;}
-.sb-hdr{padding:1.5rem 1rem 1rem;border-bottom:1px solid rgba(255,255,255,.1);}
-.lab-ic{width:40px;height:40px;background:linear-gradient(135deg,#185FA5,#378ADD);border-radius:10px;display:flex;align-items:center;justify-content:center;margin-bottom:8px;}
-.lab-ic svg{width:22px;height:22px;stroke:#fff;fill:none;stroke-width:1.5;}
-.sb-hdr h2{font-size:13px;font-weight:700;color:#fff;}
-.sb-hdr p{font-size:11px;color:rgba(255,255,255,.5);margin-top:2px;}
-.nav-lbl{padding:12px 1rem 4px;font-size:10px;color:rgba(255,255,255,.4);letter-spacing:.08em;}
-.ni{display:flex;align-items:center;gap:10px;padding:10px 1rem;font-size:13px;color:rgba(255,255,255,.7);cursor:pointer;border-right:3px solid transparent;transition:all .2s;}
-.ni:hover{background:rgba(255,255,255,.05);color:#fff;}
-.ni.on{background:rgba(24,95,165,.3);color:#fff;border-right-color:#378ADD;}
-.ni svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:1.5;flex-shrink:0;}
-.sb-ft{margin-top:auto;padding:1rem;border-top:1px solid rgba(255,255,255,.1);}
-.um{display:flex;align-items:center;gap:8px;margin-bottom:8px;}
-.av{width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,#185FA5,#378ADD);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:#fff;flex-shrink:0;}
-.un{font-size:12px;font-weight:600;color:#fff;}
-.ur{font-size:10px;color:rgba(255,255,255,.5);}
-.lo-btn{width:100%;padding:7px;background:rgba(255,255,255,.08);color:rgba(255,255,255,.7);border:1px solid rgba(255,255,255,.15);border-radius:8px;font-size:12px;cursor:pointer;}
-.lo-btn:hover{background:rgba(255,255,255,.15);color:#fff;}
-.main{flex:1;display:flex;flex-direction:column;overflow:auto;}
-.topbar{background:#fff;padding:1rem 1.5rem;border-bottom:1px solid #eee;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:10;}
-.topbar h1{font-size:18px;font-weight:700;}
-.bbdg{display:inline-block;padding:3px 12px;border-radius:20px;font-size:11px;font-weight:600;margin-top:3px;}
-.b-all{background:#E6F1FB;color:#185FA5;}.b-cairo{background:#EAF3DE;color:#27500A;}
-.b-zaq{background:#FAEEDA;color:#633806;}.b-abo{background:#EEEDFE;color:#3C3489;}
-.content{padding:1.5rem;flex:1;}
-.sg{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px;margin-bottom:1.5rem;}
-.sc{background:#fff;border-radius:12px;padding:1.25rem;box-shadow:0 2px 8px rgba(0,0,0,.06);}
-.sc-ic{width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;margin-bottom:10px;}
-.sc-ic svg{width:18px;height:18px;stroke:#fff;fill:none;stroke-width:1.5;}
-.sc-lb{font-size:12px;color:#888;margin-bottom:4px;}
-.sc-v{font-size:26px;font-weight:700;}
-.sc-s{font-size:11px;color:#aaa;margin-top:2px;}
-.card{background:#fff;border-radius:12px;box-shadow:0 2px 8px rgba(0,0,0,.06);overflow:hidden;margin-bottom:1.5rem;}
-.ch{display:flex;justify-content:space-between;align-items:center;padding:1rem 1.25rem;border-bottom:1px solid #f0f0f0;flex-wrap:wrap;gap:8px;}
-.ch h2{font-size:15px;font-weight:700;}
-.chr{display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
-.srch{display:flex;align-items:center;gap:6px;background:#f8f9fa;border:1.5px solid #eee;border-radius:8px;padding:6px 10px;}
-.srch svg{width:14px;height:14px;stroke:#bbb;fill:none;stroke-width:2;flex-shrink:0;}
-.srch input{border:none;background:none;font-size:13px;color:#1a1a2e;font-family:inherit;width:150px;outline:none;}
-.srch input::placeholder{color:#ccc;}
-.btna{padding:8px 14px;background:linear-gradient(135deg,#185FA5,#378ADD);color:#fff;border:none;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;display:flex;align-items:center;gap:5px;}
-.btna svg{width:13px;height:13px;stroke:#fff;fill:none;stroke-width:2.5;}
-.fbar{display:flex;gap:6px;padding:8px 1.25rem;border-bottom:1px solid #f0f0f0;flex-wrap:wrap;}
-.fb{padding:4px 12px;border:1.5px solid #e0e0e0;border-radius:20px;background:none;font-size:12px;cursor:pointer;color:#666;font-family:inherit;}
-.fb.on{background:#185FA5;color:#fff;border-color:#185FA5;}
-.tw{overflow-x:auto;}
-table{width:100%;border-collapse:collapse;font-size:13px;}
-th{padding:9px 12px;text-align:right;color:#888;font-weight:600;background:#fafafa;border-bottom:1px solid #f0f0f0;white-space:nowrap;font-size:12px;}
-td{padding:10px 12px;border-bottom:1px solid #f8f8f8;white-space:nowrap;}
-tr:last-child td{border-bottom:none;}
-tr:hover td{background:#fafcff;}
-.bdg{display:inline-block;padding:3px 9px;border-radius:20px;font-size:11px;font-weight:600;}
-.st{padding:3px 9px;border-radius:20px;font-size:11px;font-weight:600;}
-.st-done{background:#EAF3DE;color:#27500A;}.st-wait{background:#FAEEDA;color:#633806;}
-.st-new{background:#E6F1FB;color:#0C447C;}.st-unpaid{background:#FCEBEB;color:#A32D2D;}
-.vb{padding:4px 8px;border:1.5px solid #185FA5;border-radius:6px;background:none;color:#185FA5;font-size:11px;font-weight:600;cursor:pointer;}
-.vb:hover{background:#185FA5;color:#fff;}
-.db{padding:4px 8px;border:1.5px solid #27500A;border-radius:6px;background:none;color:#27500A;font-size:11px;font-weight:600;cursor:pointer;margin-right:3px;}
-.db:hover{background:#27500A;color:#fff;}
-.xb{padding:4px 8px;border:1.5px solid #e74c3c;border-radius:6px;background:none;color:#e74c3c;font-size:11px;font-weight:600;cursor:pointer;margin-right:3px;}
-.xb:hover{background:#e74c3c;color:#fff;}
-.eb{padding:4px 8px;border:1.5px solid #888;border-radius:6px;background:none;color:#888;font-size:11px;font-weight:600;cursor:pointer;margin-right:3px;}
-.eb:hover{background:#888;color:#fff;}
-.emp{text-align:center;padding:3rem;color:#aaa;}
-.emp svg{width:44px;height:44px;stroke:#e0e0e0;fill:none;stroke-width:1;margin:0 auto 8px;display:block;}
-.sec{display:none;}.sec.active{display:block;}
-.ov{display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:1000;align-items:center;justify-content:center;padding:1rem;}
-.ov.open{display:flex;}
-.modal{background:#fff;border-radius:16px;padding:1.75rem;width:100%;max-width:600px;max-height:90vh;overflow-y:auto;box-shadow:0 30px 80px rgba(0,0,0,.3);}
-.modal h2{font-size:17px;font-weight:700;margin-bottom:1.5rem;padding-bottom:12px;border-bottom:1px solid #f0f0f0;}
-.mg{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
-.full{grid-column:1/-1;}
-.sdv{grid-column:1/-1;padding-top:12px;margin-top:4px;border-top:1px solid #f0f0f0;font-size:11px;font-weight:700;color:#999;text-transform:uppercase;letter-spacing:.05em;}
-.mfg label{font-size:12px;color:#666;display:block;margin-bottom:5px;font-weight:600;}
-.mfg input,.mfg select,.mfg textarea{width:100%;padding:9px 12px;border:1.5px solid #e8e8e8;border-radius:8px;font-size:13px;font-family:inherit;background:#fff;color:#1a1a2e;}
-.mfg input:focus,.mfg select:focus,.mfg textarea:focus{outline:none;border-color:#185FA5;}
-.mfg textarea{resize:vertical;min-height:65px;}
-.mfg input[readonly]{background:#f8f9fa;}
-.mac{display:flex;justify-content:flex-end;gap:10px;margin-top:1.5rem;padding-top:1rem;border-top:1px solid #f0f0f0;}
-.bcn{padding:9px 18px;border:1.5px solid #e0e0e0;border-radius:8px;background:none;color:#666;cursor:pointer;font-size:13px;font-weight:600;}
-.bsv{padding:9px 20px;background:linear-gradient(135deg,#185FA5,#378ADD);color:#fff;border:none;border-radius:8px;cursor:pointer;font-size:13px;font-weight:600;}
-.bsv:disabled{opacity:.6;cursor:not-allowed;}
-.dov{display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:1000;align-items:flex-start;justify-content:center;padding:2rem 1rem;overflow-y:auto;}
-.dov.open{display:flex;}
-.dm{background:#fff;border-radius:16px;width:100%;max-width:640px;overflow:hidden;box-shadow:0 30px 80px rgba(0,0,0,.3);}
-.dh{background:linear-gradient(135deg,#1a1a2e,#16213e);padding:1.25rem 1.5rem;display:flex;justify-content:space-between;align-items:center;}
-.dh h2{font-size:16px;font-weight:700;color:#fff;}
-.dh button{padding:5px 12px;border:1px solid rgba(255,255,255,.3);border-radius:6px;background:none;color:rgba(255,255,255,.8);cursor:pointer;font-size:12px;}
-.dbody{padding:1.5rem;}
-.ds{margin-bottom:1.25rem;}
-.ds h3{font-size:11px;font-weight:700;color:#185FA5;text-transform:uppercase;letter-spacing:.06em;margin-bottom:10px;padding-bottom:6px;border-bottom:1px solid #f0f0f0;}
-.dg{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
-.di label{font-size:11px;color:#aaa;display:block;margin-bottom:2px;font-weight:600;}
-.di p{font-size:13px;color:#1a1a2e;font-weight:500;}
-.yp{background:#EAF3DE;color:#27500A;padding:2px 10px;border-radius:20px;font-size:11px;font-weight:600;}
-.np{background:#f4f4f4;color:#888;padding:2px 10px;border-radius:20px;font-size:11px;font-weight:600;}
-.mgrd{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:8px;}
-.mb{border-radius:10px;padding:12px;}
-.mb label{font-size:11px;display:block;margin-bottom:4px;font-weight:600;}
-.mb p{font-size:20px;font-weight:700;}
-.mt{background:#f4f6f9;}.mt label{color:#888;}.mt p{color:#1a1a2e;}
-.mpa{background:#EAF3DE;}.mpa label{color:#3B6D11;}.mpa p{color:#27500A;}
-.md{background:#FCEBEB;}.md label{color:#A32D2D;}.md p{color:#A32D2D;}
-.ld{display:flex;align-items:center;justify-content:center;padding:2rem;color:#aaa;gap:10px;}
-.spin{width:20px;height:20px;border:2px solid #e0e0e0;border-top-color:#185FA5;border-radius:50%;animation:sp .7s linear infinite;}
-@keyframes sp{to{transform:rotate(360deg);}}
-.toast{position:fixed;bottom:2rem;left:50%;transform:translateX(-50%);background:#1a1a2e;color:#fff;padding:10px 20px;border-radius:10px;font-size:13px;z-index:9999;opacity:0;transition:opacity .3s;pointer-events:none;}
-.toast.show{opacity:1;}
-.tgt-bar{background:#fff;border-radius:10px;padding:10px 14px;margin-bottom:1rem;display:flex;align-items:center;gap:12px;box-shadow:0 2px 8px rgba(0,0,0,.06);}
-.tgt-bar .tgt-info{flex:1;}
-.tgt-bar .tgt-name{font-size:13px;font-weight:600;color:#1a1a2e;}
-.tgt-bar .tgt-nums{font-size:12px;color:#888;margin-top:2px;}
-.tgt-prog{flex:2;height:8px;background:#f0f0f0;border-radius:10px;overflow:hidden;}
-.tgt-fill{height:100%;border-radius:10px;background:linear-gradient(90deg,#185FA5,#378ADD);transition:width .5s;}
-.tgt-fill.done{background:linear-gradient(90deg,#27500A,#3B6D11);}
-.tgt-pct{font-size:12px;font-weight:700;color:#185FA5;min-width:36px;text-align:left;}
-.user-card{background:#fff;border-radius:12px;padding:1.25rem;box-shadow:0 2px 8px rgba(0,0,0,.06);display:flex;align-items:center;gap:12px;margin-bottom:10px;}
-.uc-av{width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg,#185FA5,#378ADD);display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700;color:#fff;flex-shrink:0;}
-.uc-info{flex:1;}
-.uc-name{font-size:14px;font-weight:600;color:#1a1a2e;}
-.uc-meta{font-size:12px;color:#888;margin-top:2px;}
-.uc-acts{display:flex;gap:6px;}
+*{box-sizing:border-box;margin:0;padding:0;font-family:'Cairo',sans-serif;}
+body{background:#f4f6f9;}
+
+/* LOGIN */
+.login{height:100vh;display:flex;justify-content:center;align-items:center;background:#0f172a;}
+.login-box{background:#fff;padding:25px;border-radius:12px;width:340px;box-shadow:0 20px 50px rgba(0,0,0,.2)}
+input{width:100%;padding:10px;margin:8px 0;border:1px solid #ddd;border-radius:8px;}
+button{cursor:pointer}
+.btn{width:100%;padding:10px;background:#2563eb;color:#fff;border:none;border-radius:8px}
+
+/* LAYOUT */
+.container{display:flex;min-height:100vh;}
+.sidebar{width:240px;background:#111827;color:#fff;padding:15px}
+.sidebar h2{margin-bottom:20px}
+.menu button{width:100%;padding:10px;margin:5px 0;border:none;border-radius:8px;background:#1f2937;color:#fff}
+.menu button:hover{background:#374151}
+.main{flex:1;padding:20px}
+.card{background:#fff;padding:15px;border-radius:12px;margin-bottom:15px;box-shadow:0 2px 10px rgba(0,0,0,.05)}
+.hidden{display:none}
+
+/* TABLE */
+table{width:100%;border-collapse:collapse}
+th,td{padding:10px;border-bottom:1px solid #eee;font-size:14px}
+
+/* MODAL */
+.modal{position:fixed;inset:0;background:rgba(0,0,0,.5);display:none;justify-content:center;align-items:center}
+.modal-box{background:#fff;padding:20px;border-radius:12px;width:420px}
+.modal.show{display:flex}
+
+.btn2{background:#16a34a;color:#fff;padding:8px 12px;border:none;border-radius:8px;margin-top:10px}
+.btn3{background:#dc2626;color:#fff;padding:8px 12px;border:none;border-radius:8px}
 </style>
 </head>
 <body>
-<div id="toast" class="toast"></div>
 
-<div id="pg-login" class="page active">
-<div class="login-wrap"><div class="login-card">
-  <div class="logo-area">
-    <div class="logo-circle"><svg viewBox="0 0 24 24"><path d="M9 3H5a2 2 0 00-2 2v4m6-6h10a2 2 0 012 2v4M9 3v18m0 0h10a2 2 0 002-2V9M9 21H5a2 2 0 01-2-2V9m0 0h18"/></svg></div>
-    <h1>معمل د / سيد تعيلب</h1><p>نظام إدارة المعمل الطبي</p>
+<!-- LOGIN -->
+<div id="login" class="login">
+  <div class="login-box">
+    <h3>تسجيل الدخول</h3>
+    <input id="u" placeholder="اسم المستخدم">
+    <input id="p" type="password" placeholder="كلمة المرور">
+    <button class="btn" onclick="login()">دخول</button>
   </div>
-  <div class="fg"><label>اسم المستخدم</label><input id="lu" type="text" placeholder="أدخل اسم المستخدم"/></div>
-  <div class="fg"><label>كلمة المرور</label><input id="lp" type="password" placeholder="أدخل كلمة المرور"/></div>
-  <button class="btn-login" onclick="doLogin()">دخول</button>
-  <p class="err" id="lerr">اسم المستخدم أو كلمة المرور غلط</p>
-  <div class="hints">
-    <p><strong>admin</strong>/admin123 — أدمن (كل الفروع)</p>
-    <p><strong>cairo1</strong>/c1pass | <strong>cairo2</strong>/c2pass | <strong>cairo3</strong>/c3pass — القاهرة</p>
-    <p><strong>zaq1</strong>/z1pass | <strong>zaq2</strong>/z2pass — الزقازيق</p>
-    <p><strong>abo1</strong>/a1pass — أبو حماد</p>
-  </div>
-</div></div>
 </div>
 
-<div id="pg-dash" class="page">
-<div class="layout">
-  <div class="sidebar">
-    <div class="sb-hdr">
-      <div class="lab-ic"><svg viewBox="0 0 24 24"><path d="M9 3H5a2 2 0 00-2 2v4m6-6h10a2 2 0 012 2v4M9 3v18m0 0h10a2 2 0 002-2V9M9 21H5a2 2 0 01-2-2V9m0 0h18"/></svg></div>
-      <h2>د / سيد تعيلب</h2><p>المعمل الطبي</p>
-    </div>
-    <div class="nav-lbl">القائمة</div>
-    <div class="ni on" id="n-p" onclick="showSec('p')"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>المرضى</div>
-    <div class="ni" id="n-r" onclick="showSec('r')"><svg viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg>النتائج</div>
-    <div class="ni" id="n-i" onclick="showSec('i')"><svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>الفواتير</div>
-    <div class="ni" id="n-u" style="display:none" onclick="showSec('u')"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M20 21a8 8 0 10-16 0"/></svg>المستخدمون</div>
-    <div class="sb-ft">
-      <div class="um">
-        <div class="av" id="uav">AD</div>
-        <div><div class="un" id="uname">أدمن</div><div class="ur" id="urole">مدير</div></div>
-      </div>
-      <button class="lo-btn" onclick="logout()">تسجيل الخروج</button>
-    </div>
-  </div>
+<!-- APP -->
+<div id="app" class="hidden">
+<div class="container">
 
-  <div class="main">
-    <div class="topbar">
-      <div><h1 id="ptitle">المرضى</h1><span class="bbdg" id="bbdg"></span></div>
-      <div style="font-size:12px;color:#aaa" id="tdate"></div>
-    </div>
-    <div class="content">
-      <div class="sg" id="sgrid"></div>
+<div class="sidebar">
+<h2>المعمل</h2>
+<div class="menu">
+<button onclick="show('dash')">الرئيسية</button>
+<button onclick="show('patients')">المرضى</button>
+<button onclick="show('results')">النتائج</button>
+<button onclick="show('invoices')">الفواتير</button>
+<button onclick="show('chart')">إحصائيات</button>
+</div>
+</div>
 
-      <!-- TARGET BAR for staff -->
-      <div id="tgt-section" style="display:none">
-        <div class="tgt-bar" id="tgt-bar">
-          <div class="tgt-info">
-            <div class="tgt-name" id="tgt-name">التارجت الشهري</div>
-            <div class="tgt-nums" id="tgt-nums">0 / 0 حالة</div>
-          </div>
-          <div class="tgt-prog"><div class="tgt-fill" id="tgt-fill" style="width:0%"></div></div>
-          <div class="tgt-pct" id="tgt-pct">0%</div>
-        </div>
-      </div>
+<div class="main">
 
-      <!-- PATIENTS -->
-      <div class="sec active" id="s-p">
-        <div class="card">
-          <div class="ch">
-            <h2>قائمة المرضى</h2>
-            <div class="chr">
-              <div class="srch"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg><input id="sp" type="text" placeholder="بحث..." oninput="ft('p')"/></div>
-              <button class="btna" onclick="openM('p')"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>إضافة مريض</button>
-            </div>
-          </div>
-          <div class="fbar">
-            <button class="fb on" onclick="sf('p','all',this)">الكل</button>
-            <button class="fb" onclick="sf('p','جديد',this)">جديد</button>
-            <button class="fb" onclick="sf('p','قيد الانتظار',this)">قيد الانتظار</button>
-            <button class="fb" onclick="sf('p','مكتمل',this)">مكتمل</button>
-          </div>
-          <div id="pl" class="ld"><div class="spin"></div> جاري التحميل...</div>
-          <div class="tw" id="ptw" style="display:none"><table><thead><tr><th>الاسم</th><th>السن</th><th>التلفون</th><th>الطبيب</th><th>الفرع</th><th>العينة</th><th>المدفوع</th><th>المتبقي</th><th>الحالة</th><th>إجراءات</th></tr></thead><tbody id="ptbl"></tbody></table></div>
-          <div id="pe" class="emp" style="display:none"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/></svg><p>لا يوجد مرضى</p></div>
-        </div>
-      </div>
+<div id="dash" class="card section">
+<h3>لوحة التحكم</h3>
+<p>أهلاً 👋</p>
+</div>
 
-      <!-- RESULTS -->
-      <div class="sec" id="s-r">
-        <div class="card">
-          <div class="ch">
-            <h2>نتائج التحاليل</h2>
-            <div class="chr">
-              <div class="srch"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg><input id="sr" type="text" placeholder="بحث..." oninput="ft('r')"/></div>
-              <button class="btna" onclick="openM('r')"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>إضافة نتيجة</button>
-            </div>
-          </div>
-          <div class="fbar">
-            <button class="fb on" onclick="sf('r','all',this)">الكل</button>
-            <button class="fb" onclick="sf('r','جديد',this)">جديد</button>
-            <button class="fb" onclick="sf('r','قيد الانتظار',this)">قيد الانتظار</button>
-            <button class="fb" onclick="sf('r','مكتمل',this)">مكتمل</button>
-          </div>
-          <div id="rl" class="ld"><div class="spin"></div> جاري التحميل...</div>
-          <div class="tw" id="rtw" style="display:none"><table><thead><tr><th>المريض</th><th>التحليل</th><th>العينة</th><th>الفرع</th><th>النتيجة</th><th>أورام سابقة</th><th>التاريخ</th><th>الحالة</th><th>إجراءات</th></tr></thead><tbody id="rtbl"></tbody></table></div>
-          <div id="re" class="emp" style="display:none"><svg viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"/></svg><p>لا توجد نتائج</p></div>
-        </div>
-      </div>
+<!-- PATIENTS -->
+<div id="patients" class="card section hidden">
+<h3>المرضى</h3>
+<button class="btn2" onclick="openModal()">إضافة مريض</button>
+<table>
+<thead><tr><th>الاسم</th><th>التلفون</th><th>الفرع</th><th>إجراء</th></tr></thead>
+<tbody id="pt"></tbody>
+</table>
+</div>
 
-      <!-- INVOICES -->
-      <div class="sec" id="s-i">
-        <div class="card">
-          <div class="ch">
-            <h2>الفواتير</h2>
-            <div class="chr">
-              <div class="srch"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg><input id="si" type="text" placeholder="بحث..." oninput="ft('i')"/></div>
-              <button class="btna" onclick="openM('i')"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>فاتورة جديدة</button>
-            </div>
-          </div>
-          <div class="fbar">
-            <button class="fb on" onclick="sf('i','all',this)">الكل</button>
-            <button class="fb" onclick="sf('i','غير مدفوع',this)">غير مدفوع</button>
-            <button class="fb" onclick="sf('i','جزئي',this)">جزئي</button>
-            <button class="fb" onclick="sf('i','مدفوع',this)">مدفوع</button>
-          </div>
-          <div id="il" class="ld"><div class="spin"></div> جاري التحميل...</div>
-          <div class="tw" id="itw" style="display:none"><table><thead><tr><th>رقم</th><th>المريض</th><th>الفرع</th><th>الإجمالي</th><th>المدفوع</th><th>المتبقي</th><th>التاريخ</th><th>الحالة</th></tr></thead><tbody id="itbl"></tbody></table></div>
-          <div id="ie" class="emp" style="display:none"><svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/></svg><p>لا توجد فواتير</p></div>
-        </div>
-      </div>
+<!-- RESULTS -->
+<div id="results" class="card section hidden">
+<h3>النتائج</h3>
+<table>
+<tbody id="rt"></tbody>
+</table>
+</div>
 
-      <!-- USERS (admin only) -->
-      <div class="sec" id="s-u">
-        <div class="card">
-          <div class="ch"><h2>إدارة المستخدمين</h2>
-            <button class="btna" onclick="openM('u')"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>إضافة مستخدم</button>
-          </div>
-          <div style="padding:1rem" id="users-list"></div>
-        </div>
-      </div>
-    </div>
-  </div>
+<!-- INVOICES -->
+<div id="invoices" class="card section hidden">
+<h3>الفواتير</h3>
+<table>
+<tbody id="it"></tbody>
+</table>
+</div>
+
+<!-- CHART -->
+<div id="chart" class="card section hidden">
+<h3>إحصائيات</h3>
+<canvas id="c"></canvas>
+</div>
+
+</div>
 </div>
 </div>
 
 <!-- MODAL -->
-<div class="ov" id="aov">
-<div class="modal">
-  <h2 id="mtitle">إضافة</h2>
-  <div id="mbody"></div>
-  <div class="mac">
-    <button class="bcn" onclick="closeM()">إلغاء</button>
-    <button class="bsv" id="bsv" onclick="saveD()">حفظ</button>
+<div class="modal" id="m">
+  <div class="modal-box">
+    <h3>إضافة مريض</h3>
+    <input id="n" placeholder="الاسم">
+    <input id="ph" placeholder="التلفون">
+    <input id="b" placeholder="الفرع">
+    <button class="btn2" onclick="addPatient()">حفظ</button>
+    <button class="btn3" onclick="closeModal()">إغلاق</button>
   </div>
-</div>
-</div>
-
-<!-- DETAIL -->
-<div class="dov" id="dov">
-<div class="dm">
-  <div class="dh"><h2 id="dtitle">بيانات المريض</h2><button onclick="closeD()">إغلاق</button></div>
-  <div class="dbody" id="dbody"></div>
-</div>
 </div>
 
 <script type="module">
-import{initializeApp}from"https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
-import{getFirestore,collection,addDoc,getDocs,deleteDoc,updateDoc,doc,query,where,orderBy,serverTimestamp,getDoc}from"https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+import { getFirestore, collection, getDocs, addDoc, deleteDoc, doc } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
-const app=initializeApp({
-  apiKey:"AIzaSyD4QlQx0flDQqSrlMAG00GeG-KnzYBFPhc",
-  authDomain:"medlab-tayelab.firebaseapp.com",
-  projectId:"medlab-tayelab",
-  storageBucket:"medlab-tayelab.firebasestorage.app",
-  messagingSenderId:"482723222986",
-  appId:"1:482723222986:web:1849d08859cb7e47f1ab33"
+const app = initializeApp({
+apiKey:"AIzaSy...",
+projectId:"medlab-tayelab"
 });
-const db=getFirestore(app);
 
-// Default users stored in Firestore under 'users' collection
-// On first load, seed if empty
-const DEFAULT_USERS=[
-  {u:'admin',p:'admin123',name:'أدمن',role:'admin',branch:'all',av:'AD',target:0},
-  {u:'cairo1',p:'c1pass',name:'أحمد سعيد',role:'staff',branch:'القاهرة',av:'أح',target:30},
-  {u:'cairo2',p:'c2pass',name:'منى علي',role:'staff',branch:'القاهرة',av:'من',target:25},
-  {u:'cairo3',p:'c3pass',name:'خالد محمود',role:'staff',branch:'القاهرة',av:'خا',target:20},
-  {u:'zaq1',p:'z1pass',name:'سارة حسن',role:'staff',branch:'الزقازيق',av:'سا',target:20},
-  {u:'zaq2',p:'z2pass',name:'عمر إبراهيم',role:'staff',branch:'الزقازيق',av:'عم',target:15},
-  {u:'abo1',p:'a1pass',name:'فاطمة رضا',role:'staff',branch:'أبو حماد',av:'فا',target:10},
-];
+const db = getFirestore(app);
 
-let CU=null,MT='',editId=null;
-let AP=[],AR=[],AI=[],USERS=[];
-let FS={p:'all',r:'all',i:'all'};
+let users=[{u:"admin",p:"admin123"}];
+let current=null;
 
-const bc=b=>b==='القاهرة'?'b-cairo':b==='الزقازيق'?'b-zaq':b==='أبو حماد'?'b-abo':'b-all';
-const sc=s=>s==='مكتمل'||s==='مدفوع'||s==='نشط'?'st-done':s==='قيد الانتظار'||s==='جزئي'?'st-wait':s==='غير مدفوع'?'st-unpaid':'st-new';
-const N=id=>document.getElementById(id);
-const sh=(id,t='block')=>{const e=N(id);if(e)e.style.display=t;};
-const hd=id=>{const e=N(id);if(e)e.style.display='none';};
-function toast(m,ok=false){const t=N('toast');t.textContent=m;t.style.background=ok?'#27500A':'#1a1a2e';t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2800);}
-
-async function loadUsers(){
-  const snap=await getDocs(collection(db,'users'));
-  if(snap.empty){
-    for(const u of DEFAULT_USERS) await addDoc(collection(db,'users'),u);
-    const snap2=await getDocs(collection(db,'users'));
-    USERS=snap2.docs.map(d=>({id:d.id,...d.data()}));
-  } else {
-    USERS=snap.docs.map(d=>({id:d.id,...d.data()}));
-  }
+// LOGIN
+window.login=async function(){
+let u=u=document.getElementById('u').value;
+let p=document.getElementById('p').value;
+let f=users.find(x=>x.u===u&&x.p===p);
+if(!f)return alert("خطأ");
+current=f;
+document.getElementById('login').style.display='none';
+document.getElementById('app').classList.remove('hidden');
+loadAll();
 }
 
-window.doLogin=async function(){
-  const u=N('lu').value.trim(),p=N('lp').value.trim();
-  if(!USERS.length) await loadUsers();
-  const f=USERS.find(x=>x.u===u&&x.p===p);
-  if(!f){N('lerr').style.display='block';return;}
-  CU=f;N('lerr').style.display='none';
-  N('pg-login').classList.remove('active');N('pg-dash').classList.add('active');
-  init();
-};
-
-window.logout=function(){
-  CU=null;AP=[];AR=[];AI=[];
-  N('pg-dash').classList.remove('active');N('pg-login').classList.add('active');
-  N('lu').value='';N('lp').value='';
-};
-
-async function init(){
-  N('uav').textContent=CU.av||CU.name?.charAt(0)||'?';
-  N('uname').textContent=CU.name;
-  N('urole').textContent=CU.role==='admin'?'مدير النظام':'موظف فرع';
-  const bb=N('bbdg');
-  if(CU.role==='admin'){bb.textContent='أدمن — جميع الفروع';bb.className='bbdg b-all';}
-  else{bb.textContent='فرع '+CU.branch;bb.className='bbdg '+bc(CU.branch);}
-  N('n-u').style.display=CU.role==='admin'?'flex':'none';
-  N('tdate').textContent=new Date().toLocaleDateString('ar-EG',{weekday:'long',year:'numeric',month:'long',day:'numeric'});
-  if(CU.role==='admin') renderUsers();
-  await loadAll();
-  if(CU.role==='staff') renderTarget();
+// NAV
+window.show=function(id){
+document.querySelectorAll('.section').forEach(s=>s.classList.add('hidden'));
+document.getElementById(id).classList.remove('hidden');
 }
 
-async function loadAll(){await Promise.all([loadP(),loadR(),loadI()]);}
-
-function bldQ(col){
-  return CU.role==='admin'
-    ?query(collection(db,col),orderBy('createdAt','desc'))
-    :query(collection(db,col),where('branch','==',CU.branch),orderBy('createdAt','desc'));
+// LOAD ALL
+async function loadAll(){
+loadPatients();
+loadResults();
+loadInvoices();
+loadChart();
 }
 
-async function loadP(){
-  sh('pl','flex');hd('ptw');hd('pe');
-  try{const s=await getDocs(bldQ('patients'));AP=s.docs.map(d=>({id:d.id,...d.data()}));rP();rStats();}
-  catch(e){toast('خطأ في تحميل المرضى');console.error(e);}
-  hd('pl');
-}
-async function loadR(){
-  sh('rl','flex');hd('rtw');hd('re');
-  try{const s=await getDocs(bldQ('results'));AR=s.docs.map(d=>({id:d.id,...d.data()}));rR();}
-  catch(e){toast('خطأ في تحميل النتائج');console.error(e);}
-  hd('rl');
-}
-async function loadI(){
-  sh('il','flex');hd('itw');hd('ie');
-  try{const s=await getDocs(bldQ('invoices'));AI=s.docs.map(d=>({id:d.id,...d.data()}));rI();}
-  catch(e){toast('خطأ في تحميل الفواتير');console.error(e);}
-  hd('il');
+// PATIENTS
+async function loadPatients(){
+const s=await getDocs(collection(db,"patients"));
+let h="";
+s.forEach(d=>{
+let x=d.data();
+h+=`<tr>
+<td>${x.name}</td>
+<td>${x.phone}</td>
+<td>${x.branch}</td>
+<td><button onclick="del('patients','${d.id}')">حذف</button></td>
+</tr>`;
+});
+document.getElementById('pt').innerHTML=h;
 }
 
-function gf(data,sec){
-  const q=(N('s'+sec)?.value||'').toLowerCase();
-  const st=FS[sec];
-  return data.filter(x=>{
-    const ms=st==='all'||x.status===st;
-    const txt=(x.name||x.patient||'')+(x.phone||x.test||x.num||'');
-    return ms&&(!q||txt.toLowerCase().includes(q));
-  });
+// RESULTS
+async function loadResults(){
+const s=await getDocs(collection(db,"results"));
+let h="";
+s.forEach(d=>{
+let x=d.data();
+h+=`<tr><td>${x.patient||""} - ${x.test||""}</td></tr>`;
+});
+document.getElementById('rt').innerHTML=h;
 }
 
-function rP(){
-  const data=gf(AP,'p');
-  if(!data.length){sh('pe');hd('ptw');return;}
-  hd('pe');N('ptw').style.display='block';
-  N('ptbl').innerHTML=data.map(p=>`<tr>
-    <td style="font-weight:600">${p.name||''}</td><td>${p.age||''}</td><td>${p.phone||''}</td>
-    <td>${p.doctor||''}</td>
-    <td><span class="bdg ${bc(p.branch)}">${p.branch||''}</span></td>
-    <td>${p.sample||''}</td>
-    <td style="color:#27500A;font-weight:600">${Number(p.paid||0).toLocaleString()} ج</td>
-    <td style="color:#A32D2D;font-weight:600">${(Number(p.total||0)-Number(p.paid||0)).toLocaleString()} ج</td>
-    <td><span class="st ${sc(p.status)}">${p.status||''}</span></td>
-    <td>
-      <button class="vb" onclick="showD('${p.id}')">عرض</button>
-      <button class="eb" onclick="openEdit('${p.id}')">تعديل</button>
-      ${p.status!=='مكتمل'?`<button class="db" onclick="mkDone('${p.id}')">تم ✓</button>`:''}
-      <button class="xb" onclick="delIt('patients','${p.id}')">حذف</button>
-    </td>
-  </tr>`).join('');
-  window._AP=AP;
+// INVOICES
+async function loadInvoices(){
+const s=await getDocs(collection(db,"invoices"));
+let h="";
+s.forEach(d=>{
+let x=d.data();
+h+=`<tr><td>${x.patient||""} - ${x.total||0}</td></tr>`;
+});
+document.getElementById('it').innerHTML=h;
 }
 
-function rR(){
-  const data=gf(AR,'r');
-  if(!data.length){sh('re');hd('rtw');return;}
-  hd('re');N('rtw').style.display='block';
-  N('rtbl').innerHTML=data.map(r=>`<tr>
-    <td style="font-weight:600">${r.patient||''}</td><td>${r.test||''}</td><td>${r.sample||''}</td>
-    <td><span class="bdg ${bc(r.branch)}">${r.branch||''}</span></td>
-    <td>${r.result||'—'}</td>
-    <td><span class="${r.tumorTests==='نعم'?'yp':'np'}">${r.tumorTests||'لا'}</span></td>
-    <td>${r.date||''}</td>
-    <td><span class="st ${sc(r.status)}">${r.status||''}</span></td>
-    <td>
-      ${r.status!=='مكتمل'?`<button class="db" onclick="mkDoneR('${r.id}')">تم ✓</button>`:''}
-      <button class="xb" onclick="delIt('results','${r.id}')">حذف</button>
-    </td>
-  </tr>`).join('');
+// ADD PATIENT
+window.addPatient=async function(){
+await addDoc(collection(db,"patients"),{
+name:document.getElementById('n').value,
+phone:document.getElementById('ph').value,
+branch:document.getElementById('b').value
+});
+closeModal();loadPatients();loadChart();
 }
 
-function rI(){
-  const data=gf(AI,'i');
-  if(!data.length){sh('ie');hd('itw');return;}
-  hd('ie');N('itw').style.display='block';
-  N('itbl').innerHTML=data.map(i=>`<tr>
-    <td style="color:#888;font-weight:600">${i.num||''}</td>
-    <td style="font-weight:600">${i.patient||''}</td>
-    <td><span class="bdg ${bc(i.branch)}">${i.branch||''}</span></td>
-    <td>${Number(i.total||0).toLocaleString()} ج</td>
-    <td style="color:#27500A;font-weight:600">${Number(i.paid||0).toLocaleString()} ج</td>
-    <td style="color:#A32D2D;font-weight:600">${(Number(i.total||0)-Number(i.paid||0)).toLocaleString()} ج</td>
-    <td>${i.date||''}</td>
-    <td><span class="st ${sc(i.status)}">${i.status||''}</span></td>
-  </tr>`).join('');
+// DELETE
+window.del=async function(col,id){
+await deleteDoc(doc(db,col,id));
+loadAll();
 }
 
-function rStats(){
-  const paid=AP.reduce((a,p)=>a+Number(p.paid||0),0);
-  const due=AP.reduce((a,p)=>a+(Number(p.total||0)-Number(p.paid||0)),0);
-  const done=AP.filter(p=>p.status==='مكتمل').length;
-  N('sgrid').innerHTML=`
-    <div class="sc"><div class="sc-ic" style="background:linear-gradient(135deg,#185FA5,#378ADD)"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/></svg></div><div class="sc-lb">المرضى</div><div class="sc-v">${AP.length}</div><div class="sc-s">${CU.role==='admin'?'جميع الفروع':'فرع '+CU.branch}</div></div>
-    <div class="sc"><div class="sc-ic" style="background:linear-gradient(135deg,#27500A,#3B6D11)"><svg viewBox="0 0 24 24"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg></div><div class="sc-lb">المدفوع</div><div class="sc-v" style="color:#27500A">${paid.toLocaleString()}</div><div class="sc-s">جنيه</div></div>
-    <div class="sc"><div class="sc-ic" style="background:linear-gradient(135deg,#A32D2D,#E24B4A)"><svg viewBox="0 0 24 24"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg></div><div class="sc-lb">المتبقي</div><div class="sc-v" style="color:#A32D2D">${due.toLocaleString()}</div><div class="sc-s">جنيه</div></div>
-    <div class="sc"><div class="sc-ic" style="background:linear-gradient(135deg,#534AB7,#7F77DD)"><svg viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"/></svg></div><div class="sc-lb">مكتمل</div><div class="sc-v">${done}</div><div class="sc-s">حالة</div></div>
-  `;
+// MODAL
+window.openModal=()=>document.getElementById('m').classList.add('show');
+window.closeModal=()=>document.getElementById('m').classList.remove('show');
+
+// CHART
+async function loadChart(){
+const s=await getDocs(collection(db,"patients"));
+let b={};
+s.forEach(d=>{
+let x=d.data().branch||"unknown";
+b[x]=(b[x]||0)+1;
+});
+
+new Chart(document.getElementById('c'),{
+type:'bar',
+data:{labels:Object.keys(b),datasets:[{data:Object.values(b)}]}
+});
 }
 
-function renderTarget(){
-  const target=Number(CU.target||0);
-  if(!target){hd('tgt-section');return;}
-  sh('tgt-section');
-  const done=AP.filter(p=>p.status==='مكتمل').length;
-  const pct=Math.min(Math.round(done/target*100),100);
-  N('tgt-name').textContent='التارجت الشهري — '+CU.name;
-  N('tgt-nums').textContent=`${done} / ${target} حالة مكتملة`;
-  N('tgt-fill').style.width=pct+'%';
-  N('tgt-fill').className='tgt-fill'+(pct>=100?' done':'');
-  N('tgt-pct').textContent=pct+'%';
-  N('tgt-pct').style.color=pct>=100?'#27500A':'#185FA5';
-}
-
-function renderUsers(){
-  if(CU.role!=='admin')return;
-  const html=USERS.filter(u=>u.role==='staff').map(u=>`
-    <div class="user-card">
-      <div class="uc-av">${u.av||u.name?.charAt(0)||'?'}</div>
-      <div class="uc-info">
-        <div class="uc-name">${u.name}</div>
-        <div class="uc-meta">
-          <span class="bdg ${bc(u.branch)}">${u.branch}</span>
-          &nbsp; اسم المستخدم: <strong>${u.u}</strong>
-          &nbsp; التارجت: <strong>${u.target||0} حالة/شهر</strong>
-        </div>
-      </div>
-      <div class="uc-acts">
-        <button class="eb" onclick="openEditUser('${u.id}')">تعديل</button>
-        <button class="xb" onclick="delUser('${u.id}')">حذف</button>
-      </div>
-    </div>`).join('');
-  N('users-list').innerHTML=html||'<p style="color:#aaa;text-align:center;padding:2rem">لا يوجد موظفون</p>';
-}
-
-window.showD=function(id){
-  const p=window._AP?.find(x=>x.id===id);if(!p)return;
-  N('dtitle').textContent=p.name;
-  N('dbody').innerHTML=`
-    <div class="ds"><h3>البيانات الشخصية</h3><div class="dg">
-      <div class="di"><label>الاسم</label><p>${p.name||'—'}</p></div>
-      <div class="di"><label>السن</label><p>${p.age||'—'} سنة</p></div>
-      <div class="di"><label>التلفون</label><p>${p.phone||'—'}</p></div>
-      <div class="di"><label>الفرع</label><p><span class="bdg ${bc(p.branch)}">${p.branch||'—'}</span></p></div>
-      <div class="di" style="grid-column:1/-1"><label>العنوان</label><p>${p.address||'—'}</p></div>
-    </div></div>
-    <div class="ds"><h3>البيانات الطبية</h3><div class="dg">
-      <div class="di"><label>الطبيب المعالج</label><p>${p.doctor||'—'}</p></div>
-      <div class="di"><label>نوع العينة</label><p>${p.sample||'—'}</p></div>
-      <div class="di"><label>مكان أخذ العينة</label><p>${p.sampleSite||'—'}</p></div>
-      <div class="di"><label>التاريخ</label><p>${p.date||'—'}</p></div>
-      <div class="di"><label>عمليات جراحية سابقة</label><p><span class="${p.surgeries==='نعم'?'yp':'np'}">${p.surgeries||'لا'}</span></p></div>
-      <div class="di"><label>تحاليل أورام سابقة</label><p><span class="${p.tumorTests==='نعم'?'yp':'np'}">${p.tumorTests||'لا'}</span></p></div>
-      <div class="di" style="grid-column:1/-1"><label>ملاحظات</label><p>${p.notes||'—'}</p></div>
-    </div></div>
-    <div class="ds"><h3>المالية</h3><div class="mgrd">
-      <div class="mb mt"><label>الإجمالي</label><p>${Number(p.total||0).toLocaleString()} ج</p></div>
-      <div class="mb mpa"><label>المدفوع</label><p>${Number(p.paid||0).toLocaleString()} ج</p></div>
-      <div class="mb md"><label>المتبقي</label><p>${(Number(p.total||0)-Number(p.paid||0)).toLocaleString()} ج</p></div>
-    </div></div>
-    <div class="ds"><h3>الحالة</h3>
-      <span class="st ${sc(p.status)}">${p.status||'—'}</span>
-      ${p.status!=='مكتمل'?`<button class="db" style="margin-right:10px" onclick="mkDone('${p.id}');closeD()">تحديد كمكتمل ✓</button>`:''}
-    </div>`;
-  N('dov').classList.add('open');
-};
-window.closeD=function(){N('dov').classList.remove('open');};
-
-// Mark patient as done → auto-create result entry
-window.mkDone=async function(id){
-  const p=window._AP?.find(x=>x.id===id);if(!p)return;
-  try{
-    await updateDoc(doc(db,'patients',id),{status:'مكتمل'});
-    // Auto-create result
-    await addDoc(collection(db,'results'),{
-      patient:p.name,test:p.sample||'—',sample:p.sample||'—',
-      branch:p.branch,tumorTests:p.tumorTests||'لا',
-      result:'في الانتظار',status:'جديد',date:new Date().toISOString().split('T')[0],
-      notes:'تم إنشاؤها تلقائياً من حالة المريض',
-      patientId:id,addedBy:CU.name,createdAt:serverTimestamp()
-    });
-    toast('تم! الحالة مكتملة وتم إنشاء نتيجة تلقائياً ✓',true);
-    await loadAll();
-    if(CU.role==='staff') renderTarget();
-  }catch(e){toast('خطأ: '+e.message);}
-};
-
-window.mkDoneR=async function(id){
-  try{
-    await updateDoc(doc(db,'results',id),{status:'مكتمل'});
-    toast('تم تحديث النتيجة ✓',true);
-    await loadR();
-  }catch(e){toast('خطأ: '+e.message);}
-};
-
-window.delIt=async function(col,id){
-  if(!confirm('هل أنت متأكد من الحذف؟'))return;
-  try{await deleteDoc(doc(db,col,id));toast('تم الحذف');await loadAll();}
-  catch(e){toast('خطأ في الحذف');}
-};
-
-window.delUser=async function(id){
-  if(!confirm('هل أنت متأكد من حذف هذا المستخدم؟'))return;
-  try{await deleteDoc(doc(db,'users',id));USERS=USERS.filter(u=>u.id!==id);renderUsers();toast('تم حذف المستخدم');}
-  catch(e){toast('خطأ في الحذف');}
-};
-
-window.ft=function(s){if(s==='p')rP();else if(s==='r')rR();else if(s==='i')rI();};
-window.sf=function(s,v,btn){
-  FS[s]=v;
-  btn.closest('.fbar').querySelectorAll('.fb').forEach(b=>b.classList.remove('on'));
-  btn.classList.add('on');ft(s);
-};
-
-const bSel=()=>CU.role==='admin'
-  ?`<select id="fb"><option value="">اختر الفرع</option><option>القاهرة</option><option>الزقازيق</option><option>أبو حماد</option></select>`
-  :`<input type="text" id="fb" value="${CU.branch}" readonly/>`;
-const sOpts=`<option value="">اختر نوع العينة</option><option>دم</option><option>بول</option><option>براز</option><option>أنسجة</option><option>سائل نخاع</option><option>مسحة</option><option>إفراز</option>`;
-const today=new Date().toISOString().split('T')[0];
-
-const FORMS={
-  p:`<div class="mg">
-    <p class="sdv">البيانات الشخصية</p>
-    <div class="mfg full"><label>الاسم الكامل *</label><input id="fn" type="text" placeholder="الاسم رباعي"/></div>
-    <div class="mfg"><label>السن *</label><input id="fa" type="number" placeholder="العمر"/></div>
-    <div class="mfg"><label>رقم التلفون *</label><input id="fp" type="text" placeholder="01xxxxxxxxx"/></div>
-    <div class="mfg full"><label>العنوان</label><input id="fad" type="text" placeholder="العنوان بالتفصيل"/></div>
-    <div class="mfg"><label>الفرع *</label>BSEL</div>
-    <div class="mfg"><label>الطبيب المعالج</label><input id="fd" type="text" placeholder="اسم الطبيب"/></div>
-    <p class="sdv">بيانات العينة</p>
-    <div class="mfg"><label>نوع العينة</label><select id="fs">SOPTS</select></div>
-    <div class="mfg"><label>مكان أخذ العينة من الجسم</label><input id="fss" type="text" placeholder="مثلاً: وريد الذراع"/></div>
-    <p class="sdv">التاريخ الطبي</p>
-    <div class="mfg"><label>عمليات جراحية سابقة؟</label><select id="fsr"><option>لا</option><option>نعم</option></select></div>
-    <div class="mfg"><label>تحاليل أورام سابقة؟</label><select id="ftr"><option>لا</option><option>نعم</option></select></div>
-    <div class="mfg full"><label>ملاحظات</label><textarea id="fno" placeholder="أي معلومات إضافية..."></textarea></div>
-    <p class="sdv">المالية</p>
-    <div class="mfg"><label>المبلغ الإجمالي (جنيه)</label><input id="ft2" type="number" value="0"/></div>
-    <div class="mfg"><label>المبلغ المدفوع (جنيه)</label><input id="fpa" type="number" value="0"/></div>
-    <div class="mfg"><label>الحالة</label><select id="fst"><option>جديد</option><option>قيد الانتظار</option><option>مكتمل</option></select></div>
-    <div class="mfg"><label>التاريخ</label><input id="fdt" type="date" value="TODAY"/></div>
-  </div>`,
-  r:`<div class="mg">
-    <div class="mfg"><label>اسم المريض *</label><input id="fpt" type="text" placeholder="اسم المريض"/></div>
-    <div class="mfg"><label>نوع التحليل *</label><input id="fte" type="text" placeholder="مثلاً: CBC، سكر، أورام"/></div>
-    <div class="mfg"><label>نوع العينة</label><select id="fs">SOPTS</select></div>
-    <div class="mfg"><label>الفرع *</label>BSEL</div>
-    <div class="mfg"><label>تحاليل أورام سابقة؟</label><select id="ftr"><option>لا</option><option>نعم</option></select></div>
-    <div class="mfg"><label>النتيجة</label><input id="fre" type="text" placeholder="النتيجة"/></div>
-    <div class="mfg"><label>الحالة</label><select id="fst"><option>جديد</option><option>قيد الانتظار</option><option>مكتمل</option></select></div>
-    <div class="mfg"><label>التاريخ</label><input id="fdt" type="date" value="TODAY"/></div>
-    <div class="mfg full"><label>ملاحظات</label><textarea id="fno" placeholder="ملاحظات..."></textarea></div>
-  </div>`,
-  i:`<div class="mg">
-    <div class="mfg"><label>اسم المريض *</label><input id="fpt" type="text" placeholder="اسم المريض"/></div>
-    <div class="mfg"><label>الفرع *</label>BSEL</div>
-    <div class="mfg"><label>المبلغ الإجمالي (جنيه) *</label><input id="ft2" type="number" value="0"/></div>
-    <div class="mfg"><label>المبلغ المدفوع (جنيه)</label><input id="fpa" type="number" value="0"/></div>
-    <div class="mfg"><label>طريقة الدفع</label><select id="fpm"><option>كاش</option><option>تحويل بنكي</option><option>آجل</option></select></div>
-    <div class="mfg"><label>التاريخ</label><input id="fdt" type="date" value="TODAY"/></div>
-    <div class="mfg full"><label>تفاصيل التحاليل</label><input id="fde" type="text" placeholder="أسماء التحاليل"/></div>
-  </div>`,
-  u:`<div class="mg">
-    <div class="mfg"><label>الاسم الكامل *</label><input id="fn" type="text" placeholder="الاسم"/></div>
-    <div class="mfg"><label>اسم المستخدم *</label><input id="fu" type="text" placeholder="username"/></div>
-    <div class="mfg"><label>كلمة المرور *</label><input id="fpw" type="password" placeholder="كلمة المرور"/></div>
-    <div class="mfg"><label>التارجت الشهري (عدد الحالات)</label><input id="ftg" type="number" placeholder="0" value="0"/></div>
-    <div class="mfg"><label>الفرع *</label><select id="fb"><option value="">اختر الفرع</option><option>القاهرة</option><option>الزقازيق</option><option>أبو حماد</option></select></div>
-    <div class="mfg"><label>الصلاحية</label><select id="frl"><option value="staff">موظف</option><option value="admin">أدمن</option></select></div>
-  </div>`,
-};
-
-window.openM=function(type){
-  MT=type;editId=null;
-  const titles={p:'إضافة مريض جديد',r:'إضافة نتيجة تحليل',i:'فاتورة جديدة',u:'إضافة مستخدم جديد'};
-  N('mtitle').textContent=titles[type];
-  N('mbody').innerHTML=(FORMS[type]||'').replace(/BSEL/g,bSel()).replace(/SOPTS/g,sOpts).replace(/TODAY/g,today);
-  N('aov').classList.add('open');
-};
-
-window.openEdit=function(id){
-  const p=window._AP?.find(x=>x.id===id);if(!p)return;
-  MT='p';editId=id;
-  N('mtitle').textContent='تعديل بيانات المريض';
-  N('mbody').innerHTML=FORMS.p.replace(/BSEL/g,bSel()).replace(/SOPTS/g,sOpts).replace(/TODAY/g,today);
-  N('aov').classList.add('open');
-  setTimeout(()=>{
-    const sv=(id,v)=>{const e=N(id);if(e)e.value=v||'';};
-    sv('fn',p.name);sv('fa',p.age);sv('fp',p.phone);sv('fad',p.address);
-    sv('fd',p.doctor);sv('fss',p.sampleSite);sv('fno',p.notes);
-    sv('ft2',p.total);sv('fpa',p.paid);sv('fdt',p.date);
-    if(N('fb'))N('fb').value=p.branch||'';
-    if(N('fs'))N('fs').value=p.sample||'';
-    if(N('fsr'))N('fsr').value=p.surgeries||'لا';
-    if(N('ftr'))N('ftr').value=p.tumorTests||'لا';
-    if(N('fst'))N('fst').value=p.status||'جديد';
-  },100);
-};
-
-window.openEditUser=function(id){
-  const u=USERS.find(x=>x.id===id);if(!u)return;
-  MT='u';editId=id;
-  N('mtitle').textContent='تعديل بيانات الموظف';
-  N('mbody').innerHTML=FORMS.u.replace(/TODAY/g,today);
-  N('aov').classList.add('open');
-  setTimeout(()=>{
-    N('fn').value=u.name||'';N('fu').value=u.u||'';
-    N('fpw').placeholder='اتركه فارغاً إذا لم تريد تغييره';
-    N('ftg').value=u.target||0;
-    N('fb').value=u.branch||'';N('frl').value=u.role||'staff';
-  },100);
-};
-
-window.closeM=function(){N('aov').classList.remove('open');editId=null;};
-
-window.saveD=async function(){
-  const btn=N('bsv');btn.disabled=true;btn.textContent='جاري الحفظ...';
-  const g=id=>N(id)?.value?.trim()||'';
-  try{
-    if(MT==='p'){
-      if(!g('fn')||!g('fp')||!g('fb')){toast('من فضلك اكمل الحقول المطلوبة *');btn.disabled=false;btn.textContent='حفظ';return;}
-      const data={
-        name:g('fn'),age:g('fa'),phone:g('fp'),address:g('fad'),branch:g('fb'),
-        doctor:g('fd'),sample:g('fs'),sampleSite:g('fss'),surgeries:g('fsr'),
-        tumorTests:g('ftr'),notes:g('fno'),total:Number(g('ft2')||0),
-        paid:Number(g('fpa')||0),status:g('fst'),date:g('fdt'),addedBy:CU.name
-      };
-      if(editId){await updateDoc(doc(db,'patients',editId),data);}
-      else{data.createdAt=serverTimestamp();await addDoc(collection(db,'patients'),data);}
-    }else if(MT==='r'){
-      if(!g('fpt')||!g('fte')||!g('fb')){toast('من فضلك اكمل الحقول المطلوبة *');btn.disabled=false;btn.textContent='حفظ';return;}
-      await addDoc(collection(db,'results'),{
-        patient:g('fpt'),test:g('fte'),sample:g('fs'),branch:g('fb'),
-        tumorTests:g('ftr'),result:g('fre'),status:g('fst'),date:g('fdt'),
-        notes:g('fno'),addedBy:CU.name,createdAt:serverTimestamp()
-      });
-    }else if(MT==='i'){
-      if(!g('fpt')||!g('fb')){toast('من فضلك اكمل الحقول المطلوبة *');btn.disabled=false;btn.textContent='حفظ';return;}
-      const total=Number(g('ft2')||0),paid=Number(g('fpa')||0);
-      await addDoc(collection(db,'invoices'),{
-        num:'INV-'+Date.now().toString().slice(-6),patient:g('fpt'),branch:g('fb'),
-        total,paid,payMethod:g('fpm')||'كاش',details:g('fde'),date:g('fdt'),
-        status:paid>=total?'مدفوع':paid>0?'جزئي':'غير مدفوع',
-        addedBy:CU.name,createdAt:serverTimestamp()
-      });
-    }else if(MT==='u'){
-      if(!g('fn')||!g('fu')||!g('fb')){toast('من فضلك اكمل الحقول المطلوبة *');btn.disabled=false;btn.textContent='حفظ';return;}
-      const nm=g('fn'),uname=g('fu'),pw=g('fpw'),tgt=Number(g('ftg')||0),br=g('fb'),rl=g('frl');
-      const initials=nm.split(' ').map(w=>w[0]).slice(0,2).join('');
-      if(editId){
-        const upd={name:nm,u:uname,branch:br,role:rl,target:tgt,av:initials};
-        if(pw) upd.p=pw;
-        await updateDoc(doc(db,'users',editId),upd);
-        USERS=USERS.map(x=>x.id===editId?{...x,...upd}:x);
-      }else{
-        if(!pw){toast('كلمة المرور مطلوبة *');btn.disabled=false;btn.textContent='حفظ';return;}
-        const nd=await addDoc(collection(db,'users'),{name:nm,u:uname,p:pw,branch:br,role:rl,target:tgt,av:initials,createdAt:serverTimestamp()});
-        USERS.push({id:nd.id,name:nm,u:uname,p:pw,branch:br,role:rl,target:tgt,av:initials});
-      }
-      renderUsers();
-      toast('تم حفظ المستخدم ✓',true);closeM();btn.disabled=false;btn.textContent='حفظ';return;
-    }
-    toast('تم الحفظ بنجاح ✓',true);closeM();await loadAll();
-    if(CU.role==='staff') renderTarget();
-  }catch(e){toast('خطأ في الحفظ: '+e.message);console.error(e);}
-  btn.disabled=false;btn.textContent='حفظ';
-};
-
-window.showSec=function(s){
-  ['p','r','i','u'].forEach(x=>{N('s-'+x).classList.remove('active');N('n-'+x).classList.remove('active');});
-  N('s-'+s).classList.add('active');N('n-'+s).classList.add('active');
-  N('ptitle').textContent={p:'المرضى',r:'النتائج',i:'الفواتير',u:'إدارة المستخدمين'}[s];
-};
-
-// Load users on page start for login
-loadUsers();
-N('lu').addEventListener('keydown',e=>{if(e.key==='Enter')doLogin();});
-N('lp').addEventListener('keydown',e=>{if(e.key==='Enter')doLogin();});
 </script>
 </body>
 </html>
