@@ -21,9 +21,6 @@ body{font-family:'Segoe UI',Tahoma,Arial,sans-serif;background:#f4f6f9;color:#1a
 .fg input:focus,.fg select:focus{outline:none;border-color:#185FA5;}
 .btnl{width:100%;padding:12px;background:linear-gradient(135deg,#185FA5,#378ADD);color:#fff;border:none;border-radius:10px;font-size:15px;font-weight:600;cursor:pointer;}
 .er{color:#c0392b;font-size:13px;text-align:center;margin-top:10px;display:none;padding:8px;background:#ffeaea;border-radius:8px;}
-.hints{margin-top:1.5rem;padding:1rem;background:#f8f9fa;border-radius:10px;}
-.hints p{font-size:11px;color:#888;line-height:2;}
-.hints strong{color:#185FA5;}
 .layout{display:flex;min-height:100vh;}
 .sb{width:230px;background:#1a1a2e;color:#fff;display:flex;flex-direction:column;flex-shrink:0;}
 .sbh{padding:1.5rem 1rem 1rem;border-bottom:1px solid rgba(255,255,255,.1);}
@@ -41,14 +38,16 @@ body{font-family:'Segoe UI',Tahoma,Arial,sans-serif;background:#f4f6f9;color:#1a
 .av{width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,#185FA5,#378ADD);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:#fff;flex-shrink:0;}
 .un{font-size:12px;font-weight:600;color:#fff;}
 .ur{font-size:10px;color:rgba(255,255,255,.5);}
-.lob{width:100%;padding:7px;background:rgba(255,255,255,.08);color:rgba(255,255,255,.7);border:1px solid rgba(255,255,255,.15);border-radius:8px;font-size:12px;cursor:pointer;}
+.lob{width:100%;padding:7px;background:rgba(255,255,255,.08);color:rgba(255,255,255,.7);border:1px solid rgba(255,255,255,.15);border-radius:8px;font-size:12px;cursor:pointer;margin-bottom:5px;}
 .lob:hover{background:rgba(255,255,255,.15);color:#fff;}
+.edb{width:100%;padding:7px;background:rgba(56,138,221,.2);color:#8ab4f8;border:1px solid rgba(56,138,221,.3);border-radius:8px;font-size:12px;cursor:pointer;}
+.edb:hover{background:rgba(56,138,221,.3);}
 .mn{flex:1;display:flex;flex-direction:column;overflow:auto;}
 .tb{background:#fff;padding:1rem 1.5rem;border-bottom:1px solid #eee;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:10;}
 .tb h1{font-size:18px;font-weight:700;}
 .bb{display:inline-block;padding:3px 12px;border-radius:20px;font-size:11px;font-weight:600;margin-top:3px;}
-.b-all{background:#E6F1FB;color:#185FA5;}.b-cairo{background:#EAF3DE;color:#27500A;}
-.b-zaq{background:#FAEEDA;color:#633806;}.b-abo{background:#EEEDFE;color:#3C3489;}
+.b-all{background:#E6F1FB;color:#185FA5;}.b-c{background:#EAF3DE;color:#27500A;}
+.b-z{background:#FAEEDA;color:#633806;}.b-a{background:#EEEDFE;color:#3C3489;}
 .ct{padding:1.5rem;flex:1;}
 .sg{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px;margin-bottom:1.5rem;}
 .sc{background:#fff;border-radius:12px;padding:1.25rem;box-shadow:0 2px 8px rgba(0,0,0,.06);}
@@ -93,7 +92,7 @@ tr:hover td{background:#fafcff;}
 .sec{display:none;}.sec.on{display:block;}
 .ov{display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:1000;align-items:center;justify-content:center;padding:1rem;}
 .ov.open{display:flex;}
-.modal{background:#fff;border-radius:16px;padding:1.75rem;width:100%;max-width:600px;max-height:90vh;overflow-y:auto;box-shadow:0 30px 80px rgba(0,0,0,.3);}
+.modal{background:#fff;border-radius:16px;padding:1.75rem;width:100%;max-width:620px;max-height:90vh;overflow-y:auto;box-shadow:0 30px 80px rgba(0,0,0,.3);}
 .modal h2{font-size:17px;font-weight:700;margin-bottom:1.5rem;padding-bottom:12px;border-bottom:1px solid #f0f0f0;}
 .mg{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
 .full{grid-column:1/-1;}
@@ -109,7 +108,7 @@ tr:hover td{background:#fafcff;}
 .bsv:disabled{opacity:.6;cursor:not-allowed;}
 .dov{display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:1000;align-items:flex-start;justify-content:center;padding:2rem 1rem;overflow-y:auto;}
 .dov.open{display:flex;}
-.dm{background:#fff;border-radius:16px;width:100%;max-width:640px;overflow:hidden;box-shadow:0 30px 80px rgba(0,0,0,.3);}
+.dm{background:#fff;border-radius:16px;width:100%;max-width:660px;overflow:hidden;box-shadow:0 30px 80px rgba(0,0,0,.3);}
 .dh{background:linear-gradient(135deg,#1a1a2e,#16213e);padding:1.25rem 1.5rem;display:flex;justify-content:space-between;align-items:center;}
 .dh h2{font-size:16px;font-weight:700;color:#fff;}
 .dh button{padding:5px 12px;border:1px solid rgba(255,255,255,.3);border-radius:6px;background:none;color:rgba(255,255,255,.8);cursor:pointer;font-size:12px;}
@@ -128,6 +127,11 @@ tr:hover td{background:#fafcff;}
 .mbt{background:#f4f6f9;}.mbt label{color:#888;}.mbt p{color:#1a1a2e;}
 .mbp{background:#EAF3DE;}.mbp label{color:#3B6D11;}.mbp p{color:#27500A;}
 .mbd{background:#FCEBEB;}.mbd label{color:#A32D2D;}.mbd p{color:#A32D2D;}
+.pay-section{background:#f8f9fa;border-radius:10px;padding:1rem;margin-top:1rem;}
+.pay-section h4{font-size:12px;font-weight:700;color:#555;margin-bottom:10px;}
+.pay-row{display:flex;gap:10px;align-items:flex-end;}
+.pay-row .mfg{flex:1;}
+.pay-btn{padding:9px 16px;background:linear-gradient(135deg,#27500A,#3B6D11);color:#fff;border:none;border-radius:8px;cursor:pointer;font-size:13px;font-weight:600;white-space:nowrap;}
 .ld{display:flex;align-items:center;justify-content:center;padding:2rem;color:#aaa;gap:10px;}
 .spin{width:20px;height:20px;border:2px solid #e0e0e0;border-top-color:#185FA5;border-radius:50%;animation:sp .7s linear infinite;}
 @keyframes sp{to{transform:rotate(360deg);}}
@@ -140,7 +144,7 @@ tr:hover td{background:#fafcff;}
 .tgp{flex:2;height:8px;background:#f0f0f0;border-radius:10px;overflow:hidden;}
 .tgf{height:100%;border-radius:10px;background:linear-gradient(90deg,#185FA5,#378ADD);transition:width .5s;}
 .tgf.done{background:linear-gradient(90deg,#27500A,#3B6D11);}
-.tgpc{font-size:12px;font-weight:700;color:#185FA5;min-width:36px;text-align:left;}
+.tgpc{font-size:12px;font-weight:700;min-width:36px;text-align:left;}
 .uc{background:#fff;border-radius:12px;padding:1.25rem;box-shadow:0 2px 8px rgba(0,0,0,.06);display:flex;align-items:center;gap:12px;margin-bottom:10px;}
 .uca{width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg,#185FA5,#378ADD);display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700;color:#fff;flex-shrink:0;}
 .uci{flex:1;}
@@ -156,18 +160,13 @@ tr:hover td{background:#fafcff;}
 <div class="lw"><div class="lc">
   <div class="la">
     <div class="li"><svg viewBox="0 0 24 24"><path d="M9 3H5a2 2 0 00-2 2v4m6-6h10a2 2 0 012 2v4M9 3v18m0 0h10a2 2 0 002-2V9M9 21H5a2 2 0 01-2-2V9m0 0h18"/></svg></div>
-    <h1>معمل د / سيد تعيلب</h1><p>نظام إدارة المعمل الطبي</p>
+    <h1 id="lab-title">معمل د / سيد تعيلب</h1>
+    <p>نظام إدارة المعمل الطبي</p>
   </div>
   <div class="fg"><label>اسم المستخدم</label><input id="lu" type="text" placeholder="أدخل اسم المستخدم"/></div>
   <div class="fg"><label>كلمة المرور</label><input id="lp" type="password" placeholder="أدخل كلمة المرور"/></div>
   <button class="btnl" onclick="doLogin()">دخول</button>
   <p class="er" id="lerr">اسم المستخدم أو كلمة المرور غلط</p>
-  <div class="hints">
-    <p><strong>admin</strong>/admin123 — أدمن (كل الفروع)</p>
-    <p><strong>cairo1</strong>/c1pass | <strong>cairo2</strong>/c2pass | <strong>cairo3</strong>/c3pass — القاهرة</p>
-    <p><strong>zaq1</strong>/z1pass | <strong>zaq2</strong>/z2pass — الزقازيق</p>
-    <p><strong>abo1</strong>/a1pass — أبو حماد</p>
-  </div>
 </div></div>
 </div>
 
@@ -176,7 +175,8 @@ tr:hover td{background:#fafcff;}
   <div class="sb">
     <div class="sbh">
       <div class="sbi"><svg viewBox="0 0 24 24"><path d="M9 3H5a2 2 0 00-2 2v4m6-6h10a2 2 0 012 2v4M9 3v18m0 0h10a2 2 0 002-2V9M9 21H5a2 2 0 01-2-2V9m0 0h18"/></svg></div>
-      <h2>د / سيد تعيلب</h2><p>المعمل الطبي</p>
+      <h2 id="sb-title">المعمل الطبي</h2>
+      <p>نظام إدارة المعمل</p>
     </div>
     <div class="nl">القائمة</div>
     <div class="ni on" id="n-p" onclick="showSec('p')"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>المرضى</div>
@@ -185,9 +185,10 @@ tr:hover td{background:#fafcff;}
     <div class="ni" id="n-u" style="display:none" onclick="showSec('u')"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M20 21a8 8 0 10-16 0"/></svg>المستخدمون</div>
     <div class="sbf">
       <div class="um">
-        <div class="av" id="uav">AD</div>
-        <div><div class="un" id="uname">أدمن</div><div class="ur" id="urole">مدير</div></div>
+        <div class="av" id="uav">؟</div>
+        <div><div class="un" id="uname">...</div><div class="ur" id="urole">...</div></div>
       </div>
+      <button class="edb" onclick="openEditProfile()">تعديل بياناتي</button>
       <button class="lob" onclick="logout()">تسجيل الخروج</button>
     </div>
   </div>
@@ -280,6 +281,7 @@ tr:hover td{background:#fafcff;}
 </div>
 </div>
 
+<!-- MODAL -->
 <div class="ov" id="aov">
 <div class="modal">
   <h2 id="mtitle">إضافة</h2>
@@ -288,6 +290,7 @@ tr:hover td{background:#fafcff;}
 </div>
 </div>
 
+<!-- DETAIL -->
 <div class="dov" id="dov">
 <div class="dm">
   <div class="dh"><h2 id="dtitle">بيانات المريض</h2><button onclick="closeD()">إغلاق</button></div>
@@ -308,21 +311,12 @@ const db=getFirestore(initializeApp({
   appId:"1:482723222986:web:1849d08859cb7e47f1ab33"
 }));
 
-const DU=[
-  {u:'admin',p:'admin123',name:'أدمن',role:'admin',branch:'all',av:'AD',target:0},
-  {u:'cairo1',p:'c1pass',name:'أحمد سعيد',role:'staff',branch:'القاهرة',av:'أح',target:30},
-  {u:'cairo2',p:'c2pass',name:'منى علي',role:'staff',branch:'القاهرة',av:'من',target:25},
-  {u:'cairo3',p:'c3pass',name:'خالد محمود',role:'staff',branch:'القاهرة',av:'خا',target:20},
-  {u:'zaq1',p:'z1pass',name:'سارة حسن',role:'staff',branch:'الزقازيق',av:'سا',target:20},
-  {u:'zaq2',p:'z2pass',name:'عمر إبراهيم',role:'staff',branch:'الزقازيق',av:'عم',target:15},
-  {u:'abo1',p:'a1pass',name:'فاطمة رضا',role:'staff',branch:'أبو حماد',av:'فا',target:10},
-];
-
 let CU=null,MT='',EID=null;
 let AP=[],AR=[],AI=[],USERS=[];
 let FS={p:'all',r:'all',i:'all'};
+let SETTINGS={labName:'معمل د / سيد تعيلب'};
 
-const bc=b=>b==='القاهرة'?'b-cairo':b==='الزقازيق'?'b-zaq':b==='أبو حماد'?'b-abo':'b-all';
+const bc=b=>b==='القاهرة'?'b-c':b==='الزقازيق'?'b-z':b==='أبو حماد'?'b-a':'b-all';
 const sc=s=>s==='مكتمل'||s==='مدفوع'||s==='نشط'?'std':s==='قيد الانتظار'||s==='جزئي'?'stw':s==='غير مدفوع'?'stu':'stn';
 const N=id=>document.getElementById(id);
 const sh=(id,t='block')=>{const e=N(id);if(e)e.style.display=t;};
@@ -332,14 +326,22 @@ function toast(m,ok){const t=N('toast');t.textContent=m;t.style.background=ok?'#
 async function loadUsers(){
   try{
     const s=await getDocs(collection(db,'users'));
-    if(s.empty){
-      for(const u of DU)await addDoc(collection(db,'users'),u);
-      const s2=await getDocs(collection(db,'users'));
-      USERS=s2.docs.map(d=>({id:d.id,...d.data()}));
-    }else{
-      USERS=s.docs.map(d=>({id:d.id,...d.data()}));
+    USERS=s.docs.map(d=>({id:d.id,...d.data()}));
+    if(!USERS.length){
+      // First time: create admin only, no hardcoded staff
+      const ad=await addDoc(collection(db,'users'),{u:'admin',p:'admin123',name:'المدير',role:'admin',branch:'all',av:'MD',target:0,createdAt:serverTimestamp()});
+      USERS=[{id:ad.id,u:'admin',p:'admin123',name:'المدير',role:'admin',branch:'all',av:'MD',target:0}];
     }
-  }catch(e){USERS=[...DU];}
+  }catch(e){console.error(e);}
+}
+
+async function loadSettings(){
+  try{
+    const s=await getDocs(collection(db,'settings'));
+    if(!s.empty){const d=s.docs[0].data();SETTINGS={...SETTINGS,...d,id:s.docs[0].id};}
+  }catch(e){}
+  N('lab-title').textContent=SETTINGS.labName||'معمل د / سيد تعيلب';
+  N('sb-title').textContent=SETTINGS.labName||'المعمل الطبي';
 }
 
 window.doLogin=async function(){
@@ -359,7 +361,7 @@ window.logout=function(){
 };
 
 async function init(){
-  N('uav').textContent=CU.av||CU.name?.charAt(0)||'?';
+  N('uav').textContent=CU.av||CU.name?.charAt(0)||'؟';
   N('uname').textContent=CU.name;
   N('urole').textContent=CU.role==='admin'?'مدير النظام':'موظف فرع';
   const bb=N('bbdg');
@@ -367,11 +369,11 @@ async function init(){
   else{bb.textContent='فرع '+CU.branch;bb.className='bb '+bc(CU.branch);}
   N('n-u').style.display=CU.role==='admin'?'flex':'none';
   N('tdate').textContent=new Date().toLocaleDateString('ar-EG',{weekday:'long',year:'numeric',month:'long',day:'numeric'});
+  await loadSettings();
   if(CU.role==='admin')renderUsers();
   await loadAll();
 }
 
-// ✅ FIX: Load ALL data then filter client-side — no composite index needed
 async function loadAll(){await Promise.all([loadP(),loadR(),loadI()]);}
 
 async function loadP(){
@@ -379,17 +381,13 @@ async function loadP(){
   try{
     const s=await getDocs(collection(db,'patients'));
     let all=s.docs.map(d=>({id:d.id,...d.data()}));
-    // Sort by createdAt desc client-side
     all.sort((a,b)=>(b.createdAt?.seconds||0)-(a.createdAt?.seconds||0));
-    // Filter by branch for staff
     if(CU.role==='staff') all=all.filter(x=>x.branch===CU.branch);
-    AP=all;
-    rP();rStats();
+    AP=all;rP();rStats();
     if(CU.role==='staff')renderTarget();
   }catch(e){toast('خطأ في تحميل المرضى: '+e.message);}
   hd('pl');
 }
-
 async function loadR(){
   sh('rl','flex');hd('rtw');hd('re');
   try{
@@ -401,7 +399,6 @@ async function loadR(){
   }catch(e){toast('خطأ في تحميل النتائج: '+e.message);}
   hd('rl');
 }
-
 async function loadI(){
   sh('il','flex');hd('itw');hd('ie');
   try{
@@ -430,9 +427,7 @@ function rP(){
   hd('pe');N('ptw').style.display='block';
   N('ptbl').innerHTML=data.map(p=>`<tr>
     <td style="font-weight:600">${p.name||''}</td>
-    <td>${p.age||''}</td>
-    <td>${p.phone||''}</td>
-    <td>${p.doctor||''}</td>
+    <td>${p.age||''}</td><td>${p.phone||''}</td><td>${p.doctor||''}</td>
     <td><span class="bdg ${bc(p.branch)}">${p.branch||''}</span></td>
     <td>${p.sample||''}</td>
     <td style="color:#27500A;font-weight:600">${Number(p.paid||0).toLocaleString()} ج</td>
@@ -452,9 +447,7 @@ function rR(){
   if(!data.length){sh('re');hd('rtw');return;}
   hd('re');N('rtw').style.display='block';
   N('rtbl').innerHTML=data.map(r=>`<tr>
-    <td style="font-weight:600">${r.patient||''}</td>
-    <td>${r.test||''}</td>
-    <td>${r.sample||''}</td>
+    <td style="font-weight:600">${r.patient||''}</td><td>${r.test||''}</td><td>${r.sample||''}</td>
     <td><span class="bdg ${bc(r.branch)}">${r.branch||''}</span></td>
     <td>${r.result||'—'}</td>
     <td><span class="${r.tumorTests==='نعم'?'yp':'np'}">${r.tumorTests||'لا'}</span></td>
@@ -510,11 +503,10 @@ function renderTarget(){
 }
 
 function renderUsers(){
-  if(CU.role!=='admin')return;
   const staff=USERS.filter(u=>u.role==='staff');
   N('ulist').innerHTML=staff.length?staff.map(u=>`
     <div class="uc">
-      <div class="uca">${u.av||u.name?.charAt(0)||'?'}</div>
+      <div class="uca">${u.av||u.name?.charAt(0)||'؟'}</div>
       <div class="uci">
         <div class="ucn">${u.name}</div>
         <div class="ucm"><span class="bdg ${bc(u.branch)}">${u.branch}</span> &nbsp; <strong>${u.u}</strong> &nbsp; تارجت: <strong>${u.target||0} حالة</strong></div>
@@ -523,13 +515,13 @@ function renderUsers(){
         <button class="eb" onclick='openEditUser(${JSON.stringify(u.id)})'>تعديل</button>
         <button class="xb" onclick='delUser(${JSON.stringify(u.id)})'>حذف</button>
       </div>
-    </div>`).join(''):'<p style="color:#aaa;text-align:center;padding:2rem">لا يوجد موظفون</p>';
+    </div>`).join(''):'<p style="color:#aaa;text-align:center;padding:2rem">لا يوجد موظفون — اضغط إضافة مستخدم</p>';
 }
 
-// ✅ FIX: showD now uses AP array directly (works for all users)
 window.showD=function(id){
   const p=AP.find(x=>x.id===id);
   if(!p){toast('لم يتم العثور على المريض');return;}
+  const due=Number(p.total||0)-Number(p.paid||0);
   N('dtitle').textContent=p.name;
   N('dbd').innerHTML=`
     <div class="ds"><h3>البيانات الشخصية</h3><div class="dg">
@@ -548,11 +540,21 @@ window.showD=function(id){
       <div class="di"><label>تحاليل أورام سابقة</label><p><span class="${p.tumorTests==='نعم'?'yp':'np'}">${p.tumorTests||'لا'}</span></p></div>
       <div class="di" style="grid-column:1/-1"><label>ملاحظات</label><p>${p.notes||'—'}</p></div>
     </div></div>
-    <div class="ds"><h3>المالية</h3><div class="mgd">
-      <div class="mb mbt"><label>الإجمالي</label><p>${Number(p.total||0).toLocaleString()} ج</p></div>
-      <div class="mb mbp"><label>المدفوع</label><p>${Number(p.paid||0).toLocaleString()} ج</p></div>
-      <div class="mb mbd"><label>المتبقي</label><p>${(Number(p.total||0)-Number(p.paid||0)).toLocaleString()} ج</p></div>
-    </div></div>
+    <div class="ds"><h3>المالية</h3>
+      <div class="mgd">
+        <div class="mb mbt"><label>الإجمالي</label><p>${Number(p.total||0).toLocaleString()} ج</p></div>
+        <div class="mb mbp"><label>المدفوع</label><p>${Number(p.paid||0).toLocaleString()} ج</p></div>
+        <div class="mb mbd"><label>المتبقي</label><p id="due-display">${due.toLocaleString()} ج</p></div>
+      </div>
+      ${due>0?`<div class="pay-section">
+        <h4>إضافة دفعة جديدة</h4>
+        <div class="pay-row">
+          <div class="mfg"><label>المبلغ المدفوع (جنيه)</label><input id="pay-amt" type="number" placeholder="0" min="0" max="${due}"/></div>
+          <button class="pay-btn" onclick='addPayment(${JSON.stringify(p.id)},${due})'>إضافة دفعة ✓</button>
+        </div>
+        <p style="font-size:11px;color:#888;margin-top:6px">الحد الأقصى: ${due.toLocaleString()} جنيه</p>
+      </div>`:'<p style="text-align:center;color:#27500A;font-weight:600;margin-top:10px;font-size:13px">✓ تم سداد المبلغ كاملاً</p>'}
+    </div>
     <div class="ds"><h3>الحالة</h3>
       <span class="st ${sc(p.status)}">${p.status||'—'}</span>
       ${p.status!=='مكتمل'?`<button class="db" style="margin-right:10px" onclick='mkDone(${JSON.stringify(p.id)});closeD()'>تحديد كمكتمل ✓</button>`:''}
@@ -561,10 +563,29 @@ window.showD=function(id){
 };
 window.closeD=()=>N('dov').classList.remove('open');
 
+// ✅ Add payment: adds amount to paid, updates remaining
+window.addPayment=async function(id,due){
+  const amt=Number(N('pay-amt')?.value||0);
+  if(!amt||amt<=0){toast('من فضلك أدخل مبلغ صحيح');return;}
+  if(amt>due){toast('المبلغ أكبر من المتبقي!');return;}
+  const p=AP.find(x=>x.id===id);if(!p)return;
+  const newPaid=Number(p.paid||0)+amt;
+  const newTotal=Number(p.total||0);
+  const newStatus=newPaid>=newTotal?'مدفوع':'جزئي';
+  try{
+    await updateDoc(doc(db,'patients',id),{paid:newPaid,payStatus:newStatus});
+    toast('تم إضافة الدفعة ✓',true);
+    closeD();await loadAll();
+  }catch(e){toast('خطأ: '+e.message);}
+};
+
+// ✅ Mark done: moves to results + adds remaining to invoice as pending
 window.mkDone=async function(id){
   const p=AP.find(x=>x.id===id);if(!p)return;
+  const due=Number(p.total||0)-Number(p.paid||0);
   try{
     await updateDoc(doc(db,'patients',id),{status:'مكتمل'});
+    // Auto-create result
     await addDoc(collection(db,'results'),{
       patient:p.name,test:p.sample||'تحليل عام',sample:p.sample||'—',
       branch:p.branch,tumorTests:p.tumorTests||'لا',
@@ -573,7 +594,20 @@ window.mkDone=async function(id){
       notes:'أُنشئت تلقائياً بعد إتمام الحالة',
       patientId:id,addedBy:CU.name,createdAt:serverTimestamp()
     });
-    toast('تم! وتم إنشاء نتيجة تلقائياً ✓',true);
+    // If there's remaining balance, create invoice
+    if(due>0){
+      await addDoc(collection(db,'invoices'),{
+        num:'INV-'+Date.now().toString().slice(-6),
+        patient:p.name,branch:p.branch,
+        total:Number(p.total||0),paid:Number(p.paid||0),
+        payMethod:'آجل',details:'مبلغ متبقي بعد إتمام الحالة',
+        date:new Date().toISOString().split('T')[0],
+        status:'جزئي',addedBy:CU.name,createdAt:serverTimestamp()
+      });
+      toast('تم! تم إنشاء نتيجة وفاتورة بالمبلغ المتبقي ('+due.toLocaleString()+' ج) ✓',true);
+    }else{
+      toast('تم! تم إنشاء النتيجة تلقائياً ✓',true);
+    }
     await loadAll();
   }catch(e){toast('خطأ: '+e.message);}
 };
@@ -658,6 +692,16 @@ const FORMS={
     <div class="mfg"><label>الفرع *</label><select id="fb"><option value="">اختر الفرع</option><option>القاهرة</option><option>الزقازيق</option><option>أبو حماد</option></select></div>
     <div class="mfg"><label>الصلاحية</label><select id="frl"><option value="staff">موظف</option><option value="admin">أدمن</option></select></div>
   </div>`,
+  // ✅ Profile edit form
+  profile:`<div class="mg">
+    <p class="sdv">البيانات الشخصية</p>
+    <div class="mfg"><label>الاسم الكامل *</label><input id="fn" type="text"/></div>
+    <div class="mfg"><label>اسم المستخدم *</label><input id="fu" type="text"/></div>
+    <div class="mfg"><label>كلمة المرور الجديدة</label><input id="fpw" type="password" placeholder="اتركه فارغاً للإبقاء على القديم"/></div>
+    <div class="mfg"><label>تأكيد كلمة المرور</label><input id="fpw2" type="password" placeholder="أعد كتابة كلمة المرور"/></div>
+    ${CU?.role==='admin'?`<p class="sdv">إعدادات المعمل</p>
+    <div class="mfg full"><label>اسم المعمل</label><input id="flab" type="text" placeholder="مثلاً: معمل د / سيد تعيلب"/></div>`:''}
+  </div>`,
 };
 
 window.openM=function(type){
@@ -665,6 +709,19 @@ window.openM=function(type){
   N('mtitle').textContent={p:'إضافة مريض جديد',r:'إضافة نتيجة',i:'فاتورة جديدة',u:'إضافة مستخدم'}[type];
   N('mbody').innerHTML=(FORMS[type]||'').replace(/BSEL/g,bSel()).replace(/SO/g,sO).replace(/TD/g,td);
   N('aov').classList.add('open');
+};
+
+// ✅ Edit own profile
+window.openEditProfile=function(){
+  MT='profile';EID=CU.id;
+  N('mtitle').textContent='تعديل بياناتي';
+  N('mbody').innerHTML=FORMS.profile.replace(/BSEL/g,bSel()).replace(/SO/g,sO).replace(/TD/g,td);
+  N('aov').classList.add('open');
+  setTimeout(()=>{
+    N('fn').value=CU.name||'';
+    N('fu').value=CU.u||'';
+    if(N('flab'))N('flab').value=SETTINGS.labName||'';
+  },100);
 };
 
 window.openEdit=function(id){
@@ -694,7 +751,7 @@ window.openEditUser=function(id){
   N('aov').classList.add('open');
   setTimeout(()=>{
     N('fn').value=u.name||'';N('fu').value=u.u||'';
-    N('fpw').placeholder='اتركه فارغاً إذا لم تريد التغيير';
+    N('fpw').placeholder='اتركه فارغاً للإبقاء على القديم';
     N('ftg').value=u.target||0;
     N('fb').value=u.branch||'';N('frl').value=u.role||'staff';
   },100);
@@ -706,7 +763,29 @@ window.saveD=async function(){
   const btn=N('bsv');btn.disabled=true;btn.textContent='جاري الحفظ...';
   const g=id=>N(id)?.value?.trim()||'';
   try{
-    if(MT==='p'){
+    if(MT==='profile'){
+      if(!g('fn')||!g('fu')){toast('الاسم واسم المستخدم مطلوبان');btn.disabled=false;btn.textContent='حفظ';return;}
+      const pw=g('fpw'),pw2=g('fpw2');
+      if(pw&&pw!==pw2){toast('كلمتا المرور غير متطابقتان');btn.disabled=false;btn.textContent='حفظ';return;}
+      const nm=g('fn'),un=g('fu');
+      const ini=nm.split(' ').map(w=>w[0]||'').slice(0,2).join('').toUpperCase();
+      const upd={name:nm,u:un,av:ini};
+      if(pw)upd.p=pw;
+      await updateDoc(doc(db,'users',EID),upd);
+      // Update lab name if admin
+      if(CU.role==='admin'&&N('flab')){
+        const labName=g('flab');
+        if(SETTINGS.id){await updateDoc(doc(db,'settings',SETTINGS.id),{labName});}
+        else{const nd=await addDoc(collection(db,'settings'),{labName});SETTINGS.id=nd.id;}
+        SETTINGS.labName=labName;
+        N('lab-title').textContent=labName;
+        N('sb-title').textContent=labName;
+      }
+      CU={...CU,...upd};
+      USERS=USERS.map(x=>x.id===EID?{...x,...upd}:x);
+      N('uav').textContent=ini;N('uname').textContent=nm;
+      toast('تم تحديث بياناتك ✓',true);closeM();
+    }else if(MT==='p'){
       if(!g('fn')||!g('fp')||!g('fb')){toast('من فضلك اكمل الحقول المطلوبة *');btn.disabled=false;btn.textContent='حفظ';return;}
       const data={name:g('fn'),age:g('fa'),phone:g('fp'),address:g('fad'),branch:g('fb'),
         doctor:g('fd'),sample:g('fs'),sampleSite:g('fss'),surgeries:g('fsr'),
@@ -714,12 +793,15 @@ window.saveD=async function(){
         paid:Number(g('fpa')||0),status:g('fst'),date:g('fdt'),addedBy:CU.name};
       if(EID){await updateDoc(doc(db,'patients',EID),data);}
       else{data.createdAt=serverTimestamp();await addDoc(collection(db,'patients'),data);}
+      toast('تم الحفظ ✓',true);closeM();await loadAll();
     }else if(MT==='r'){
       if(!g('fpt')||!g('fte')||!g('fb')){toast('من فضلك اكمل الحقول المطلوبة *');btn.disabled=false;btn.textContent='حفظ';return;}
-      const data={patient:g('fpt'),test:g('fte'),sample:g('fs'),branch:g('fb'),
+      await addDoc(collection(db,'results'),{
+        patient:g('fpt'),test:g('fte'),sample:g('fs'),branch:g('fb'),
         tumorTests:g('ftr'),result:g('fre'),status:g('fst'),date:g('fdt'),
-        notes:g('fno'),addedBy:CU.name,createdAt:serverTimestamp()};
-      await addDoc(collection(db,'results'),data);
+        notes:g('fno'),addedBy:CU.name,createdAt:serverTimestamp()
+      });
+      toast('تم الحفظ ✓',true);closeM();await loadAll();
     }else if(MT==='i'){
       if(!g('fpt')||!g('fb')){toast('من فضلك اكمل الحقول المطلوبة *');btn.disabled=false;btn.textContent='حفظ';return;}
       const total=Number(g('ft2')||0),paid=Number(g('fpa')||0);
@@ -729,6 +811,7 @@ window.saveD=async function(){
         status:paid>=total?'مدفوع':paid>0?'جزئي':'غير مدفوع',
         addedBy:CU.name,createdAt:serverTimestamp()
       });
+      toast('تم الحفظ ✓',true);closeM();await loadAll();
     }else if(MT==='u'){
       if(!g('fn')||!g('fu')||!g('fb')){toast('من فضلك اكمل الحقول المطلوبة *');btn.disabled=false;btn.textContent='حفظ';return;}
       const nm=g('fn'),un=g('fu'),pw=g('fpw'),tgt=Number(g('ftg')||0),br=g('fb'),rl=g('frl');
@@ -743,9 +826,8 @@ window.saveD=async function(){
         const nd=await addDoc(collection(db,'users'),{name:nm,u:un,p:pw,branch:br,role:rl,target:tgt,av:ini,createdAt:serverTimestamp()});
         USERS.push({id:nd.id,name:nm,u:un,p:pw,branch:br,role:rl,target:tgt,av:ini});
       }
-      renderUsers();toast('تم حفظ المستخدم ✓',true);closeM();btn.disabled=false;btn.textContent='حفظ';return;
+      renderUsers();toast('تم حفظ المستخدم ✓',true);closeM();
     }
-    toast('تم الحفظ بنجاح ✓',true);closeM();await loadAll();
   }catch(e){toast('خطأ: '+e.message);console.error(e);}
   btn.disabled=false;btn.textContent='حفظ';
 };
@@ -757,6 +839,7 @@ window.showSec=function(s){
 };
 
 await loadUsers();
+await loadSettings();
 N('lu').addEventListener('keydown',e=>{if(e.key==='Enter')doLogin();});
 N('lp').addEventListener('keydown',e=>{if(e.key==='Enter')doLogin();});
 </script>
