@@ -624,35 +624,39 @@ function rR(){
 }
 
 function rI(){
-  const data=gf(AI,'i');
+  let data=gf(AI,'i');
+  if(CU.role==='staff') data=data.filter(x=>x.branch===CU.branch);
   if(!data.length){sh('ie');hd('itw');N('imob').innerHTML='';return;}
   hd('ie');
   N('itw').style.display='block';
-  N('itbl').innerHTML=data.map(i=>`<tr>
+  N('itbl').innerHTML=data.map(i=>{const due=Number(i.total||0)-Number(i.paid||0);return `<tr>
     <td style="color:#888;font-weight:600">${i.num||''}</td>
     <td style="font-weight:600">${i.patient||''}</td>
     <td><span class="bdg ${bc(i.branch)}">${i.branch||''}</span></td>
     <td>${Number(i.total||0).toLocaleString()} ج</td>
     <td style="color:#27500A;font-weight:600">${Number(i.paid||0).toLocaleString()} ج</td>
-    <td style="color:#A32D2D;font-weight:600">${(Number(i.total||0)-Number(i.paid||0)).toLocaleString()} ج</td>
+    <td style="color:${due>0?'#A32D2D':'#27500A'};font-weight:600">${due.toLocaleString()} ج</td>
     <td>${i.date||''}</td>
     <td><span class="st ${sc(i.status)}">${i.status||''}</span></td>
-  </tr>`).join('');
-  N('imob').innerHTML=data.map(i=>`
+    <td>${due>0?`<button class="db" onclick='payInvoice(${JSON.stringify(i.id)},${due})'>دفع ✓</button>`:''}</td>
+  </tr>`;}).join('');
+  N('imob').innerHTML=data.map(i=>{const due=Number(i.total||0)-Number(i.paid||0);return `
     <div class="pcard">
       <div class="pcard-top">
-        <div><div class="pcard-name">${i.patient||''}</div><div class="pcard-sub">${i.num||''} &nbsp;|&nbsp; ${i.date||''}</div></div>
+        <div><div class="pcard-name">${i.patient||''}</div><div class="pcard-sub">${i.num||''} | ${i.date||''}</div></div>
         <span class="st ${sc(i.status)}">${i.status||''}</span>
       </div>
       <div class="pcard-row">
         <div class="pcard-item"><label>الفرع</label><span><span class="bdg ${bc(i.branch)}">${i.branch||''}</span></span></div>
         <div class="pcard-item"><label>طريقة الدفع</label><span>${i.payMethod||'—'}</span></div>
+        <div class="pcard-item"><label>التفاصيل</label><span>${i.details||'—'}</span></div>
       </div>
       <div class="pcard-money">
         <div class="pm-box pm-paid"><label>المدفوع</label><span>${Number(i.paid||0).toLocaleString()} ج</span></div>
-        <div class="pm-box pm-due"><label>المتبقي</label><span>${(Number(i.total||0)-Number(i.paid||0)).toLocaleString()} ج</span></div>
+        <div class="pm-box pm-due"><label>المتبقي</label><span>${due.toLocaleString()} ج</span></div>
       </div>
-    </div>`).join('');
+      ${due>0?`<div class="pcard-acts"><button class="db" onclick='payInvoice(${JSON.stringify(i.id)},${due})'>إضافة دفعة ✓</button></div>`:'<p style="font-size:12px;color:#27500A;font-weight:600;text-align:center;padding-top:8px">✓ مدفوع بالكامل</p>'}
+    </div>`;}).join('');
 }
 
 function rStats(){
@@ -745,6 +749,20 @@ window.addPayment=async function(id,due){
   try{
     await updateDoc(doc(db,'patients',id),{paid:newPaid,payStatus:newPaid>=newTotal?'مدفوع':'جزئي'});
     toast('تم إضافة الدفعة ✓',true);closeD();await loadAll();
+  }catch(e){toast('خطأ: '+e.message);}
+};
+
+window.payInvoice=async function(id,due){
+  const amt=Number(prompt('أدخل المبلغ المدفوع (الحد الأقصى '+due+' جنيه):'));
+  if(!amt||amt<=0||isNaN(amt)){toast('مبلغ غير صحيح');return;}
+  if(amt>due){toast('المبلغ أكبر من المتبقي!');return;}
+  const inv=AI.find(x=>x.id===id);if(!inv)return;
+  const newPaid=Number(inv.paid||0)+amt;
+  const newTotal=Number(inv.total||0);
+  const newStatus=newPaid>=newTotal?'مدفوع':newPaid>0?'جزئي':'غير مدفوع';
+  try{
+    await updateDoc(doc(db,'invoices',id),{paid:newPaid,status:newStatus});
+    toast('تم تسجيل الدفعة ✓',true);await loadI();
   }catch(e){toast('خطأ: '+e.message);}
 };
 
