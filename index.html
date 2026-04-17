@@ -178,14 +178,7 @@ tr:hover td{background:#fafcff;}
 .pay-btn{padding:10px 14px;background:linear-gradient(135deg,#27500A,#3B6D11);color:#fff;border:none;border-radius:8px;cursor:pointer;font-size:13px;font-weight:600;white-space:nowrap;}
 
 /* TARGET */
-.tgb{background:#fff;border-radius:10px;padding:12px;margin-bottom:1rem;box-shadow:0 2px 8px rgba(0,0,0,.05);}
-.tg-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;}
-.tgn{font-size:13px;font-weight:600;color:#1a1a2e;}
-.tgs{font-size:12px;color:#888;}
-.tgpc{font-size:14px;font-weight:700;}
-.tgp{height:8px;background:#f0f0f0;border-radius:10px;overflow:hidden;}
-.tgf{height:100%;border-radius:10px;background:linear-gradient(90deg,#185FA5,#378ADD);transition:width .5s;}
-.tgf.done{background:linear-gradient(90deg,#27500A,#3B6D11);}
+
 
 /* USER CARDS */
 .uc{background:#fff;border-radius:10px;padding:1rem;box-shadow:0 2px 8px rgba(0,0,0,.05);display:flex;align-items:center;gap:10px;margin-bottom:8px;}
@@ -295,18 +288,7 @@ tr:hover td{background:#fafcff;}
     <div class="ct">
       <div class="sg" id="sgrid"></div>
 
-      <div id="tgt-wrap" style="display:none">
-        <div class="tgb">
-          <div class="tg-top">
-            <div class="tgn" id="tgn">التارجت</div>
-            <div style="display:flex;align-items:center;gap:8px">
-              <div class="tgs" id="tgs">0/0</div>
-              <div class="tgpc" id="tgpc">0%</div>
-            </div>
-          </div>
-          <div class="tgp"><div class="tgf" id="tgf" style="width:0%"></div></div>
-        </div>
-      </div>
+
 
       <!-- PATIENTS -->
       <div class="sec on" id="s-p">
@@ -327,7 +309,7 @@ tr:hover td{background:#fafcff;}
           <div id="pl" class="ld"><div class="spin"></div>جاري التحميل...</div>
           <!-- Desktop table -->
           <div class="desk-table tw" id="ptw" style="display:none">
-            <table><thead><tr><th>الاسم</th><th>السن</th><th>التلفون</th><th>الطبيب</th><th>الفرع</th><th>العينة</th><th>المدفوع</th><th>المتبقي</th><th>الحالة</th><th>إجراءات</th></tr></thead><tbody id="ptbl"></tbody></table>
+            <table><thead><tr><th>الاسم</th><th>السن</th><th>التلفون</th><th>الطبيب</th><th>المستلم</th><th>الفرع</th><th>العينة</th><th>المدفوع</th><th>المتبقي</th><th>الحالة</th><th>إجراءات</th></tr></thead><tbody id="ptbl"></tbody></table>
           </div>
           <!-- Mobile cards -->
           <div class="mob-cards" id="pmob" style="padding:8px"></div>
@@ -505,7 +487,7 @@ async function loadP(){
     all.sort((a,b)=>(b.createdAt?.seconds||0)-(a.createdAt?.seconds||0));
     if(CU.role==='staff')all=all.filter(x=>x.branch===CU.branch);
     AP=all;rP();rStats();
-    if(CU.role==='staff')renderTarget();
+
   }catch(e){toast('خطأ في تحميل المرضى: '+e.message);}
   hd('pl');
 }
@@ -573,6 +555,7 @@ function rP(){
         <span class="st ${sc(p.status)}">${p.status||''}</span>
       </div>
       <div class="pcard-row">
+        <div class="pcard-item"><label>المستلم</label><span style="color:#185FA5;font-weight:700">${p.addedBy||'—'}</span></div>
         <div class="pcard-item"><label>الفرع</label><span><span class="bdg ${bc(p.branch)}">${p.branch||''}</span></span></div>
         <div class="pcard-item"><label>الطبيب</label><span>${p.doctor||'—'}</span></div>
         <div class="pcard-item"><label>العينة</label><span>${p.sample||'—'}</span></div>
@@ -638,7 +621,10 @@ function rI(){
     <td style="color:${due>0?'#A32D2D':'#27500A'};font-weight:600">${due.toLocaleString()} ج</td>
     <td>${i.date||''}</td>
     <td><span class="st ${sc(i.status)}">${i.status||''}</span></td>
-    <td>${due>0?`<button class="db" onclick='payInvoice(${JSON.stringify(i.id)},${due})'>دفع ✓</button>`:''}</td>
+    <td style="display:flex;gap:4px;flex-wrap:wrap">
+      ${due>0?`<button class="db" onclick='payInvoice(${JSON.stringify(i.id)},${due})'>دفع ✓</button>`:''}
+      ${CU.role==='admin'?`<button class="xb" onclick='delIt("invoices",${JSON.stringify(i.id)})'>حذف</button>`:''}
+    </td>
   </tr>`;}).join('');
   N('imob').innerHTML=data.map(i=>{const due=Number(i.total||0)-Number(i.paid||0);return `
     <div class="pcard">
@@ -655,7 +641,10 @@ function rI(){
         <div class="pm-box pm-paid"><label>المدفوع</label><span>${Number(i.paid||0).toLocaleString()} ج</span></div>
         <div class="pm-box pm-due"><label>المتبقي</label><span>${due.toLocaleString()} ج</span></div>
       </div>
-      ${due>0?`<div class="pcard-acts"><button class="db" onclick='payInvoice(${JSON.stringify(i.id)},${due})'>إضافة دفعة ✓</button></div>`:'<p style="font-size:12px;color:#27500A;font-weight:600;text-align:center;padding-top:8px">✓ مدفوع بالكامل</p>'}
+      <div class="pcard-acts" style="padding-top:8px;border-top:1px solid #f0f0f0;margin-top:8px">
+        ${due>0?`<button class="db" onclick='payInvoice(${JSON.stringify(i.id)},${due})'>إضافة دفعة ✓</button>`:'<span style="font-size:12px;color:#27500A;font-weight:600">✓ مدفوع بالكامل</span>'}
+        ${CU.role==='admin'?`<button class="xb" onclick='delIt("invoices",${JSON.stringify(i.id)})'>حذف</button>`:''}
+      </div>
     </div>`;}).join('');
 }
 
@@ -671,16 +660,7 @@ function rStats(){
   `;
 }
 
-function renderTarget(){
-  const tgt=Number(CU.target||0);if(!tgt){hd('tgt-wrap');return;}
-  sh('tgt-wrap');
-  const done=AP.filter(p=>p.status==='مكتمل').length;
-  const pct=Math.min(Math.round(done/tgt*100),100);
-  N('tgn').textContent='التارجت — '+CU.name;
-  N('tgs').textContent=done+'/'+tgt+' حالة';
-  N('tgf').style.width=pct+'%';N('tgf').className='tgf'+(pct>=100?' done':'');
-  N('tgpc').textContent=pct+'%';N('tgpc').style.color=pct>=100?'#27500A':'#185FA5';
-}
+
 
 function renderUsers(){
   const staff=USERS.filter(u=>u.role==='staff');
@@ -718,6 +698,7 @@ window.showD=function(id){
       <div class="di"><label>عمليات جراحية سابقة</label><p><span class="${p.surgeries==='نعم'?'yp':'np'}">${p.surgeries||'لا'}</span></p></div>
       <div class="di"><label>تحاليل أورام سابقة</label><p><span class="${p.tumorTests==='نعم'?'yp':'np'}">${p.tumorTests||'لا'}</span></p></div>
       <div class="di" style="grid-column:1/-1"><label>ملاحظات</label><p>${p.notes||'—'}</p></div>
+      <div class="di"><label>المستلم (تم الإدخال بواسطة)</label><p style="color:#185FA5;font-weight:700">${p.addedBy||'—'}</p></div>
     </div></div>
     <div class="ds"><h3>المالية</h3>
       <div class="mgd">
