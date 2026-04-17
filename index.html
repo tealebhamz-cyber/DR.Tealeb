@@ -2,160 +2,245 @@
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
 <title>معمل د / سيد تعيلب</title>
 <style>
 *{box-sizing:border-box;margin:0;padding:0;}
-body{font-family:'Segoe UI',Tahoma,Arial,sans-serif;background:#f4f6f9;color:#1a1a2e;direction:rtl;}
+body{font-family:'Segoe UI',Tahoma,Arial,sans-serif;background:#f4f6f9;color:#1a1a2e;direction:rtl;-webkit-tap-highlight-color:transparent;}
 .page{display:none;}.page.active{display:block;}
-.lw{min-height:100vh;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#1a1a2e,#16213e);}
-.lc{background:#fff;border-radius:16px;padding:2.5rem;width:100%;max-width:420px;box-shadow:0 20px 60px rgba(0,0,0,.3);}
-.la{text-align:center;margin-bottom:2rem;}
-.li{width:70px;height:70px;background:linear-gradient(135deg,#185FA5,#378ADD);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 12px;}
-.li svg{width:35px;height:35px;stroke:#fff;fill:none;stroke-width:1.5;}
-.la h1{font-size:20px;font-weight:700;color:#1a1a2e;}
-.la p{font-size:13px;color:#666;margin-top:4px;}
-.fg{margin-bottom:14px;}
-.fg label{display:block;font-size:13px;color:#555;margin-bottom:6px;font-weight:500;}
-.fg input,.fg select{width:100%;padding:10px 14px;border:1.5px solid #e0e0e0;border-radius:10px;font-size:14px;font-family:inherit;}
+
+/* LOGIN */
+.lw{min-height:100vh;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#1a1a2e,#16213e);padding:1rem;}
+.lc{background:#fff;border-radius:16px;padding:2rem;width:100%;max-width:400px;box-shadow:0 20px 60px rgba(0,0,0,.3);}
+.la{text-align:center;margin-bottom:1.5rem;}
+.li{width:64px;height:64px;background:linear-gradient(135deg,#185FA5,#378ADD);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 10px;}
+.li svg{width:30px;height:30px;stroke:#fff;fill:none;stroke-width:1.5;}
+.la h1{font-size:18px;font-weight:700;color:#1a1a2e;}
+.la p{font-size:12px;color:#666;margin-top:3px;}
+.fg{margin-bottom:12px;}
+.fg label{display:block;font-size:13px;color:#555;margin-bottom:5px;font-weight:500;}
+.fg input,.fg select{width:100%;padding:11px 14px;border:1.5px solid #e0e0e0;border-radius:10px;font-size:15px;font-family:inherit;}
 .fg input:focus,.fg select:focus{outline:none;border-color:#185FA5;}
-.btnl{width:100%;padding:12px;background:linear-gradient(135deg,#185FA5,#378ADD);color:#fff;border:none;border-radius:10px;font-size:15px;font-weight:600;cursor:pointer;}
+.btnl{width:100%;padding:13px;background:linear-gradient(135deg,#185FA5,#378ADD);color:#fff;border:none;border-radius:10px;font-size:15px;font-weight:600;cursor:pointer;}
 .er{color:#c0392b;font-size:13px;text-align:center;margin-top:10px;display:none;padding:8px;background:#ffeaea;border-radius:8px;}
-.layout{display:flex;min-height:100vh;}
-.sb{width:230px;background:#1a1a2e;color:#fff;display:flex;flex-direction:column;flex-shrink:0;}
-.sbh{padding:1.5rem 1rem 1rem;border-bottom:1px solid rgba(255,255,255,.1);}
-.sbi{width:40px;height:40px;background:linear-gradient(135deg,#185FA5,#378ADD);border-radius:10px;display:flex;align-items:center;justify-content:center;margin-bottom:8px;}
-.sbi svg{width:22px;height:22px;stroke:#fff;fill:none;stroke-width:1.5;}
-.sbh h2{font-size:13px;font-weight:700;color:#fff;}
-.sbh p{font-size:11px;color:rgba(255,255,255,.5);margin-top:2px;}
-.nl{padding:12px 1rem 4px;font-size:10px;color:rgba(255,255,255,.4);letter-spacing:.08em;}
-.ni{display:flex;align-items:center;gap:10px;padding:10px 1rem;font-size:13px;color:rgba(255,255,255,.7);cursor:pointer;border-right:3px solid transparent;transition:all .2s;}
-.ni:hover{background:rgba(255,255,255,.05);color:#fff;}
+
+/* LAYOUT */
+.layout{display:flex;min-height:100vh;position:relative;}
+
+/* SIDEBAR */
+.sb{width:240px;background:#1a1a2e;color:#fff;display:flex;flex-direction:column;flex-shrink:0;transition:transform .3s;z-index:100;}
+.sbh{padding:1.25rem 1rem 1rem;border-bottom:1px solid rgba(255,255,255,.1);}
+.sbi{width:38px;height:38px;background:linear-gradient(135deg,#185FA5,#378ADD);border-radius:9px;display:flex;align-items:center;justify-content:center;margin-bottom:7px;}
+.sbi svg{width:20px;height:20px;stroke:#fff;fill:none;stroke-width:1.5;}
+.sbh h2{font-size:13px;font-weight:700;color:#fff;line-height:1.3;}
+.sbh p{font-size:10px;color:rgba(255,255,255,.5);margin-top:2px;}
+.nl{padding:10px 1rem 3px;font-size:10px;color:rgba(255,255,255,.4);letter-spacing:.08em;}
+.ni{display:flex;align-items:center;gap:10px;padding:11px 1rem;font-size:13px;color:rgba(255,255,255,.7);cursor:pointer;border-right:3px solid transparent;}
+.ni:hover,.ni:active{background:rgba(255,255,255,.05);color:#fff;}
 .ni.on{background:rgba(24,95,165,.3);color:#fff;border-right-color:#378ADD;}
 .ni svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:1.5;flex-shrink:0;}
 .sbf{margin-top:auto;padding:1rem;border-top:1px solid rgba(255,255,255,.1);}
 .um{display:flex;align-items:center;gap:8px;margin-bottom:8px;}
-.av{width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,#185FA5,#378ADD);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:#fff;flex-shrink:0;}
+.av{width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,#185FA5,#378ADD);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:#fff;flex-shrink:0;}
 .un{font-size:12px;font-weight:600;color:#fff;}
 .ur{font-size:10px;color:rgba(255,255,255,.5);}
-.lob{width:100%;padding:7px;background:rgba(255,255,255,.08);color:rgba(255,255,255,.7);border:1px solid rgba(255,255,255,.15);border-radius:8px;font-size:12px;cursor:pointer;margin-bottom:5px;}
-.lob:hover{background:rgba(255,255,255,.15);color:#fff;}
-.edb{width:100%;padding:7px;background:rgba(56,138,221,.2);color:#8ab4f8;border:1px solid rgba(56,138,221,.3);border-radius:8px;font-size:12px;cursor:pointer;}
-.edb:hover{background:rgba(56,138,221,.3);}
-.mn{flex:1;display:flex;flex-direction:column;overflow:auto;}
-.tb{background:#fff;padding:1rem 1.5rem;border-bottom:1px solid #eee;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:10;}
-.tb h1{font-size:18px;font-weight:700;}
-.bb{display:inline-block;padding:3px 12px;border-radius:20px;font-size:11px;font-weight:600;margin-top:3px;}
+.edb{width:100%;padding:7px;background:rgba(56,138,221,.2);color:#8ab4f8;border:1px solid rgba(56,138,221,.3);border-radius:8px;font-size:12px;cursor:pointer;margin-bottom:5px;}
+.lob{width:100%;padding:7px;background:rgba(255,255,255,.08);color:rgba(255,255,255,.7);border:1px solid rgba(255,255,255,.15);border-radius:8px;font-size:12px;cursor:pointer;}
+
+/* MAIN */
+.mn{flex:1;display:flex;flex-direction:column;overflow:auto;min-width:0;}
+.tb{background:#fff;padding:.875rem 1rem;border-bottom:1px solid #eee;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:50;}
+.tb-left{display:flex;align-items:center;gap:10px;}
+.menu-btn{width:36px;height:36px;border:none;background:#f4f6f9;border-radius:8px;display:none;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;}
+.menu-btn svg{width:18px;height:18px;stroke:#1a1a2e;fill:none;stroke-width:2;}
+.tb h1{font-size:16px;font-weight:700;}
+.bb{display:inline-block;padding:2px 10px;border-radius:20px;font-size:10px;font-weight:600;margin-top:2px;}
 .b-all{background:#E6F1FB;color:#185FA5;}.b-c{background:#EAF3DE;color:#27500A;}
 .b-z{background:#FAEEDA;color:#633806;}.b-a{background:#EEEDFE;color:#3C3489;}
-.ct{padding:1.5rem;flex:1;}
-.sg{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px;margin-bottom:1.5rem;}
-.sc{background:#fff;border-radius:12px;padding:1.25rem;box-shadow:0 2px 8px rgba(0,0,0,.06);}
-.sci{width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;margin-bottom:10px;}
-.sci svg{width:18px;height:18px;stroke:#fff;fill:none;stroke-width:1.5;}
-.scl{font-size:12px;color:#888;margin-bottom:4px;}
-.scv{font-size:26px;font-weight:700;}
-.scs{font-size:11px;color:#aaa;margin-top:2px;}
-.card{background:#fff;border-radius:12px;box-shadow:0 2px 8px rgba(0,0,0,.06);overflow:hidden;margin-bottom:1.5rem;}
-.ch{display:flex;justify-content:space-between;align-items:center;padding:1rem 1.25rem;border-bottom:1px solid #f0f0f0;flex-wrap:wrap;gap:8px;}
-.ch h2{font-size:15px;font-weight:700;}
-.chr{display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
-.sr{display:flex;align-items:center;gap:6px;background:#f8f9fa;border:1.5px solid #eee;border-radius:8px;padding:6px 10px;}
-.sr svg{width:14px;height:14px;stroke:#bbb;fill:none;stroke-width:2;flex-shrink:0;}
-.sr input{border:none;background:none;font-size:13px;color:#1a1a2e;font-family:inherit;width:150px;outline:none;}
+.tdate{font-size:11px;color:#aaa;white-space:nowrap;}
+.ct{padding:1rem;flex:1;}
+
+/* OVERLAY for mobile sidebar */
+.sb-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:90;}
+.sb-overlay.show{display:block;}
+
+/* STATS */
+.sg{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:1rem;}
+.sc{background:#fff;border-radius:10px;padding:1rem;box-shadow:0 2px 8px rgba(0,0,0,.05);}
+.sci{width:32px;height:32px;border-radius:8px;display:flex;align-items:center;justify-content:center;margin-bottom:8px;}
+.sci svg{width:16px;height:16px;stroke:#fff;fill:none;stroke-width:1.5;}
+.scl{font-size:11px;color:#888;margin-bottom:3px;}
+.scv{font-size:22px;font-weight:700;}
+.scs{font-size:10px;color:#aaa;margin-top:1px;}
+
+/* CARD */
+.card{background:#fff;border-radius:12px;box-shadow:0 2px 8px rgba(0,0,0,.05);overflow:hidden;margin-bottom:1rem;}
+.ch{display:flex;justify-content:space-between;align-items:center;padding:.875rem 1rem;border-bottom:1px solid #f0f0f0;flex-wrap:wrap;gap:8px;}
+.ch h2{font-size:14px;font-weight:700;}
+.chr{display:flex;align-items:center;gap:6px;flex-wrap:wrap;}
+.sr{display:flex;align-items:center;gap:5px;background:#f8f9fa;border:1.5px solid #eee;border-radius:8px;padding:6px 10px;}
+.sr svg{width:13px;height:13px;stroke:#bbb;fill:none;stroke-width:2;flex-shrink:0;}
+.sr input{border:none;background:none;font-size:13px;color:#1a1a2e;font-family:inherit;width:130px;outline:none;}
 .sr input::placeholder{color:#ccc;}
-.ba{padding:8px 14px;background:linear-gradient(135deg,#185FA5,#378ADD);color:#fff;border:none;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;display:flex;align-items:center;gap:5px;}
-.ba svg{width:13px;height:13px;stroke:#fff;fill:none;stroke-width:2.5;}
-.fb{display:flex;gap:6px;padding:8px 1.25rem;border-bottom:1px solid #f0f0f0;flex-wrap:wrap;}
-.fbb{padding:4px 12px;border:1.5px solid #e0e0e0;border-radius:20px;background:none;font-size:12px;cursor:pointer;color:#666;font-family:inherit;}
+.ba{padding:8px 12px;background:linear-gradient(135deg,#185FA5,#378ADD);color:#fff;border:none;border-radius:8px;font-size:12px;font-weight:600;cursor:pointer;display:flex;align-items:center;gap:4px;white-space:nowrap;}
+.ba svg{width:12px;height:12px;stroke:#fff;fill:none;stroke-width:2.5;}
+.fb{display:flex;gap:5px;padding:7px 1rem;border-bottom:1px solid #f0f0f0;overflow-x:auto;-webkit-overflow-scrolling:touch;}
+.fb::-webkit-scrollbar{display:none;}
+.fbb{padding:4px 12px;border:1.5px solid #e0e0e0;border-radius:20px;background:none;font-size:12px;cursor:pointer;color:#666;font-family:inherit;white-space:nowrap;flex-shrink:0;}
 .fbb.on{background:#185FA5;color:#fff;border-color:#185FA5;}
-.tw{overflow-x:auto;}
-table{width:100%;border-collapse:collapse;font-size:13px;}
-th{padding:9px 12px;text-align:right;color:#888;font-weight:600;background:#fafafa;border-bottom:1px solid #f0f0f0;white-space:nowrap;font-size:12px;}
-td{padding:10px 12px;border-bottom:1px solid #f8f8f8;white-space:nowrap;}
+
+/* TABLE → CARDS on mobile */
+.tw{overflow-x:auto;-webkit-overflow-scrolling:touch;}
+table{width:100%;border-collapse:collapse;font-size:12px;}
+th{padding:8px 10px;text-align:right;color:#888;font-weight:600;background:#fafafa;border-bottom:1px solid #f0f0f0;white-space:nowrap;font-size:11px;}
+td{padding:9px 10px;border-bottom:1px solid #f8f8f8;white-space:nowrap;}
 tr:last-child td{border-bottom:none;}
 tr:hover td{background:#fafcff;}
-.bdg{display:inline-block;padding:3px 9px;border-radius:20px;font-size:11px;font-weight:600;}
-.st{padding:3px 9px;border-radius:20px;font-size:11px;font-weight:600;}
+
+/* MOBILE PATIENT CARDS */
+.pcard{background:#fff;border-radius:10px;padding:1rem;margin-bottom:8px;box-shadow:0 1px 4px rgba(0,0,0,.08);}
+.pcard-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px;}
+.pcard-name{font-size:14px;font-weight:700;color:#1a1a2e;}
+.pcard-sub{font-size:11px;color:#888;margin-top:2px;}
+.pcard-row{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:8px;}
+.pcard-item{display:flex;flex-direction:column;gap:2px;}
+.pcard-item label{font-size:10px;color:#aaa;font-weight:600;}
+.pcard-item span{font-size:12px;font-weight:600;color:#1a1a2e;}
+.pcard-acts{display:flex;gap:6px;flex-wrap:wrap;padding-top:8px;border-top:1px solid #f0f0f0;}
+.pcard-money{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:8px;}
+.pm-box{border-radius:8px;padding:8px;}
+.pm-box label{font-size:10px;display:block;margin-bottom:2px;font-weight:600;}
+.pm-box span{font-size:15px;font-weight:700;}
+.pm-paid{background:#EAF3DE;}.pm-paid label{color:#3B6D11;}.pm-paid span{color:#27500A;}
+.pm-due{background:#FCEBEB;}.pm-due label{color:#A32D2D;}.pm-due span{color:#A32D2D;}
+
+.bdg{display:inline-block;padding:2px 8px;border-radius:20px;font-size:10px;font-weight:600;}
+.st{padding:3px 8px;border-radius:20px;font-size:11px;font-weight:600;}
 .std{background:#EAF3DE;color:#27500A;}.stw{background:#FAEEDA;color:#633806;}
 .stn{background:#E6F1FB;color:#0C447C;}.stu{background:#FCEBEB;color:#A32D2D;}
-.vb{padding:4px 8px;border:1.5px solid #185FA5;border-radius:6px;background:none;color:#185FA5;font-size:11px;font-weight:600;cursor:pointer;}
-.vb:hover{background:#185FA5;color:#fff;}
-.db{padding:4px 8px;border:1.5px solid #27500A;border-radius:6px;background:none;color:#27500A;font-size:11px;font-weight:600;cursor:pointer;margin-right:3px;}
-.db:hover{background:#27500A;color:#fff;}
-.xb{padding:4px 8px;border:1.5px solid #e74c3c;border-radius:6px;background:none;color:#e74c3c;font-size:11px;font-weight:600;cursor:pointer;margin-right:3px;}
-.xb:hover{background:#e74c3c;color:#fff;}
-.eb{padding:4px 8px;border:1.5px solid #888;border-radius:6px;background:none;color:#888;font-size:11px;font-weight:600;cursor:pointer;margin-right:3px;}
-.eb:hover{background:#888;color:#fff;}
-.emp{text-align:center;padding:3rem;color:#aaa;}
+.vb{padding:6px 10px;border:1.5px solid #185FA5;border-radius:6px;background:none;color:#185FA5;font-size:11px;font-weight:600;cursor:pointer;}
+.vb:active{background:#185FA5;color:#fff;}
+.db{padding:6px 10px;border:1.5px solid #27500A;border-radius:6px;background:none;color:#27500A;font-size:11px;font-weight:600;cursor:pointer;}
+.db:active{background:#27500A;color:#fff;}
+.xb{padding:6px 10px;border:1.5px solid #e74c3c;border-radius:6px;background:none;color:#e74c3c;font-size:11px;font-weight:600;cursor:pointer;}
+.xb:active{background:#e74c3c;color:#fff;}
+.eb{padding:6px 10px;border:1.5px solid #888;border-radius:6px;background:none;color:#888;font-size:11px;font-weight:600;cursor:pointer;}
+.eb:active{background:#888;color:#fff;}
+.emp{text-align:center;padding:3rem 1rem;color:#aaa;}
 .emp svg{width:44px;height:44px;stroke:#e0e0e0;fill:none;stroke-width:1;margin:0 auto 8px;display:block;}
 .sec{display:none;}.sec.on{display:block;}
-.ov{display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:1000;align-items:center;justify-content:center;padding:1rem;}
+
+/* MODAL */
+.ov{display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:200;align-items:flex-end;justify-content:center;padding:0;}
 .ov.open{display:flex;}
-.modal{background:#fff;border-radius:16px;padding:1.75rem;width:100%;max-width:620px;max-height:90vh;overflow-y:auto;box-shadow:0 30px 80px rgba(0,0,0,.3);}
-.modal h2{font-size:17px;font-weight:700;margin-bottom:1.5rem;padding-bottom:12px;border-bottom:1px solid #f0f0f0;}
-.mg{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+.modal{background:#fff;border-radius:16px 16px 0 0;padding:1.5rem;width:100%;max-width:100%;max-height:92vh;overflow-y:auto;box-shadow:0 -10px 40px rgba(0,0,0,.2);}
+.modal-drag{width:40px;height:4px;background:#e0e0e0;border-radius:4px;margin:0 auto 1rem;}
+.modal h2{font-size:16px;font-weight:700;margin-bottom:1.25rem;padding-bottom:10px;border-bottom:1px solid #f0f0f0;}
+.mg{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
 .full{grid-column:1/-1;}
-.sdv{grid-column:1/-1;padding-top:12px;margin-top:4px;border-top:1px solid #f0f0f0;font-size:11px;font-weight:700;color:#999;text-transform:uppercase;letter-spacing:.05em;}
-.mfg label{font-size:12px;color:#666;display:block;margin-bottom:5px;font-weight:600;}
-.mfg input,.mfg select,.mfg textarea{width:100%;padding:9px 12px;border:1.5px solid #e8e8e8;border-radius:8px;font-size:13px;font-family:inherit;background:#fff;color:#1a1a2e;}
+.sdv{grid-column:1/-1;padding-top:10px;margin-top:2px;border-top:1px solid #f0f0f0;font-size:10px;font-weight:700;color:#999;text-transform:uppercase;letter-spacing:.05em;}
+.mfg label{font-size:12px;color:#666;display:block;margin-bottom:4px;font-weight:600;}
+.mfg input,.mfg select,.mfg textarea{width:100%;padding:10px 12px;border:1.5px solid #e8e8e8;border-radius:8px;font-size:14px;font-family:inherit;background:#fff;color:#1a1a2e;}
 .mfg input:focus,.mfg select:focus,.mfg textarea:focus{outline:none;border-color:#185FA5;}
-.mfg textarea{resize:vertical;min-height:65px;}
+.mfg textarea{resize:vertical;min-height:70px;}
 .mfg input[readonly]{background:#f8f9fa;}
-.mac{display:flex;justify-content:flex-end;gap:10px;margin-top:1.5rem;padding-top:1rem;border-top:1px solid #f0f0f0;}
-.bcn{padding:9px 18px;border:1.5px solid #e0e0e0;border-radius:8px;background:none;color:#666;cursor:pointer;font-size:13px;font-weight:600;}
-.bsv{padding:9px 20px;background:linear-gradient(135deg,#185FA5,#378ADD);color:#fff;border:none;border-radius:8px;cursor:pointer;font-size:13px;font-weight:600;}
-.bsv:disabled{opacity:.6;cursor:not-allowed;}
-.dov{display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:1000;align-items:flex-start;justify-content:center;padding:2rem 1rem;overflow-y:auto;}
+.mac{display:flex;gap:10px;margin-top:1.25rem;padding-top:1rem;border-top:1px solid #f0f0f0;}
+.bcn{flex:1;padding:12px;border:1.5px solid #e0e0e0;border-radius:10px;background:none;color:#666;cursor:pointer;font-size:14px;font-weight:600;}
+.bsv{flex:2;padding:12px;background:linear-gradient(135deg,#185FA5,#378ADD);color:#fff;border:none;border-radius:10px;cursor:pointer;font-size:14px;font-weight:600;}
+.bsv:disabled{opacity:.6;}
+
+/* DETAIL */
+.dov{display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:200;align-items:flex-end;justify-content:center;}
 .dov.open{display:flex;}
-.dm{background:#fff;border-radius:16px;width:100%;max-width:660px;overflow:hidden;box-shadow:0 30px 80px rgba(0,0,0,.3);}
-.dh{background:linear-gradient(135deg,#1a1a2e,#16213e);padding:1.25rem 1.5rem;display:flex;justify-content:space-between;align-items:center;}
-.dh h2{font-size:16px;font-weight:700;color:#fff;}
+.dm{background:#fff;border-radius:16px 16px 0 0;width:100%;max-height:92vh;overflow-y:auto;}
+.dh{background:linear-gradient(135deg,#1a1a2e,#16213e);padding:1rem 1.25rem;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;}
+.dh h2{font-size:15px;font-weight:700;color:#fff;}
 .dh button{padding:5px 12px;border:1px solid rgba(255,255,255,.3);border-radius:6px;background:none;color:rgba(255,255,255,.8);cursor:pointer;font-size:12px;}
-.dbd{padding:1.5rem;}
+.dbd{padding:1.25rem;}
 .ds{margin-bottom:1.25rem;}
 .ds h3{font-size:11px;font-weight:700;color:#185FA5;text-transform:uppercase;letter-spacing:.06em;margin-bottom:10px;padding-bottom:6px;border-bottom:1px solid #f0f0f0;}
 .dg{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
 .di label{font-size:11px;color:#aaa;display:block;margin-bottom:2px;font-weight:600;}
 .di p{font-size:13px;color:#1a1a2e;font-weight:500;}
-.yp{background:#EAF3DE;color:#27500A;padding:2px 10px;border-radius:20px;font-size:11px;font-weight:600;}
-.np{background:#f4f4f4;color:#888;padding:2px 10px;border-radius:20px;font-size:11px;font-weight:600;}
-.mgd{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:8px;}
-.mb{border-radius:10px;padding:12px;}
-.mb label{font-size:11px;display:block;margin-bottom:4px;font-weight:600;}
-.mb p{font-size:20px;font-weight:700;}
+.yp{background:#EAF3DE;color:#27500A;padding:2px 8px;border-radius:20px;font-size:11px;font-weight:600;}
+.np{background:#f4f4f4;color:#888;padding:2px 8px;border-radius:20px;font-size:11px;font-weight:600;}
+.mgd{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:8px;}
+.mb{border-radius:10px;padding:10px;}
+.mb label{font-size:10px;display:block;margin-bottom:3px;font-weight:600;}
+.mb p{font-size:18px;font-weight:700;}
 .mbt{background:#f4f6f9;}.mbt label{color:#888;}.mbt p{color:#1a1a2e;}
 .mbp{background:#EAF3DE;}.mbp label{color:#3B6D11;}.mbp p{color:#27500A;}
 .mbd{background:#FCEBEB;}.mbd label{color:#A32D2D;}.mbd p{color:#A32D2D;}
 .pay-section{background:#f8f9fa;border-radius:10px;padding:1rem;margin-top:1rem;}
 .pay-section h4{font-size:12px;font-weight:700;color:#555;margin-bottom:10px;}
-.pay-row{display:flex;gap:10px;align-items:flex-end;}
+.pay-row{display:flex;gap:8px;align-items:flex-end;}
 .pay-row .mfg{flex:1;}
-.pay-btn{padding:9px 16px;background:linear-gradient(135deg,#27500A,#3B6D11);color:#fff;border:none;border-radius:8px;cursor:pointer;font-size:13px;font-weight:600;white-space:nowrap;}
+.pay-btn{padding:10px 14px;background:linear-gradient(135deg,#27500A,#3B6D11);color:#fff;border:none;border-radius:8px;cursor:pointer;font-size:13px;font-weight:600;white-space:nowrap;}
+
+/* TARGET */
+.tgb{background:#fff;border-radius:10px;padding:12px;margin-bottom:1rem;box-shadow:0 2px 8px rgba(0,0,0,.05);}
+.tg-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;}
+.tgn{font-size:13px;font-weight:600;color:#1a1a2e;}
+.tgs{font-size:12px;color:#888;}
+.tgpc{font-size:14px;font-weight:700;}
+.tgp{height:8px;background:#f0f0f0;border-radius:10px;overflow:hidden;}
+.tgf{height:100%;border-radius:10px;background:linear-gradient(90deg,#185FA5,#378ADD);transition:width .5s;}
+.tgf.done{background:linear-gradient(90deg,#27500A,#3B6D11);}
+
+/* USER CARDS */
+.uc{background:#fff;border-radius:10px;padding:1rem;box-shadow:0 2px 8px rgba(0,0,0,.05);display:flex;align-items:center;gap:10px;margin-bottom:8px;}
+.uca{width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,#185FA5,#378ADD);display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700;color:#fff;flex-shrink:0;}
+.uci{flex:1;min-width:0;}
+.ucn{font-size:13px;font-weight:600;color:#1a1a2e;}
+.ucm{font-size:11px;color:#888;margin-top:3px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.ucat{display:flex;gap:5px;flex-shrink:0;}
+
+/* LOADING */
 .ld{display:flex;align-items:center;justify-content:center;padding:2rem;color:#aaa;gap:10px;}
 .spin{width:20px;height:20px;border:2px solid #e0e0e0;border-top-color:#185FA5;border-radius:50%;animation:sp .7s linear infinite;}
 @keyframes sp{to{transform:rotate(360deg);}}
-.toast{position:fixed;bottom:2rem;left:50%;transform:translateX(-50%);background:#1a1a2e;color:#fff;padding:10px 20px;border-radius:10px;font-size:13px;z-index:9999;opacity:0;transition:opacity .3s;pointer-events:none;}
+.toast{position:fixed;bottom:1.5rem;left:50%;transform:translateX(-50%);background:#1a1a2e;color:#fff;padding:10px 20px;border-radius:10px;font-size:13px;z-index:9999;opacity:0;transition:opacity .3s;pointer-events:none;white-space:nowrap;max-width:90vw;text-align:center;}
 .toast.show{opacity:1;}
-.tgb{background:#fff;border-radius:10px;padding:12px 16px;margin-bottom:1rem;display:flex;align-items:center;gap:12px;box-shadow:0 2px 8px rgba(0,0,0,.06);}
-.tgi{flex:1;}
-.tgn{font-size:13px;font-weight:600;color:#1a1a2e;}
-.tgs{font-size:12px;color:#888;margin-top:2px;}
-.tgp{flex:2;height:8px;background:#f0f0f0;border-radius:10px;overflow:hidden;}
-.tgf{height:100%;border-radius:10px;background:linear-gradient(90deg,#185FA5,#378ADD);transition:width .5s;}
-.tgf.done{background:linear-gradient(90deg,#27500A,#3B6D11);}
-.tgpc{font-size:12px;font-weight:700;min-width:36px;text-align:left;}
-.uc{background:#fff;border-radius:12px;padding:1.25rem;box-shadow:0 2px 8px rgba(0,0,0,.06);display:flex;align-items:center;gap:12px;margin-bottom:10px;}
-.uca{width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg,#185FA5,#378ADD);display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700;color:#fff;flex-shrink:0;}
-.uci{flex:1;}
-.ucn{font-size:14px;font-weight:600;color:#1a1a2e;}
-.ucm{font-size:12px;color:#888;margin-top:3px;}
-.ucat{display:flex;gap:6px;}
+
+/* RESPONSIVE */
+@media(max-width:768px){
+  .sb{position:fixed;top:0;right:0;height:100%;transform:translateX(100%);z-index:100;}
+  .sb.open{transform:translateX(0);}
+  .menu-btn{display:flex;}
+  .sg{grid-template-columns:repeat(2,1fr);}
+  .mg{grid-template-columns:1fr;}
+  .full{grid-column:1;}
+  .sdv{grid-column:1;}
+  .dg{grid-template-columns:1fr 1fr;}
+  .mgd{grid-template-columns:repeat(3,1fr);}
+  .tdate{display:none;}
+  .tw{display:none;}
+  .mob-cards{display:block;}
+  .desk-table{display:none;}
+  .sr input{width:100px;}
+  .ch{gap:6px;}
+}
+@media(min-width:769px){
+  .mob-cards{display:none;}
+  .desk-table{display:block;}
+  .menu-btn{display:none;}
+  .sb{transform:none!important;}
+}
+@media(max-width:480px){
+  .sg{grid-template-columns:repeat(2,1fr);}
+  .ct{padding:.75rem;}
+  .ch{padding:.75rem;}
+  .ba span{display:none;}
+  .ba{padding:8px 10px;}
+  .mgd{grid-template-columns:1fr 1fr;}
+  .mgd .mb:last-child{grid-column:1/-1;}
+}
 </style>
 </head>
 <body>
 <div id="toast" class="toast"></div>
 
+<!-- LOGIN -->
 <div id="pg-l" class="page active">
 <div class="lw"><div class="lc">
   <div class="la">
@@ -163,57 +248,74 @@ tr:hover td{background:#fafcff;}
     <h1 id="lab-title">معمل د / سيد تعيلب</h1>
     <p>نظام إدارة المعمل الطبي</p>
   </div>
-  <div class="fg"><label>اسم المستخدم</label><input id="lu" type="text" placeholder="أدخل اسم المستخدم"/></div>
-  <div class="fg"><label>كلمة المرور</label><input id="lp" type="password" placeholder="أدخل كلمة المرور"/></div>
+  <div class="fg"><label>اسم المستخدم</label><input id="lu" type="text" placeholder="أدخل اسم المستخدم" autocomplete="username"/></div>
+  <div class="fg"><label>كلمة المرور</label><input id="lp" type="password" placeholder="أدخل كلمة المرور" autocomplete="current-password"/></div>
   <button class="btnl" onclick="doLogin()">دخول</button>
   <p class="er" id="lerr">اسم المستخدم أو كلمة المرور غلط</p>
 </div></div>
 </div>
 
+<!-- DASHBOARD -->
 <div id="pg-d" class="page">
+<div class="sb-overlay" id="sb-overlay" onclick="closeSb()"></div>
 <div class="layout">
-  <div class="sb">
+  <div class="sb" id="sidebar">
     <div class="sbh">
       <div class="sbi"><svg viewBox="0 0 24 24"><path d="M9 3H5a2 2 0 00-2 2v4m6-6h10a2 2 0 012 2v4M9 3v18m0 0h10a2 2 0 002-2V9M9 21H5a2 2 0 01-2-2V9m0 0h18"/></svg></div>
       <h2 id="sb-title">المعمل الطبي</h2>
       <p>نظام إدارة المعمل</p>
     </div>
     <div class="nl">القائمة</div>
-    <div class="ni on" id="n-p" onclick="showSec('p')"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>المرضى</div>
-    <div class="ni" id="n-r" onclick="showSec('r')"><svg viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg>النتائج</div>
-    <div class="ni" id="n-i" onclick="showSec('i')"><svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>الفواتير</div>
-    <div class="ni" id="n-u" style="display:none" onclick="showSec('u')"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M20 21a8 8 0 10-16 0"/></svg>المستخدمون</div>
+    <div class="ni on" id="n-p" onclick="showSec('p');closeSb()"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>المرضى</div>
+    <div class="ni" id="n-r" onclick="showSec('r');closeSb()"><svg viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg>النتائج</div>
+    <div class="ni" id="n-i" onclick="showSec('i');closeSb()"><svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>الفواتير</div>
+    <div class="ni" id="n-u" style="display:none" onclick="showSec('u');closeSb()"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M20 21a8 8 0 10-16 0"/></svg>المستخدمون</div>
     <div class="sbf">
       <div class="um">
         <div class="av" id="uav">؟</div>
         <div><div class="un" id="uname">...</div><div class="ur" id="urole">...</div></div>
       </div>
-      <button class="edb" onclick="openEditProfile()">تعديل بياناتي</button>
+      <button class="edb" onclick="openEditProfile();closeSb()">تعديل بياناتي</button>
       <button class="lob" onclick="logout()">تسجيل الخروج</button>
     </div>
   </div>
 
   <div class="mn">
     <div class="tb">
-      <div><h1 id="ptitle">المرضى</h1><span class="bb" id="bbdg"></span></div>
-      <div style="font-size:12px;color:#aaa" id="tdate"></div>
+      <div class="tb-left">
+        <button class="menu-btn" onclick="openSb()"><svg viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button>
+        <div>
+          <h1 id="ptitle">المرضى</h1>
+          <span class="bb" id="bbdg"></span>
+        </div>
+      </div>
+      <div class="tdate" id="tdate"></div>
     </div>
+
     <div class="ct">
       <div class="sg" id="sgrid"></div>
+
       <div id="tgt-wrap" style="display:none">
         <div class="tgb">
-          <div class="tgi"><div class="tgn" id="tgn">التارجت</div><div class="tgs" id="tgs">0/0</div></div>
+          <div class="tg-top">
+            <div class="tgn" id="tgn">التارجت</div>
+            <div style="display:flex;align-items:center;gap:8px">
+              <div class="tgs" id="tgs">0/0</div>
+              <div class="tgpc" id="tgpc">0%</div>
+            </div>
+          </div>
           <div class="tgp"><div class="tgf" id="tgf" style="width:0%"></div></div>
-          <div class="tgpc" id="tgpc">0%</div>
         </div>
       </div>
 
+      <!-- PATIENTS -->
       <div class="sec on" id="s-p">
         <div class="card">
-          <div class="ch"><h2>قائمة المرضى</h2>
+          <div class="ch">
+            <h2>قائمة المرضى</h2>
             <div class="chr">
               <div class="sr"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg><input id="qp" type="text" placeholder="بحث..." oninput="ft('p')"/></div>
-              <button class="ba" onclick="openM('p')"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>إضافة مريض</button>
+              <button class="ba" onclick="openM('p')"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg><span>إضافة مريض</span></button>
             </div>
           </div>
           <div class="fb">
@@ -223,17 +325,24 @@ tr:hover td{background:#fafcff;}
             <button class="fbb" onclick="sf('p','مكتمل',this)">مكتمل</button>
           </div>
           <div id="pl" class="ld"><div class="spin"></div>جاري التحميل...</div>
-          <div class="tw" id="ptw" style="display:none"><table><thead><tr><th>الاسم</th><th>السن</th><th>التلفون</th><th>الطبيب</th><th>الفرع</th><th>العينة</th><th>المدفوع</th><th>المتبقي</th><th>الحالة</th><th>إجراءات</th></tr></thead><tbody id="ptbl"></tbody></table></div>
+          <!-- Desktop table -->
+          <div class="desk-table tw" id="ptw" style="display:none">
+            <table><thead><tr><th>الاسم</th><th>السن</th><th>التلفون</th><th>الطبيب</th><th>الفرع</th><th>العينة</th><th>المدفوع</th><th>المتبقي</th><th>الحالة</th><th>إجراءات</th></tr></thead><tbody id="ptbl"></tbody></table>
+          </div>
+          <!-- Mobile cards -->
+          <div class="mob-cards" id="pmob" style="padding:8px"></div>
           <div id="pe" class="emp" style="display:none"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/></svg><p>لا يوجد مرضى</p></div>
         </div>
       </div>
 
+      <!-- RESULTS -->
       <div class="sec" id="s-r">
         <div class="card">
-          <div class="ch"><h2>نتائج التحاليل</h2>
+          <div class="ch">
+            <h2>نتائج التحاليل</h2>
             <div class="chr">
               <div class="sr"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg><input id="qr" type="text" placeholder="بحث..." oninput="ft('r')"/></div>
-              <button class="ba" onclick="openM('r')"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>إضافة نتيجة</button>
+              <button class="ba" onclick="openM('r')"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg><span>إضافة</span></button>
             </div>
           </div>
           <div class="fb">
@@ -243,17 +352,22 @@ tr:hover td{background:#fafcff;}
             <button class="fbb" onclick="sf('r','مكتمل',this)">مكتمل</button>
           </div>
           <div id="rl" class="ld"><div class="spin"></div>جاري التحميل...</div>
-          <div class="tw" id="rtw" style="display:none"><table><thead><tr><th>المريض</th><th>التحليل</th><th>العينة</th><th>الفرع</th><th>النتيجة</th><th>أورام سابقة</th><th>التاريخ</th><th>الحالة</th><th>إجراءات</th></tr></thead><tbody id="rtbl"></tbody></table></div>
+          <div class="desk-table tw" id="rtw" style="display:none">
+            <table><thead><tr><th>المريض</th><th>التحليل</th><th>العينة</th><th>الفرع</th><th>النتيجة</th><th>أورام سابقة</th><th>التاريخ</th><th>الحالة</th><th>إجراءات</th></tr></thead><tbody id="rtbl"></tbody></table>
+          </div>
+          <div class="mob-cards" id="rmob" style="padding:8px"></div>
           <div id="re" class="emp" style="display:none"><svg viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"/></svg><p>لا توجد نتائج</p></div>
         </div>
       </div>
 
+      <!-- INVOICES -->
       <div class="sec" id="s-i">
         <div class="card">
-          <div class="ch"><h2>الفواتير</h2>
+          <div class="ch">
+            <h2>الفواتير</h2>
             <div class="chr">
               <div class="sr"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg><input id="qi" type="text" placeholder="بحث..." oninput="ft('i')"/></div>
-              <button class="ba" onclick="openM('i')"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>فاتورة جديدة</button>
+              <button class="ba" onclick="openM('i')"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg><span>فاتورة</span></button>
             </div>
           </div>
           <div class="fb">
@@ -263,17 +377,21 @@ tr:hover td{background:#fafcff;}
             <button class="fbb" onclick="sf('i','مدفوع',this)">مدفوع</button>
           </div>
           <div id="il" class="ld"><div class="spin"></div>جاري التحميل...</div>
-          <div class="tw" id="itw" style="display:none"><table><thead><tr><th>رقم</th><th>المريض</th><th>الفرع</th><th>الإجمالي</th><th>المدفوع</th><th>المتبقي</th><th>التاريخ</th><th>الحالة</th></tr></thead><tbody id="itbl"></tbody></table></div>
+          <div class="desk-table tw" id="itw" style="display:none">
+            <table><thead><tr><th>رقم</th><th>المريض</th><th>الفرع</th><th>الإجمالي</th><th>المدفوع</th><th>المتبقي</th><th>التاريخ</th><th>الحالة</th></tr></thead><tbody id="itbl"></tbody></table>
+          </div>
+          <div class="mob-cards" id="imob" style="padding:8px"></div>
           <div id="ie" class="emp" style="display:none"><svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/></svg><p>لا توجد فواتير</p></div>
         </div>
       </div>
 
+      <!-- USERS -->
       <div class="sec" id="s-u">
         <div class="card">
           <div class="ch"><h2>إدارة المستخدمين</h2>
-            <button class="ba" onclick="openM('u')"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>إضافة مستخدم</button>
+            <button class="ba" onclick="openM('u')"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg><span>إضافة</span></button>
           </div>
-          <div style="padding:1rem" id="ulist"></div>
+          <div style="padding:.75rem" id="ulist"></div>
         </div>
       </div>
     </div>
@@ -284,6 +402,7 @@ tr:hover td{background:#fafcff;}
 <!-- MODAL -->
 <div class="ov" id="aov">
 <div class="modal">
+  <div class="modal-drag"></div>
   <h2 id="mtitle">إضافة</h2>
   <div id="mbody"></div>
   <div class="mac"><button class="bcn" onclick="closeM()">إلغاء</button><button class="bsv" id="bsv" onclick="saveD()">حفظ</button></div>
@@ -323,12 +442,14 @@ const sh=(id,t='block')=>{const e=N(id);if(e)e.style.display=t;};
 const hd=id=>{const e=N(id);if(e)e.style.display='none';};
 function toast(m,ok){const t=N('toast');t.textContent=m;t.style.background=ok?'#27500A':'#1a1a2e';t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2800);}
 
+window.openSb=()=>{N('sidebar').classList.add('open');N('sb-overlay').classList.add('show');};
+window.closeSb=()=>{N('sidebar').classList.remove('open');N('sb-overlay').classList.remove('show');};
+
 async function loadUsers(){
   try{
     const s=await getDocs(collection(db,'users'));
     USERS=s.docs.map(d=>({id:d.id,...d.data()}));
     if(!USERS.length){
-      // First time: create admin only, no hardcoded staff
       const ad=await addDoc(collection(db,'users'),{u:'admin',p:'admin123',name:'المدير',role:'admin',branch:'all',av:'MD',target:0,createdAt:serverTimestamp()});
       USERS=[{id:ad.id,u:'admin',p:'admin123',name:'المدير',role:'admin',branch:'all',av:'MD',target:0}];
     }
@@ -340,8 +461,8 @@ async function loadSettings(){
     const s=await getDocs(collection(db,'settings'));
     if(!s.empty){const d=s.docs[0].data();SETTINGS={...SETTINGS,...d,id:s.docs[0].id};}
   }catch(e){}
-  N('lab-title').textContent=SETTINGS.labName||'معمل د / سيد تعيلب';
-  N('sb-title').textContent=SETTINGS.labName||'المعمل الطبي';
+  const ln=SETTINGS.labName||'معمل د / سيد تعيلب';
+  N('lab-title').textContent=ln;N('sb-title').textContent=ln;document.title=ln;
 }
 
 window.doLogin=async function(){
@@ -357,7 +478,7 @@ window.doLogin=async function(){
 window.logout=function(){
   CU=null;AP=[];AR=[];AI=[];
   N('pg-d').classList.remove('active');N('pg-l').classList.add('active');
-  N('lu').value='';N('lp').value='';
+  N('lu').value='';N('lp').value='';closeSb();
 };
 
 async function init(){
@@ -377,35 +498,35 @@ async function init(){
 async function loadAll(){await Promise.all([loadP(),loadR(),loadI()]);}
 
 async function loadP(){
-  sh('pl','flex');hd('ptw');hd('pe');
+  sh('pl','flex');hd('ptw');N('pmob').innerHTML='';hd('pe');
   try{
     const s=await getDocs(collection(db,'patients'));
     let all=s.docs.map(d=>({id:d.id,...d.data()}));
     all.sort((a,b)=>(b.createdAt?.seconds||0)-(a.createdAt?.seconds||0));
-    if(CU.role==='staff') all=all.filter(x=>x.branch===CU.branch);
+    if(CU.role==='staff')all=all.filter(x=>x.branch===CU.branch);
     AP=all;rP();rStats();
     if(CU.role==='staff')renderTarget();
   }catch(e){toast('خطأ في تحميل المرضى: '+e.message);}
   hd('pl');
 }
 async function loadR(){
-  sh('rl','flex');hd('rtw');hd('re');
+  sh('rl','flex');hd('rtw');N('rmob').innerHTML='';hd('re');
   try{
     const s=await getDocs(collection(db,'results'));
     let all=s.docs.map(d=>({id:d.id,...d.data()}));
     all.sort((a,b)=>(b.createdAt?.seconds||0)-(a.createdAt?.seconds||0));
-    if(CU.role==='staff') all=all.filter(x=>x.branch===CU.branch);
+    if(CU.role==='staff')all=all.filter(x=>x.branch===CU.branch);
     AR=all;rR();
   }catch(e){toast('خطأ في تحميل النتائج: '+e.message);}
   hd('rl');
 }
 async function loadI(){
-  sh('il','flex');hd('itw');hd('ie');
+  sh('il','flex');hd('itw');N('imob').innerHTML='';hd('ie');
   try{
     const s=await getDocs(collection(db,'invoices'));
     let all=s.docs.map(d=>({id:d.id,...d.data()}));
     all.sort((a,b)=>(b.createdAt?.seconds||0)-(a.createdAt?.seconds||0));
-    if(CU.role==='staff') all=all.filter(x=>x.branch===CU.branch);
+    if(CU.role==='staff')all=all.filter(x=>x.branch===CU.branch);
     AI=all;rI();
   }catch(e){toast('خطأ في تحميل الفواتير: '+e.message);}
   hd('il');
@@ -423,12 +544,13 @@ function gf(data,sec){
 
 function rP(){
   const data=gf(AP,'p');
-  if(!data.length){sh('pe');hd('ptw');return;}
-  hd('pe');N('ptw').style.display='block';
+  if(!data.length){sh('pe');hd('ptw');N('pmob').innerHTML='';return;}
+  hd('pe');
+  // Desktop
+  N('ptw').style.display='block';
   N('ptbl').innerHTML=data.map(p=>`<tr>
-    <td style="font-weight:600">${p.name||''}</td>
-    <td>${p.age||''}</td><td>${p.phone||''}</td><td>${p.doctor||''}</td>
-    <td><span class="bdg ${bc(p.branch)}">${p.branch||''}</span></td>
+    <td style="font-weight:600">${p.name||''}</td><td>${p.age||''}</td><td>${p.phone||''}</td>
+    <td>${p.doctor||''}</td><td><span class="bdg ${bc(p.branch)}">${p.branch||''}</span></td>
     <td>${p.sample||''}</td>
     <td style="color:#27500A;font-weight:600">${Number(p.paid||0).toLocaleString()} ج</td>
     <td style="color:#A32D2D;font-weight:600">${(Number(p.total||0)-Number(p.paid||0)).toLocaleString()} ج</td>
@@ -440,12 +562,39 @@ function rP(){
       <button class="xb" onclick='delIt("patients",${JSON.stringify(p.id)})'>حذف</button>
     </td>
   </tr>`).join('');
+  // Mobile
+  N('pmob').innerHTML=data.map(p=>`
+    <div class="pcard">
+      <div class="pcard-top">
+        <div>
+          <div class="pcard-name">${p.name||''}</div>
+          <div class="pcard-sub">${p.age||''} سنة &nbsp;|&nbsp; ${p.phone||''}</div>
+        </div>
+        <span class="st ${sc(p.status)}">${p.status||''}</span>
+      </div>
+      <div class="pcard-row">
+        <div class="pcard-item"><label>الفرع</label><span><span class="bdg ${bc(p.branch)}">${p.branch||''}</span></span></div>
+        <div class="pcard-item"><label>الطبيب</label><span>${p.doctor||'—'}</span></div>
+        <div class="pcard-item"><label>العينة</label><span>${p.sample||'—'}</span></div>
+      </div>
+      <div class="pcard-money">
+        <div class="pm-box pm-paid"><label>المدفوع</label><span>${Number(p.paid||0).toLocaleString()} ج</span></div>
+        <div class="pm-box pm-due"><label>المتبقي</label><span>${(Number(p.total||0)-Number(p.paid||0)).toLocaleString()} ج</span></div>
+      </div>
+      <div class="pcard-acts">
+        <button class="vb" onclick='showD(${JSON.stringify(p.id)})'>عرض</button>
+        <button class="eb" onclick='openEdit(${JSON.stringify(p.id)})'>تعديل</button>
+        ${p.status!=='مكتمل'?`<button class="db" onclick='mkDone(${JSON.stringify(p.id)})'>تم ✓</button>`:''}
+        <button class="xb" onclick='delIt("patients",${JSON.stringify(p.id)})'>حذف</button>
+      </div>
+    </div>`).join('');
 }
 
 function rR(){
   const data=gf(AR,'r');
-  if(!data.length){sh('re');hd('rtw');return;}
-  hd('re');N('rtw').style.display='block';
+  if(!data.length){sh('re');hd('rtw');N('rmob').innerHTML='';return;}
+  hd('re');
+  N('rtw').style.display='block';
   N('rtbl').innerHTML=data.map(r=>`<tr>
     <td style="font-weight:600">${r.patient||''}</td><td>${r.test||''}</td><td>${r.sample||''}</td>
     <td><span class="bdg ${bc(r.branch)}">${r.branch||''}</span></td>
@@ -453,17 +602,32 @@ function rR(){
     <td><span class="${r.tumorTests==='نعم'?'yp':'np'}">${r.tumorTests||'لا'}</span></td>
     <td>${r.date||''}</td>
     <td><span class="st ${sc(r.status)}">${r.status||''}</span></td>
-    <td>
-      ${r.status!=='مكتمل'?`<button class="db" onclick='mkDoneR(${JSON.stringify(r.id)})'>تم ✓</button>`:''}
-      <button class="xb" onclick='delIt("results",${JSON.stringify(r.id)})'>حذف</button>
-    </td>
+    <td>${r.status!=='مكتمل'?`<button class="db" onclick='mkDoneR(${JSON.stringify(r.id)})'>تم ✓</button>`:''}<button class="xb" style="margin-right:3px" onclick='delIt("results",${JSON.stringify(r.id)})'>حذف</button></td>
   </tr>`).join('');
+  N('rmob').innerHTML=data.map(r=>`
+    <div class="pcard">
+      <div class="pcard-top">
+        <div><div class="pcard-name">${r.patient||''}</div><div class="pcard-sub">${r.test||''} &nbsp;|&nbsp; ${r.date||''}</div></div>
+        <span class="st ${sc(r.status)}">${r.status||''}</span>
+      </div>
+      <div class="pcard-row">
+        <div class="pcard-item"><label>الفرع</label><span><span class="bdg ${bc(r.branch)}">${r.branch||''}</span></span></div>
+        <div class="pcard-item"><label>العينة</label><span>${r.sample||'—'}</span></div>
+        <div class="pcard-item"><label>أورام سابقة</label><span><span class="${r.tumorTests==='نعم'?'yp':'np'}">${r.tumorTests||'لا'}</span></span></div>
+        <div class="pcard-item"><label>النتيجة</label><span>${r.result||'—'}</span></div>
+      </div>
+      <div class="pcard-acts">
+        ${r.status!=='مكتمل'?`<button class="db" onclick='mkDoneR(${JSON.stringify(r.id)})'>تم ✓</button>`:''}
+        <button class="xb" onclick='delIt("results",${JSON.stringify(r.id)})'>حذف</button>
+      </div>
+    </div>`).join('');
 }
 
 function rI(){
   const data=gf(AI,'i');
-  if(!data.length){sh('ie');hd('itw');return;}
-  hd('ie');N('itw').style.display='block';
+  if(!data.length){sh('ie');hd('itw');N('imob').innerHTML='';return;}
+  hd('ie');
+  N('itw').style.display='block';
   N('itbl').innerHTML=data.map(i=>`<tr>
     <td style="color:#888;font-weight:600">${i.num||''}</td>
     <td style="font-weight:600">${i.patient||''}</td>
@@ -474,6 +638,21 @@ function rI(){
     <td>${i.date||''}</td>
     <td><span class="st ${sc(i.status)}">${i.status||''}</span></td>
   </tr>`).join('');
+  N('imob').innerHTML=data.map(i=>`
+    <div class="pcard">
+      <div class="pcard-top">
+        <div><div class="pcard-name">${i.patient||''}</div><div class="pcard-sub">${i.num||''} &nbsp;|&nbsp; ${i.date||''}</div></div>
+        <span class="st ${sc(i.status)}">${i.status||''}</span>
+      </div>
+      <div class="pcard-row">
+        <div class="pcard-item"><label>الفرع</label><span><span class="bdg ${bc(i.branch)}">${i.branch||''}</span></span></div>
+        <div class="pcard-item"><label>طريقة الدفع</label><span>${i.payMethod||'—'}</span></div>
+      </div>
+      <div class="pcard-money">
+        <div class="pm-box pm-paid"><label>المدفوع</label><span>${Number(i.paid||0).toLocaleString()} ج</span></div>
+        <div class="pm-box pm-due"><label>المتبقي</label><span>${(Number(i.total||0)-Number(i.paid||0)).toLocaleString()} ج</span></div>
+      </div>
+    </div>`).join('');
 }
 
 function rStats(){
@@ -481,25 +660,22 @@ function rStats(){
   const due=AP.reduce((a,p)=>a+(Number(p.total||0)-Number(p.paid||0)),0);
   const done=AP.filter(p=>p.status==='مكتمل').length;
   N('sgrid').innerHTML=`
-    <div class="sc"><div class="sci" style="background:linear-gradient(135deg,#185FA5,#378ADD)"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/></svg></div><div class="scl">المرضى</div><div class="scv">${AP.length}</div><div class="scs">${CU.role==='admin'?'جميع الفروع':'فرع '+CU.branch}</div></div>
-    <div class="sc"><div class="sci" style="background:linear-gradient(135deg,#27500A,#3B6D11)"><svg viewBox="0 0 24 24"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg></div><div class="scl">المدفوع</div><div class="scv" style="color:#27500A">${paid.toLocaleString()}</div><div class="scs">جنيه</div></div>
-    <div class="sc"><div class="sci" style="background:linear-gradient(135deg,#A32D2D,#E24B4A)"><svg viewBox="0 0 24 24"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg></div><div class="scl">المتبقي</div><div class="scv" style="color:#A32D2D">${due.toLocaleString()}</div><div class="scs">جنيه</div></div>
+    <div class="sc"><div class="sci" style="background:linear-gradient(135deg,#185FA5,#378ADD)"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/></svg></div><div class="scl">المرضى</div><div class="scv">${AP.length}</div><div class="scs">${CU.role==='admin'?'كل الفروع':'فرع '+CU.branch}</div></div>
+    <div class="sc"><div class="sci" style="background:linear-gradient(135deg,#27500A,#3B6D11)"><svg viewBox="0 0 24 24"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg></div><div class="scl">المدفوع</div><div class="scv" style="color:#27500A;font-size:18px">${paid.toLocaleString()}</div><div class="scs">جنيه</div></div>
+    <div class="sc"><div class="sci" style="background:linear-gradient(135deg,#A32D2D,#E24B4A)"><svg viewBox="0 0 24 24"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg></div><div class="scl">المتبقي</div><div class="scv" style="color:#A32D2D;font-size:18px">${due.toLocaleString()}</div><div class="scs">جنيه</div></div>
     <div class="sc"><div class="sci" style="background:linear-gradient(135deg,#534AB7,#7F77DD)"><svg viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"/></svg></div><div class="scl">مكتمل</div><div class="scv">${done}</div><div class="scs">حالة</div></div>
   `;
 }
 
 function renderTarget(){
-  const tgt=Number(CU.target||0);
-  if(!tgt){hd('tgt-wrap');return;}
+  const tgt=Number(CU.target||0);if(!tgt){hd('tgt-wrap');return;}
   sh('tgt-wrap');
   const done=AP.filter(p=>p.status==='مكتمل').length;
   const pct=Math.min(Math.round(done/tgt*100),100);
-  N('tgn').textContent='التارجت الشهري — '+CU.name;
-  N('tgs').textContent=done+' / '+tgt+' حالة مكتملة';
-  N('tgf').style.width=pct+'%';
-  N('tgf').className='tgf'+(pct>=100?' done':'');
-  N('tgpc').textContent=pct+'%';
-  N('tgpc').style.color=pct>=100?'#27500A':'#185FA5';
+  N('tgn').textContent='التارجت — '+CU.name;
+  N('tgs').textContent=done+'/'+tgt+' حالة';
+  N('tgf').style.width=pct+'%';N('tgf').className='tgf'+(pct>=100?' done':'');
+  N('tgpc').textContent=pct+'%';N('tgpc').style.color=pct>=100?'#27500A':'#185FA5';
 }
 
 function renderUsers(){
@@ -509,18 +685,17 @@ function renderUsers(){
       <div class="uca">${u.av||u.name?.charAt(0)||'؟'}</div>
       <div class="uci">
         <div class="ucn">${u.name}</div>
-        <div class="ucm"><span class="bdg ${bc(u.branch)}">${u.branch}</span> &nbsp; <strong>${u.u}</strong> &nbsp; تارجت: <strong>${u.target||0} حالة</strong></div>
+        <div class="ucm"><span class="bdg ${bc(u.branch)}">${u.branch}</span> &nbsp;<strong>${u.u}</strong> &nbsp;تارجت:<strong>${u.target||0}</strong></div>
       </div>
       <div class="ucat">
         <button class="eb" onclick='openEditUser(${JSON.stringify(u.id)})'>تعديل</button>
         <button class="xb" onclick='delUser(${JSON.stringify(u.id)})'>حذف</button>
       </div>
-    </div>`).join(''):'<p style="color:#aaa;text-align:center;padding:2rem">لا يوجد موظفون — اضغط إضافة مستخدم</p>';
+    </div>`).join(''):'<p style="color:#aaa;text-align:center;padding:2rem">لا يوجد موظفون</p>';
 }
 
 window.showD=function(id){
-  const p=AP.find(x=>x.id===id);
-  if(!p){toast('لم يتم العثور على المريض');return;}
+  const p=AP.find(x=>x.id===id);if(!p){toast('خطأ في عرض البيانات');return;}
   const due=Number(p.total||0)-Number(p.paid||0);
   N('dtitle').textContent=p.name;
   N('dbd').innerHTML=`
@@ -544,16 +719,13 @@ window.showD=function(id){
       <div class="mgd">
         <div class="mb mbt"><label>الإجمالي</label><p>${Number(p.total||0).toLocaleString()} ج</p></div>
         <div class="mb mbp"><label>المدفوع</label><p>${Number(p.paid||0).toLocaleString()} ج</p></div>
-        <div class="mb mbd"><label>المتبقي</label><p id="due-display">${due.toLocaleString()} ج</p></div>
+        <div class="mb mbd"><label>المتبقي</label><p>${due.toLocaleString()} ج</p></div>
       </div>
-      ${due>0?`<div class="pay-section">
-        <h4>إضافة دفعة جديدة</h4>
+      ${due>0?`<div class="pay-section"><h4>إضافة دفعة جديدة</h4>
         <div class="pay-row">
-          <div class="mfg"><label>المبلغ المدفوع (جنيه)</label><input id="pay-amt" type="number" placeholder="0" min="0" max="${due}"/></div>
-          <button class="pay-btn" onclick='addPayment(${JSON.stringify(p.id)},${due})'>إضافة دفعة ✓</button>
-        </div>
-        <p style="font-size:11px;color:#888;margin-top:6px">الحد الأقصى: ${due.toLocaleString()} جنيه</p>
-      </div>`:'<p style="text-align:center;color:#27500A;font-weight:600;margin-top:10px;font-size:13px">✓ تم سداد المبلغ كاملاً</p>'}
+          <div class="mfg"><label>المبلغ (جنيه) — الحد الأقصى ${due.toLocaleString()}</label><input id="pay-amt" type="number" placeholder="0" min="0" max="${due}"/></div>
+          <button class="pay-btn" onclick='addPayment(${JSON.stringify(p.id)},${due})'>إضافة ✓</button>
+        </div></div>`:'<p style="text-align:center;color:#27500A;font-weight:600;margin-top:10px;font-size:13px">✓ تم سداد المبلغ كاملاً</p>'}
     </div>
     <div class="ds"><h3>الحالة</h3>
       <span class="st ${sc(p.status)}">${p.status||'—'}</span>
@@ -563,7 +735,6 @@ window.showD=function(id){
 };
 window.closeD=()=>N('dov').classList.remove('open');
 
-// ✅ Add payment: adds amount to paid, updates remaining
 window.addPayment=async function(id,due){
   const amt=Number(N('pay-amt')?.value||0);
   if(!amt||amt<=0){toast('من فضلك أدخل مبلغ صحيح');return;}
@@ -571,68 +742,57 @@ window.addPayment=async function(id,due){
   const p=AP.find(x=>x.id===id);if(!p)return;
   const newPaid=Number(p.paid||0)+amt;
   const newTotal=Number(p.total||0);
-  const newStatus=newPaid>=newTotal?'مدفوع':'جزئي';
   try{
-    await updateDoc(doc(db,'patients',id),{paid:newPaid,payStatus:newStatus});
-    toast('تم إضافة الدفعة ✓',true);
-    closeD();await loadAll();
+    await updateDoc(doc(db,'patients',id),{paid:newPaid,payStatus:newPaid>=newTotal?'مدفوع':'جزئي'});
+    toast('تم إضافة الدفعة ✓',true);closeD();await loadAll();
   }catch(e){toast('خطأ: '+e.message);}
 };
 
-// ✅ Mark done: moves to results + adds remaining to invoice as pending
 window.mkDone=async function(id){
   const p=AP.find(x=>x.id===id);if(!p)return;
   const due=Number(p.total||0)-Number(p.paid||0);
   try{
     await updateDoc(doc(db,'patients',id),{status:'مكتمل'});
-    // Auto-create result
     await addDoc(collection(db,'results'),{
       patient:p.name,test:p.sample||'تحليل عام',sample:p.sample||'—',
-      branch:p.branch,tumorTests:p.tumorTests||'لا',
-      result:'في الانتظار',status:'جديد',
-      date:new Date().toISOString().split('T')[0],
-      notes:'أُنشئت تلقائياً بعد إتمام الحالة',
-      patientId:id,addedBy:CU.name,createdAt:serverTimestamp()
+      branch:p.branch,tumorTests:p.tumorTests||'لا',result:'في الانتظار',
+      status:'جديد',date:new Date().toISOString().split('T')[0],
+      notes:'أُنشئت تلقائياً بعد إتمام الحالة',patientId:id,
+      addedBy:CU.name,createdAt:serverTimestamp()
     });
-    // If there's remaining balance, create invoice
     if(due>0){
       await addDoc(collection(db,'invoices'),{
-        num:'INV-'+Date.now().toString().slice(-6),
-        patient:p.name,branch:p.branch,
-        total:Number(p.total||0),paid:Number(p.paid||0),
-        payMethod:'آجل',details:'مبلغ متبقي بعد إتمام الحالة',
-        date:new Date().toISOString().split('T')[0],
-        status:'جزئي',addedBy:CU.name,createdAt:serverTimestamp()
+        num:'INV-'+Date.now().toString().slice(-6),patient:p.name,branch:p.branch,
+        total:Number(p.total||0),paid:Number(p.paid||0),payMethod:'آجل',
+        details:'مبلغ متبقي بعد إتمام الحالة',
+        date:new Date().toISOString().split('T')[0],status:'جزئي',
+        addedBy:CU.name,createdAt:serverTimestamp()
       });
-      toast('تم! تم إنشاء نتيجة وفاتورة بالمبلغ المتبقي ('+due.toLocaleString()+' ج) ✓',true);
-    }else{
-      toast('تم! تم إنشاء النتيجة تلقائياً ✓',true);
-    }
+      toast('تم! نتيجة + فاتورة بالمتبقي ('+due.toLocaleString()+' ج) ✓',true);
+    }else{toast('تم! وتم إنشاء النتيجة تلقائياً ✓',true);}
     await loadAll();
   }catch(e){toast('خطأ: '+e.message);}
 };
 
 window.mkDoneR=async function(id){
-  try{await updateDoc(doc(db,'results',id),{status:'مكتمل'});toast('تم تحديث النتيجة ✓',true);await loadR();}
+  try{await updateDoc(doc(db,'results',id),{status:'مكتمل'});toast('تم ✓',true);await loadR();}
   catch(e){toast('خطأ: '+e.message);}
 };
 
 window.delIt=async function(col,id){
   if(!confirm('هل أنت متأكد من الحذف؟'))return;
   try{await deleteDoc(doc(db,col,id));toast('تم الحذف');await loadAll();}
-  catch(e){toast('خطأ في الحذف');}
+  catch(e){toast('خطأ');}
 };
-
 window.delUser=async function(id){
-  if(!confirm('هل أنت متأكد من حذف هذا المستخدم؟'))return;
-  try{await deleteDoc(doc(db,'users',id));USERS=USERS.filter(u=>u.id!==id);renderUsers();toast('تم حذف المستخدم');}
-  catch(e){toast('خطأ: '+e.message);}
+  if(!confirm('هل أنت متأكد؟'))return;
+  try{await deleteDoc(doc(db,'users',id));USERS=USERS.filter(u=>u.id!==id);renderUsers();toast('تم الحذف');}
+  catch(e){toast('خطأ');}
 };
 
 window.ft=s=>{if(s==='p')rP();else if(s==='r')rR();else if(s==='i')rI();};
 window.sf=(s,v,btn)=>{
-  FS[s]=v;
-  btn.closest('.fb').querySelectorAll('.fbb').forEach(b=>b.classList.remove('on'));
+  FS[s]=v;btn.closest('.fb').querySelectorAll('.fbb').forEach(b=>b.classList.remove('on'));
   btn.classList.add('on');ft(s);
 };
 
@@ -647,26 +807,26 @@ const FORMS={
     <p class="sdv">البيانات الشخصية</p>
     <div class="mfg full"><label>الاسم الكامل *</label><input id="fn" type="text" placeholder="الاسم رباعي"/></div>
     <div class="mfg"><label>السن</label><input id="fa" type="number" placeholder="العمر"/></div>
-    <div class="mfg"><label>رقم التلفون *</label><input id="fp" type="text" placeholder="01xxxxxxxxx"/></div>
+    <div class="mfg"><label>التلفون *</label><input id="fp" type="tel" placeholder="01xxxxxxxxx"/></div>
     <div class="mfg full"><label>العنوان</label><input id="fad" type="text" placeholder="العنوان بالتفصيل"/></div>
     <div class="mfg"><label>الفرع *</label>BSEL</div>
     <div class="mfg"><label>الطبيب المعالج</label><input id="fd" type="text" placeholder="اسم الطبيب"/></div>
     <p class="sdv">بيانات العينة</p>
     <div class="mfg"><label>نوع العينة</label><select id="fs">SO</select></div>
-    <div class="mfg"><label>مكان أخذ العينة من الجسم</label><input id="fss" type="text" placeholder="مثلاً: وريد الذراع"/></div>
+    <div class="mfg"><label>مكان أخذ العينة</label><input id="fss" type="text" placeholder="مثلاً: وريد الذراع"/></div>
     <p class="sdv">التاريخ الطبي</p>
     <div class="mfg"><label>عمليات جراحية سابقة؟</label><select id="fsr"><option>لا</option><option>نعم</option></select></div>
     <div class="mfg"><label>تحاليل أورام سابقة؟</label><select id="ftr"><option>لا</option><option>نعم</option></select></div>
     <div class="mfg full"><label>ملاحظات</label><textarea id="fno" placeholder="أي معلومات إضافية..."></textarea></div>
     <p class="sdv">المالية</p>
-    <div class="mfg"><label>المبلغ الإجمالي (جنيه)</label><input id="ft2" type="number" value="0"/></div>
-    <div class="mfg"><label>المبلغ المدفوع (جنيه)</label><input id="fpa" type="number" value="0"/></div>
+    <div class="mfg"><label>الإجمالي (جنيه)</label><input id="ft2" type="number" value="0"/></div>
+    <div class="mfg"><label>المدفوع (جنيه)</label><input id="fpa" type="number" value="0"/></div>
     <div class="mfg"><label>الحالة</label><select id="fst"><option>جديد</option><option>قيد الانتظار</option><option>مكتمل</option></select></div>
     <div class="mfg"><label>التاريخ</label><input id="fdt" type="date" value="TD"/></div>
   </div>`,
   r:`<div class="mg">
-    <div class="mfg"><label>اسم المريض *</label><input id="fpt" type="text" placeholder="اسم المريض"/></div>
-    <div class="mfg"><label>نوع التحليل *</label><input id="fte" type="text" placeholder="مثلاً: CBC، سكر، أورام"/></div>
+    <div class="mfg full"><label>اسم المريض *</label><input id="fpt" type="text" placeholder="اسم المريض"/></div>
+    <div class="mfg"><label>نوع التحليل *</label><input id="fte" type="text" placeholder="مثلاً: CBC، سكر"/></div>
     <div class="mfg"><label>نوع العينة</label><select id="fs">SO</select></div>
     <div class="mfg"><label>الفرع *</label>BSEL</div>
     <div class="mfg"><label>تحاليل أورام سابقة؟</label><select id="ftr"><option>لا</option><option>نعم</option></select></div>
@@ -676,52 +836,46 @@ const FORMS={
     <div class="mfg full"><label>ملاحظات</label><textarea id="fno" placeholder="ملاحظات..."></textarea></div>
   </div>`,
   i:`<div class="mg">
-    <div class="mfg"><label>اسم المريض *</label><input id="fpt" type="text" placeholder="اسم المريض"/></div>
+    <div class="mfg full"><label>اسم المريض *</label><input id="fpt" type="text" placeholder="اسم المريض"/></div>
     <div class="mfg"><label>الفرع *</label>BSEL</div>
-    <div class="mfg"><label>المبلغ الإجمالي (جنيه) *</label><input id="ft2" type="number" value="0"/></div>
-    <div class="mfg"><label>المبلغ المدفوع (جنيه)</label><input id="fpa" type="number" value="0"/></div>
+    <div class="mfg"><label>الإجمالي (جنيه) *</label><input id="ft2" type="number" value="0"/></div>
+    <div class="mfg"><label>المدفوع (جنيه)</label><input id="fpa" type="number" value="0"/></div>
     <div class="mfg"><label>طريقة الدفع</label><select id="fpm"><option>كاش</option><option>تحويل بنكي</option><option>آجل</option></select></div>
     <div class="mfg"><label>التاريخ</label><input id="fdt" type="date" value="TD"/></div>
     <div class="mfg full"><label>تفاصيل التحاليل</label><input id="fde" type="text" placeholder="أسماء التحاليل"/></div>
   </div>`,
   u:`<div class="mg">
-    <div class="mfg"><label>الاسم الكامل *</label><input id="fn" type="text" placeholder="الاسم"/></div>
+    <div class="mfg full"><label>الاسم الكامل *</label><input id="fn" type="text" placeholder="الاسم"/></div>
     <div class="mfg"><label>اسم المستخدم *</label><input id="fu" type="text" placeholder="username"/></div>
     <div class="mfg"><label>كلمة المرور</label><input id="fpw" type="password" placeholder="كلمة المرور"/></div>
-    <div class="mfg"><label>التارجت الشهري (حالة)</label><input id="ftg" type="number" value="0"/></div>
+    <div class="mfg"><label>التارجت الشهري</label><input id="ftg" type="number" value="0"/></div>
     <div class="mfg"><label>الفرع *</label><select id="fb"><option value="">اختر الفرع</option><option>القاهرة</option><option>الزقازيق</option><option>أبو حماد</option></select></div>
     <div class="mfg"><label>الصلاحية</label><select id="frl"><option value="staff">موظف</option><option value="admin">أدمن</option></select></div>
   </div>`,
-  // ✅ Profile edit form
   profile:`<div class="mg">
     <p class="sdv">البيانات الشخصية</p>
-    <div class="mfg"><label>الاسم الكامل *</label><input id="fn" type="text"/></div>
+    <div class="mfg full"><label>الاسم الكامل *</label><input id="fn" type="text"/></div>
     <div class="mfg"><label>اسم المستخدم *</label><input id="fu" type="text"/></div>
-    <div class="mfg"><label>كلمة المرور الجديدة</label><input id="fpw" type="password" placeholder="اتركه فارغاً للإبقاء على القديم"/></div>
+    <div class="mfg"><label>كلمة المرور الجديدة</label><input id="fpw" type="password" placeholder="اتركه فارغاً للإبقاء"/></div>
     <div class="mfg"><label>تأكيد كلمة المرور</label><input id="fpw2" type="password" placeholder="أعد كتابة كلمة المرور"/></div>
-    ${CU?.role==='admin'?`<p class="sdv">إعدادات المعمل</p>
-    <div class="mfg full"><label>اسم المعمل</label><input id="flab" type="text" placeholder="مثلاً: معمل د / سيد تعيلب"/></div>`:''}
+    LABFIELD
   </div>`,
 };
 
 window.openM=function(type){
   MT=type;EID=null;
   N('mtitle').textContent={p:'إضافة مريض جديد',r:'إضافة نتيجة',i:'فاتورة جديدة',u:'إضافة مستخدم'}[type];
-  N('mbody').innerHTML=(FORMS[type]||'').replace(/BSEL/g,bSel()).replace(/SO/g,sO).replace(/TD/g,td);
+  N('mbody').innerHTML=(FORMS[type]||'').replace(/BSEL/g,bSel()).replace(/SO/g,sO).replace(/TD/g,td).replace(/LABFIELD/g,'');
   N('aov').classList.add('open');
 };
 
-// ✅ Edit own profile
 window.openEditProfile=function(){
   MT='profile';EID=CU.id;
   N('mtitle').textContent='تعديل بياناتي';
-  N('mbody').innerHTML=FORMS.profile.replace(/BSEL/g,bSel()).replace(/SO/g,sO).replace(/TD/g,td);
+  const labField=CU.role==='admin'?`<p class="sdv">إعدادات المعمل</p><div class="mfg full"><label>اسم المعمل</label><input id="flab" type="text" placeholder="اسم المعمل"/></div>`:'';
+  N('mbody').innerHTML=FORMS.profile.replace(/LABFIELD/g,labField);
   N('aov').classList.add('open');
-  setTimeout(()=>{
-    N('fn').value=CU.name||'';
-    N('fu').value=CU.u||'';
-    if(N('flab'))N('flab').value=SETTINGS.labName||'';
-  },100);
+  setTimeout(()=>{N('fn').value=CU.name||'';N('fu').value=CU.u||'';if(N('flab'))N('flab').value=SETTINGS.labName||'';},100);
 };
 
 window.openEdit=function(id){
@@ -752,8 +906,7 @@ window.openEditUser=function(id){
   setTimeout(()=>{
     N('fn').value=u.name||'';N('fu').value=u.u||'';
     N('fpw').placeholder='اتركه فارغاً للإبقاء على القديم';
-    N('ftg').value=u.target||0;
-    N('fb').value=u.branch||'';N('frl').value=u.role||'staff';
+    N('ftg').value=u.target||0;N('fb').value=u.branch||'';N('frl').value=u.role||'staff';
   },100);
 };
 
@@ -769,20 +922,16 @@ window.saveD=async function(){
       if(pw&&pw!==pw2){toast('كلمتا المرور غير متطابقتان');btn.disabled=false;btn.textContent='حفظ';return;}
       const nm=g('fn'),un=g('fu');
       const ini=nm.split(' ').map(w=>w[0]||'').slice(0,2).join('').toUpperCase();
-      const upd={name:nm,u:un,av:ini};
-      if(pw)upd.p=pw;
+      const upd={name:nm,u:un,av:ini};if(pw)upd.p=pw;
       await updateDoc(doc(db,'users',EID),upd);
-      // Update lab name if admin
       if(CU.role==='admin'&&N('flab')){
         const labName=g('flab');
         if(SETTINGS.id){await updateDoc(doc(db,'settings',SETTINGS.id),{labName});}
         else{const nd=await addDoc(collection(db,'settings'),{labName});SETTINGS.id=nd.id;}
         SETTINGS.labName=labName;
-        N('lab-title').textContent=labName;
-        N('sb-title').textContent=labName;
+        N('lab-title').textContent=labName;N('sb-title').textContent=labName;document.title=labName;
       }
-      CU={...CU,...upd};
-      USERS=USERS.map(x=>x.id===EID?{...x,...upd}:x);
+      CU={...CU,...upd};USERS=USERS.map(x=>x.id===EID?{...x,...upd}:x);
       N('uav').textContent=ini;N('uname').textContent=nm;
       toast('تم تحديث بياناتك ✓',true);closeM();
     }else if(MT==='p'){
@@ -796,31 +945,25 @@ window.saveD=async function(){
       toast('تم الحفظ ✓',true);closeM();await loadAll();
     }else if(MT==='r'){
       if(!g('fpt')||!g('fte')||!g('fb')){toast('من فضلك اكمل الحقول المطلوبة *');btn.disabled=false;btn.textContent='حفظ';return;}
-      await addDoc(collection(db,'results'),{
-        patient:g('fpt'),test:g('fte'),sample:g('fs'),branch:g('fb'),
+      await addDoc(collection(db,'results'),{patient:g('fpt'),test:g('fte'),sample:g('fs'),branch:g('fb'),
         tumorTests:g('ftr'),result:g('fre'),status:g('fst'),date:g('fdt'),
-        notes:g('fno'),addedBy:CU.name,createdAt:serverTimestamp()
-      });
+        notes:g('fno'),addedBy:CU.name,createdAt:serverTimestamp()});
       toast('تم الحفظ ✓',true);closeM();await loadAll();
     }else if(MT==='i'){
       if(!g('fpt')||!g('fb')){toast('من فضلك اكمل الحقول المطلوبة *');btn.disabled=false;btn.textContent='حفظ';return;}
       const total=Number(g('ft2')||0),paid=Number(g('fpa')||0);
-      await addDoc(collection(db,'invoices'),{
-        num:'INV-'+Date.now().toString().slice(-6),patient:g('fpt'),branch:g('fb'),
-        total,paid,payMethod:g('fpm')||'كاش',details:g('fde'),date:g('fdt'),
-        status:paid>=total?'مدفوع':paid>0?'جزئي':'غير مدفوع',
-        addedBy:CU.name,createdAt:serverTimestamp()
-      });
+      await addDoc(collection(db,'invoices'),{num:'INV-'+Date.now().toString().slice(-6),
+        patient:g('fpt'),branch:g('fb'),total,paid,payMethod:g('fpm')||'كاش',
+        details:g('fde'),date:g('fdt'),status:paid>=total?'مدفوع':paid>0?'جزئي':'غير مدفوع',
+        addedBy:CU.name,createdAt:serverTimestamp()});
       toast('تم الحفظ ✓',true);closeM();await loadAll();
     }else if(MT==='u'){
       if(!g('fn')||!g('fu')||!g('fb')){toast('من فضلك اكمل الحقول المطلوبة *');btn.disabled=false;btn.textContent='حفظ';return;}
       const nm=g('fn'),un=g('fu'),pw=g('fpw'),tgt=Number(g('ftg')||0),br=g('fb'),rl=g('frl');
       const ini=nm.split(' ').map(w=>w[0]||'').slice(0,2).join('').toUpperCase();
       if(EID){
-        const upd={name:nm,u:un,branch:br,role:rl,target:tgt,av:ini};
-        if(pw)upd.p=pw;
-        await updateDoc(doc(db,'users',EID),upd);
-        USERS=USERS.map(x=>x.id===EID?{...x,...upd}:x);
+        const upd={name:nm,u:un,branch:br,role:rl,target:tgt,av:ini};if(pw)upd.p=pw;
+        await updateDoc(doc(db,'users',EID),upd);USERS=USERS.map(x=>x.id===EID?{...x,...upd}:x);
       }else{
         if(!pw){toast('كلمة المرور مطلوبة *');btn.disabled=false;btn.textContent='حفظ';return;}
         const nd=await addDoc(collection(db,'users'),{name:nm,u:un,p:pw,branch:br,role:rl,target:tgt,av:ini,createdAt:serverTimestamp()});
