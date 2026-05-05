@@ -37,12 +37,12 @@ body{font-family:'Cairo',sans-serif;background:var(--bg);color:var(--text);direc
 .llogo p{font-size:13px;color:var(--text2);margin-top:4px;}
 .lfg{margin-bottom:14px;}
 .lfg label{display:block;font-size:12px;color:var(--text2);margin-bottom:6px;font-weight:600;letter-spacing:.03em;}
-.lfg input{width:100%;padding:12px 16px;background:var(--bg3);border:1px solid var(--border2);border-radius:var(--radius-sm);
-  color:var(--text);font-size:14px;font-family:'Cairo',sans-serif;transition:border-color .2s,box-shadow .2s;}
+.lfg input{width:100%;padding:13px 16px;background:var(--bg3);border:1px solid var(--border2);border-radius:var(--radius-sm);
+  color:var(--text);font-size:16px;font-family:'Cairo',sans-serif;transition:border-color .2s,box-shadow .2s;-webkit-appearance:none;}
 .lfg input:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px rgba(108,99,255,.15);}
-.lbtn{width:100%;padding:13px;background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;
-  border:none;border-radius:var(--radius-sm);font-size:15px;font-weight:700;font-family:'Cairo',sans-serif;cursor:pointer;
-  transition:opacity .2s,transform .1s;letter-spacing:.02em;}
+.lbtn{width:100%;padding:14px;background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;
+  border:none;border-radius:var(--radius-sm);font-size:16px;font-weight:700;font-family:'Cairo',sans-serif;cursor:pointer;
+  transition:opacity .2s,transform .1s;letter-spacing:.02em;-webkit-appearance:none;}
 .lbtn:hover{opacity:.9;}.lbtn:active{transform:scale(.98);}
 .lerr{color:#fca5a5;font-size:13px;text-align:center;margin-top:10px;display:none;
   padding:8px;background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.2);border-radius:var(--radius-sm);}
@@ -207,7 +207,8 @@ tr:hover td{background:rgba(255,255,255,.025);}
   align-items:flex-end;justify-content:center;backdrop-filter:blur(4px);}
 .ov.open{display:flex;}
 .modal{background:var(--bg2);border:1px solid var(--border2);border-radius:20px 20px 0 0;
-  padding:1.5rem;width:100%;max-width:100%;max-height:92vh;overflow-y:auto;}
+  padding:1.5rem;width:100%;max-width:100%;max-height:92vh;overflow-y:auto;
+  padding-bottom:calc(1.5rem + env(safe-area-inset-bottom,0px));}
 .modal-drag{width:36px;height:4px;background:var(--bg4);border-radius:4px;margin:0 auto 1.25rem;}
 .modal h2{font-size:16px;font-weight:800;color:var(--text);margin-bottom:1.25rem;
   padding-bottom:10px;border-bottom:1px solid var(--border);}
@@ -235,7 +236,8 @@ tr:hover td{background:rgba(255,255,255,.025);}
   align-items:flex-end;justify-content:center;backdrop-filter:blur(4px);}
 .dov.open{display:flex;}
 .dm{background:var(--bg2);border:1px solid var(--border2);border-radius:20px 20px 0 0;
-  width:100%;max-height:92vh;overflow-y:auto;}
+  width:100%;max-height:92vh;overflow-y:auto;
+  padding-bottom:env(safe-area-inset-bottom,0px);}
 .dh{background:linear-gradient(135deg,rgba(108,99,255,.2),rgba(129,140,248,.1));
   padding:1.25rem 1.5rem;display:flex;justify-content:space-between;align-items:center;
   position:sticky;top:0;backdrop-filter:blur(10px);border-bottom:1px solid var(--border);}
@@ -284,29 +286,64 @@ tr:hover td{background:rgba(255,255,255,.025);}
 @media(max-width:768px){
   .sb{position:fixed;top:0;right:0;height:100%;transform:translateX(100%);}
   .sb.open{transform:translateX(0);box-shadow:-20px 0 60px rgba(0,0,0,.5);}
-  .menu-btn{display:flex;}
+  .menu-btn{display:flex!important;}
   .sg{grid-template-columns:repeat(2,1fr);}
-  .mg{grid-template-columns:1fr;}
-  .full,.sdiv{grid-column:1;}
+  .mg{grid-template-columns:1fr!important;}
+  .full,.sdiv{grid-column:1!important;}
   .dgrid{grid-template-columns:1fr 1fr;}
   .money3{grid-template-columns:1fr 1fr;}
   .money3 .m3:last-child{grid-column:1/-1;}
   .tb-date{display:none;}
-  .desk-tbl{display:none;}
-  .mob-cards{display:block;}
-  .srch input{width:100px;}
+  .desk-tbl{display:none!important;}
+  .mob-cards{display:block!important;}
+  /* Better mobile form inputs */
+  .mfg input,.mfg select,.mfg textarea{
+    padding:14px 14px;font-size:16px!important;
+    border-radius:12px;border-width:1.5px;
+  }
+  .mfg label{font-size:13px!important;margin-bottom:7px;}
+  .mfg{margin-bottom:2px;}
+  /* Better modal on mobile */
+  .modal{padding:1.25rem 1rem;border-radius:24px 24px 0 0;}
+  .modal h2{font-size:17px;}
+  .mac{gap:8px;}
+  .bcn,.bsv{padding:14px;font-size:15px;border-radius:12px;}
+  /* Better search on mobile */
+  .srch{flex:1;min-width:0;}
+  .srch input{width:100%;min-width:0;}
+  .chr{flex-wrap:nowrap;width:100%;}
+  .ch{flex-direction:column;align-items:flex-start;}
+  .ch h2{margin-bottom:4px;}
+  .chr{width:100%;}
+  /* Better topbar */
+  .topbar{padding:.75rem 1rem;}
+  .tb-title{font-size:16px;}
+  /* Better stat cards */
+  .sc{padding:1rem;}
+  .sc-val{font-size:24px;}
+  /* Better patient cards */
+  .pcard{padding:1rem;}
+  .pc-name{font-size:15px;}
+  .pc-acts{gap:8px;}
+  .btn-sm{padding:8px 12px;font-size:12px;}
+  /* Better filter bar */
+  .fb{padding:6px 14px;font-size:13px;}
+  /* Content padding */
+  .ct{padding:.875rem .75rem;}
 }
 @media(min-width:769px){
-  .mob-cards{display:none;}
-  .desk-tbl{display:block;}
+  .mob-cards{display:none!important;}
+  .desk-tbl{display:block!important;}
   .menu-btn{display:none!important;}
   .sb{transform:none!important;}
 }
 @media(max-width:480px){
   .sg{grid-template-columns:1fr 1fr;}
-  .ct{padding:.875rem;}
+  .ct{padding:.75rem .625rem;}
   .badd span{display:none;}
-  .badd{padding:8px 10px;}
+  .badd{padding:10px 12px;}
+  .ch{gap:8px;}
+  .topbar{padding:.625rem .875rem;}
 }
 </style>
 </head>
@@ -1042,7 +1079,7 @@ window.saveD=async function(){
       N('uav').textContent=ini;N('uname').textContent=nm;
       toast('تم تحديث بياناتك ✓',true);closeM();
     }else if(MT==='p'){
-      if(!g('fn')||!g('fp')||!g('fb')){toast('اكمل الحقول المطلوبة *');btn.disabled=false;btn.textContent='حفظ';return;}
+      if(!g('fn')){toast('اسم المريض مطلوب');btn.disabled=false;btn.textContent='حفظ';return;}
       const data={name:g('fn'),age:g('fa'),phone:g('fp'),address:g('fad'),branch:g('fb'),
         doctor:g('fd'),sampleSite:g('fss'),surgeries:g('fsr'),tumorTests:g('ftr'),
         notes:g('fno'),total:Number(g('ft2')||0),paid:Number(g('fpa')||0),
@@ -1051,13 +1088,13 @@ window.saveD=async function(){
       else{data.createdAt=serverTimestamp();await addDoc(collection(db,'patients'),data);}
       toast('تم الحفظ ✓',true);closeM();await loadAll();
     }else if(MT==='r'){
-      if(!g('fpt')||!g('fte')||!g('fb')){toast('اكمل الحقول المطلوبة *');btn.disabled=false;btn.textContent='حفظ';return;}
+      if(!g('fpt')){toast('اسم المريض مطلوب');btn.disabled=false;btn.textContent='حفظ';return;}
       await addDoc(collection(db,'results'),{patient:g('fpt'),test:g('fte'),branch:g('fb'),
         tumorTests:g('ftr'),result:g('fre'),status:g('fst'),date:g('fdt'),
         notes:g('fno'),addedBy:CU.name,createdAt:serverTimestamp()});
       toast('تم الحفظ ✓',true);closeM();await loadAll();
     }else if(MT==='i'){
-      if(!g('fpt')||!g('fb')){toast('اكمل الحقول المطلوبة *');btn.disabled=false;btn.textContent='حفظ';return;}
+      // no required for invoices
       const total=Number(g('ft2')||0),paid=Number(g('fpa')||0);
       await addDoc(collection(db,'invoices'),{num:'INV-'+Date.now().toString().slice(-6),
         patient:g('fpt'),branch:g('fb'),total,paid,payMethod:g('fpm')||'كاش',
@@ -1065,7 +1102,7 @@ window.saveD=async function(){
         addedBy:CU.name,createdAt:serverTimestamp()});
       toast('تم الحفظ ✓',true);closeM();await loadAll();
     }else if(MT==='u'){
-      if(!g('fn')||!g('fu')||!g('fb')){toast('اكمل الحقول المطلوبة *');btn.disabled=false;btn.textContent='حفظ';return;}
+      if(!g('fn')||!g('fu')){toast('الاسم واسم المستخدم مطلوبان');btn.disabled=false;btn.textContent='حفظ';return;}
       const nm=g('fn'),un=g('fu'),pw=g('fpw'),br=g('fb'),rl=g('frl');
       const ini=nm.split(' ').map(w=>w[0]||'').slice(0,2).join('').toUpperCase();
       if(EID){
