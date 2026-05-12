@@ -427,8 +427,8 @@ tr:hover td{background:rgba(255,255,255,.025);}
           <div class="fbar">
             <button class="fb on" onclick="sf('p','all',this)">الكل</button>
             <button class="fb" onclick="sf('p','جديد',this)">جديد</button>
-            <button class="fb" onclick="sf('p','قيد الانتظار',this)">قيد الانتظار</button>
-            <button class="fb" onclick="sf('p','مكتمل',this)">مكتمل</button>
+            <button class="fb" onclick="sf('p','منتظر التسليم',this)">منتظر التسليم</button>
+            <button class="fb" onclick="sf('p','تم التسليم',this)">تم التسليم</button>
           </div>
           <div id="pl" class="ld"><div class="spin"></div>جاري التحميل...</div>
           <div class="desk-tbl tw" id="ptw" style="display:none">
@@ -454,8 +454,8 @@ tr:hover td{background:rgba(255,255,255,.025);}
           <div class="fbar">
             <button class="fb on" onclick="sf('r','all',this)">الكل</button>
             <button class="fb" onclick="sf('r','جديد',this)">جديد</button>
-            <button class="fb" onclick="sf('r','قيد الانتظار',this)">قيد الانتظار</button>
-            <button class="fb" onclick="sf('r','مكتمل',this)">مكتمل</button>
+            <button class="fb" onclick="sf('r','منتظر التسليم',this)">منتظر التسليم</button>
+            <button class="fb" onclick="sf('r','تم التسليم',this)">تم التسليم</button>
           </div>
           <div id="rl" class="ld"><div class="spin"></div>جاري التحميل...</div>
           <div class="desk-tbl tw" id="rtw" style="display:none">
@@ -541,7 +541,7 @@ let FS={p:'all',r:'all',i:'all'};
 let SETTINGS={labName:'معمل د / سيد تعيلب'};
 
 const bc=b=>b==='القاهرة'?'b-c':b==='الزقازيق'?'b-z':b==='أبو حماد'?'b-a':'b-all';
-const sc=s=>s==='مكتمل'||s==='مدفوع'||s==='نشط'?'std':s==='قيد الانتظار'||s==='جزئي'?'stw':s==='غير مدفوع'?'stu':'stn';
+const sc=s=>s==='تم التسليم'||s==='مدفوع'||s==='نشط'?'std':s==='منتظر التسليم'||s==='جزئي'?'stw':s==='غير مدفوع'?'stu':'stn';
 const N=id=>document.getElementById(id);
 const sh=(id,t='block')=>{const e=N(id);if(e)e.style.display=t;};
 const hd=id=>{const e=N(id);if(e)e.style.display='none';};
@@ -682,7 +682,7 @@ function rP(){
       <td><div class="act-btns">
         <button class="btn-sm btn-view" onclick='showD(${JSON.stringify(p.id)})'>عرض</button>
         <button class="btn-sm btn-edit" onclick='openEdit(${JSON.stringify(p.id)})'>تعديل</button>
-        ${p.status!=='مكتمل'?`<button class="btn-sm btn-done" onclick='mkDone(${JSON.stringify(p.id)})'>تم ✓</button>`:''}
+        ${p.status!=='تم التسليم'?`<button class="btn-sm btn-done" onclick='mkDone(${JSON.stringify(p.id)})'>تم ✓</button>`:''}
         <button class="btn-sm btn-del" onclick='delIt("patients",${JSON.stringify(p.id)})'>حذف</button>
       </div></td>
     </tr>`;
@@ -707,7 +707,7 @@ function rP(){
       <div class="pc-acts">
         <button class="btn-sm btn-view" onclick='showD(${JSON.stringify(p.id)})'>عرض</button>
         <button class="btn-sm btn-edit" onclick='openEdit(${JSON.stringify(p.id)})'>تعديل</button>
-        ${p.status!=='مكتمل'?`<button class="btn-sm btn-done" onclick='mkDone(${JSON.stringify(p.id)})'>تم ✓</button>`:''}
+        ${p.status!=='تم التسليم'?`<button class="btn-sm btn-done" onclick='mkDone(${JSON.stringify(p.id)})'>تم ✓</button>`:''}
         <button class="btn-sm btn-del" onclick='delIt("patients",${JSON.stringify(p.id)})'>حذف</button>
       </div>
     </div>`;
@@ -727,7 +727,7 @@ function rR(){
     <td style="color:var(--text2)">${r.date||''}</td>
     <td><span class="st ${sc(r.status)}">${r.status||''}</span></td>
     <td><div class="act-btns">
-      ${r.status!=='مكتمل'?`<button class="btn-sm btn-done" onclick='mkDoneR(${JSON.stringify(r.id)})'>تم ✓</button>`:''}
+      ${r.status!=='تم التسليم'?`<button class="btn-sm btn-done" onclick='mkDoneR(${JSON.stringify(r.id)})'>تم ✓</button>`:''}
       <button class="btn-sm btn-del" onclick='delIt("results",${JSON.stringify(r.id)})'>حذف</button>
     </div></td>
   </tr>`).join('');
@@ -742,7 +742,7 @@ function rR(){
       <div class="pc-field"><label>النتيجة</label><span>${r.result||'—'}</span></div>
     </div>
     <div class="pc-acts">
-      ${r.status!=='مكتمل'?`<button class="btn-sm btn-done" onclick='mkDoneR(${JSON.stringify(r.id)})'>تم ✓</button>`:''}
+      ${r.status!=='تم التسليم'?`<button class="btn-sm btn-done" onclick='mkDoneR(${JSON.stringify(r.id)})'>تم ✓</button>`:''}
       <button class="btn-sm btn-del" onclick='delIt("results",${JSON.stringify(r.id)})'>حذف</button>
     </div>
   </div>`).join('');
@@ -794,7 +794,7 @@ function rI(){
 }
 
 function rStats(){
-  const done=AP.filter(p=>p.status==='مكتمل').length;
+  const done=AP.filter(p=>p.status==='تم التسليم').length;
   let html=`
     <div class="sc">
       <div class="sc-glow" style="background:#6c63ff"></div>
@@ -880,7 +880,7 @@ window.showD=function(id){
     </div>
     <div class="dsec"><h3>الحالة</h3>
       <span class="st ${sc(p.status)}">${p.status||'—'}</span>
-      ${p.status!=='مكتمل'?`<button class="btn-sm btn-done" style="margin-right:10px" onclick='mkDone(${JSON.stringify(p.id)});closeD()'>تحديد كمكتمل ✓</button>`:''}
+      ${p.status!=='تم التسليم'?`<button class="btn-sm btn-done" style="margin-right:10px" onclick='mkDone(${JSON.stringify(p.id)});closeD()'>تحديد كمكتمل ✓</button>`:''}
     </div>`;
   N('dov').classList.add('open');
 };
@@ -915,10 +915,10 @@ window.mkDone=async function(id){
   const p=AP.find(x=>x.id===id);if(!p)return;
   const due=Number(p.total||0)-Number(p.paid||0);
   try{
-    await updateDoc(doc(db,'patients',id),{status:'مكتمل'});
+    await updateDoc(doc(db,'patients',id),{status:'تم التسليم'});
     await addDoc(collection(db,'results'),{
       patient:p.name,test:'تحليل أورام',branch:p.branch,
-      tumorTests:p.tumorTests||'لا',result:'في الانتظار',status:'جديد',
+      tumorTests:p.tumorTests||'لا',result:'في الانتظار',status:'منتظر التسليم',
       date:new Date().toISOString().split('T')[0],
       notes:'أُنشئت تلقائياً',patientId:id,addedBy:CU.name,createdAt:serverTimestamp()
     });
@@ -935,7 +935,7 @@ window.mkDone=async function(id){
   }catch(e){toast('خطأ: '+e.message);}
 };
 window.mkDoneR=async function(id){
-  try{await updateDoc(doc(db,'results',id),{status:'مكتمل'});toast('تم ✓',true);await loadR();}
+  try{await updateDoc(doc(db,'results',id),{status:'تم التسليم'});toast('تم ✓',true);await loadR();}
   catch(e){toast('خطأ: '+e.message);}
 };
 window.delIt=async function(col,id){
@@ -976,7 +976,7 @@ const FORMS={
     <p class="sdiv">المالية</p>
     <div class="mfg"><label>الإجمالي (جنيه)</label><input id="ft2" type="number" value="0"/></div>
     <div class="mfg"><label>المدفوع (جنيه)</label><input id="fpa" type="number" value="0"/></div>
-    <div class="mfg"><label>الحالة</label><select id="fst"><option>جديد</option><option>قيد الانتظار</option><option>مكتمل</option></select></div>
+    <div class="mfg"><label>الحالة</label><select id="fst"><option>جديد</option><option>منتظر التسليم</option><option>تم التسليم</option></select></div>
     <div class="mfg"><label>التاريخ</label><input id="fdt" type="date" value="TD"/></div>
   </div>`,
   r:`<div class="mg">
@@ -985,7 +985,7 @@ const FORMS={
     <div class="mfg"><label>الفرع *</label>BSEL</div>
     <div class="mfg"><label>تحاليل أورام سابقة؟</label><select id="ftr"><option>لا</option><option>نعم</option></select></div>
     <div class="mfg"><label>النتيجة</label><input id="fre" type="text" placeholder="النتيجة"/></div>
-    <div class="mfg"><label>الحالة</label><select id="fst"><option>جديد</option><option>قيد الانتظار</option><option>مكتمل</option></select></div>
+    <div class="mfg"><label>الحالة</label><select id="fst"><option>جديد</option><option>منتظر التسليم</option><option>تم التسليم</option></select></div>
     <div class="mfg"><label>التاريخ</label><input id="fdt" type="date" value="TD"/></div>
     <div class="mfg full"><label>ملاحظات</label><textarea id="fno" placeholder="ملاحظات..."></textarea></div>
   </div>`,
